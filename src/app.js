@@ -1,8 +1,9 @@
 import React, { Component } from 'React';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import firebase from 'firebase';
 import { Header } from './components/common';
 import AddItemForm from './components/AddItemForm';
+import GetItemsList from './components/GetItemsList';
 import ImagePicker from 'react-native-image-picker';
 
 class App extends Component {
@@ -28,8 +29,12 @@ class App extends Component {
     render () {
         return (
             <View>
+
                 <Header headerText="My Gifts" />
-                <AddItemForm />
+                <ScrollView>
+                    <AddItemForm />
+                    <GetItemsList />
+                </ScrollView>
             </View>
         );
     }
