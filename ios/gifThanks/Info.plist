@@ -43,14 +43,15 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
-    <string>To select image from camera roll</string>
+	<string>To select image from camera roll</string>
 	<key>NSCameraUsageDescription</key>
-    <string>To use camera</string>
+	<string>To use camera</string>
 	<key>NSMicrophoneUsageDescription</key>
-    <string>To use camera microphone</string>
-	
+	<string>To use camera microphone</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
 			<key>localhost</key>
