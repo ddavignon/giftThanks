@@ -5,7 +5,6 @@ import { Card, CardSection } from './common';
 
 const ItemDetail = ({ item }) => {
     //This is a destructured props object using album instead of props
-    console.log('inside ItemDetail');
     const { image, title } = item;
     const {
         thumbnailStyle,
@@ -14,14 +13,17 @@ const ItemDetail = ({ item }) => {
         headerTextStyle,
     } = styles;
 
+
     return (
         <Card>
-            <TouchableWithoutFeedback>
+            <TouchableWithoutFeedback
+                onPress={console.log('I got touched!')}
+            >
                 <CardSection>
                     <View style={thumbnailContainerStyle}>
                         <Image
                             style={thumbnailStyle}
-                            source={{ uri: item.image }}
+                            source={{ uri: image }}
                         />
                     </View>
                     <View style={headerContentStyle}>

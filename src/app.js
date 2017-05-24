@@ -33,8 +33,6 @@ class App extends Component {
             <View>
 
                 <Header headerText="My Gifts" />
-
-                <ItemList />
                 <ScrollView>
                     <ItemList />
                 </ScrollView>
