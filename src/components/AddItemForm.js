@@ -1,4 +1,4 @@
-import React, { Component } from 'React';
+import React, { Component } from 'react';
 import {
     TouchableOpacity,
     Image,
@@ -6,23 +6,17 @@ import {
     Text,
     PixelRatio
 } from 'react-native';
+import { connect } from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
-import RNFetchBlob from 'react-native-fetch-blob';
-import firebase from 'firebase';
+import {
+    sendItemForm,
+    isFromTextChanged,
+    itemResults
+} from '../actions';
 import { Card, CardSection, Button, Input } from './common';
 
-const Blob = RNFetchBlob.polyfill.Blob;
-window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
-window.Blob = Blob;
 
 class AddItemForm extends Component {
-    
-    state = {
-        isFrom: '',
-        description: '',
-        responsePath: '',
-        avatarSource: null,
-    }
 
     handleAddImageButton() {
                 // More info on all the options is below in the README...just some common use cases shown here 
@@ -36,68 +30,58 @@ class AddItemForm extends Component {
                 path: 'images'
             }
         };
+
+
+        ImagePicker.showImagePicker(options, (response) => {
+            this.props.itemResults({ response });
+        });
             
             /**
              * The first arg is the options object for customization (it can also be null or omitted for default options),
              * The second arg is the callback which sends object: response (more info below in README)
              */
-        ImagePicker.showImagePicker(options, (response) => {
-            console.log('Response = ', response);
+        // ImagePicker.showImagePicker(options, (response) => {
+        //     console.log('Response = ', response);
             
-            if (response.didCancel) {
-                console.log('User cancelled image picker');
-            }
-            else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
-            }
-            else if (response.customButton) {
-                console.log('User tapped custom button: ', response.customButton);
-            }
-            else {
-                const source = { uri: response.uri };
-                const path = response.origURL;  
+        //     if (response.didCancel) {
+        //         console.log('User cancelled image picker');
+        //     }
+        //     else if (response.error) {
+        //         console.log('ImagePicker Error: ', response.error);
+        //     }
+        //     else if (response.customButton) {
+        //         console.log('User tapped custom button: ', response.customButton);
+        //     }
+        //     else {
+        //         const source = { uri: response.uri };
+        //         const path = response.origURL;  
 
-                this.setState({
-                    avatarSource: source,
-                    responsePath: path
-                });
-            }
-        });
+        //         this.setState({
+        //             avatarSource: source,
+        //             responsePath: path
+        //         });
+        //     }
+        // });
     }
 
     sendItemForm() {
-        const { isFrom, description, responsePath } = this.state;
+        const { isFrom, description, responsePath } = this.props;
 
-        const testImageName = `image-from-react-native-${new Date()}.jpg`;
-
-        Blob.build(RNFetchBlob.wrap(responsePath), { type: 'image/jpeg' })
-            .then((blob) => firebase.storage()
-                    .ref('images')
-                    .child(testImageName)
-                    .put(blob, { contentType: 'image/png' })
-            )
-            .then((snapshot) => {
-                // console.log(snapshot.downloadURL);
-                let itemURL = snapshot.downloadURL;
-                firebase.database().ref(`/items/`)
-                    .push({ isFrom, itemURL })
-                    .then(() => this.setState({ isFrom: '', avatarSource: null }));
-
-            });
+        this.sendItemForm({ isFrom, description, responsePath });
     }
 
-    render () {
+    render() {
         const { container, clothingItem, clothingItemContainer } = styles;
 
         return (
             <View>
                 <CardSection>
-                    <View style={{ flex: 1}} >
+                    <View style={{ flex: 1 }} >
                         <TouchableOpacity style={container} onPress={this.handleAddImageButton.bind(this)}>
                             <View style={[container, clothingItem, clothingItemContainer]}>
-                                { this.state.avatarSource === null
+                                { this.props.avatarSource === null
                                     ? <Text>Select a Photo</Text>
-                                    : <Image style={styles.clothingItem} source={this.state.avatarSource} />
+                                    : <Image style={styles.clothingItem} source={this.props.avatarSource} />
                                 }
                             </View>
                         </TouchableOpacity>
@@ -107,8 +91,8 @@ class AddItemForm extends Component {
                     <Input
                         placeholder="Bob"
                         label="From"
-                        value={this.state.isFrom}
-                        onChangeText={isFrom => this.setState({ isFrom })}
+                        value={this.props.isFrom}
+                        onChangeText={text => this.isFromTextChanged(text)}
                     />
                 </CardSection>
                 {/*<CardSection>
@@ -148,5 +132,22 @@ const styles = {
   }
 };
 
+const mapStateToProps = ({ addItem }) => {
+    const {
+        isFrom,
+        description,
+        responsePath,
+        avatarSource,
+    } = addItem;
 
-export default AddItemForm;
+    return {
+        isFrom,
+        description,
+        responsePath,
+        avatarSource
+    };
+};
+
+export default connect(mapStateToProps, {
+    isFromTextChanged, sendItemForm, itemResults
+})(AddItemForm);

@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { View, ScrollView } from 'react-native';
-import ImagePicker from 'react-native-image-picker';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxThunk from 'redux-thunk';
 import firebase from 'firebase';
 import { Header } from './components/common';
+import reducers from './reducers';
 import AddItemForm from './components/AddItemForm';
 import GetItemsList from './components/GetItemsList';
 import ItemList from './components/ItemList';
 
+
+const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
 class App extends Component {
 
@@ -19,7 +24,7 @@ class App extends Component {
             messagingSenderId: '602379545711'
         });
 
-        firebase.auth().onAuthStateChanged(function (user) {
+        firebase.auth().onAuthStateChanged(user => {
             if (!user) {
                 firebase.auth().signInAnonymously();
             } else {
@@ -30,13 +35,16 @@ class App extends Component {
 
     render() {
         return (
-            <View>
-
-                <Header headerText="My Gifts" />
-                <ScrollView>
-                    <ItemList />
-                </ScrollView>
-            </View>
+            <Provider store={store}>
+                <View>
+                    <Header headerText="My Gifts" />
+                    <ScrollView>
+                        <AddItemForm />
+                        {/*<GetItemsList />*/}
+                        <ItemList />
+                    </ScrollView>
+                </View>
+            </Provider>
         );
     }
 }
