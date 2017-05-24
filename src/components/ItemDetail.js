@@ -1,39 +1,41 @@
-import React from 'react';
-import { Text, View, Image, TouchableWithoutFeedback } from 'react-native';
+import React, { Component } from 'react';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
 import { Card, CardSection } from './common';
 
 
-const ItemDetail = ({ item }) => {
+class ItemDetail extends Component {
     //This is a destructured props object using album instead of props
-    const { image, title } = item;
-    const {
-        thumbnailStyle,
-        headerContentStyle,
-        thumbnailContainerStyle,
-        headerTextStyle,
-    } = styles;
+    render() {
+        const {
+            thumbnailStyle,
+            headerContentStyle,
+            thumbnailContainerStyle,
+            headerTextStyle,
+        } = styles;
 
+        const { image, title } = this.props.item;
 
-    return (
-        <Card>
-            <TouchableWithoutFeedback
-                onPress={console.log('I got touched!')}
+        return (
+            <TouchableOpacity
+                onPress={() => console.log('I got touched!')}
             >
-                <CardSection>
-                    <View style={thumbnailContainerStyle}>
-                        <Image
-                            style={thumbnailStyle}
-                            source={{ uri: image }}
-                        />
-                    </View>
-                    <View style={headerContentStyle}>
-                        <Text style={headerTextStyle}>{title}</Text>
-                    </View>
-                </CardSection>
-            </TouchableWithoutFeedback>
-        </Card>
-    );
-};
+                <Card>
+                    <CardSection>
+                        <View style={thumbnailContainerStyle}>
+                            <Image
+                                style={thumbnailStyle}
+                                source={{ uri: image }}
+                            />
+                        </View>
+                        <View style={headerContentStyle}>
+                            <Text style={headerTextStyle}>{title}</Text>
+                        </View>
+                    </CardSection>
+                </Card>
+            </TouchableOpacity>
+        );
+    }
+}
 
 const styles = {
     headerContentStyle: {
