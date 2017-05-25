@@ -44,6 +44,7 @@ class App extends Component {
                         {/*<GetItemsList />*/}
                     <ItemList />
                     </ScrollView>
+                    <FooterBar />
                 </View>
             </Provider>
         );
