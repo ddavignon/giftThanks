@@ -8,6 +8,7 @@ import { Header } from './components/common';
 import reducers from './reducers';
 import AddItemForm from './components/AddItemForm';
 import GetItemsList from './components/GetItemsList';
+import FooterBar from './components/FooterBar';
 import ItemList from './components/ItemList';
 
 
@@ -41,7 +42,7 @@ class App extends Component {
                     <ScrollView>
                         <AddItemForm />
                         {/*<GetItemsList />*/}
-                        <ItemList />
+                    <ItemList />
                     </ScrollView>
                 </View>
             </Provider>
