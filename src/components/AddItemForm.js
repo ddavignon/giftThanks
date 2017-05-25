@@ -13,13 +13,12 @@ import {
     isFromTextChanged,
     itemResults
 } from '../actions';
-import { Card, CardSection, Button, Input } from './common';
+import { CardSection, Button, Input } from './common';
 
 
 class AddItemForm extends Component {
 
     handleAddImageButton() {
-                // More info on all the options is below in the README...just some common use cases shown here 
         const options = {
             title: 'Select Item',
             // customButtons: [
@@ -35,33 +34,6 @@ class AddItemForm extends Component {
         ImagePicker.showImagePicker(options, (response) => {
             this.props.itemResults({ response });
         });
-            
-            /**
-             * The first arg is the options object for customization (it can also be null or omitted for default options),
-             * The second arg is the callback which sends object: response (more info below in README)
-             */
-        // ImagePicker.showImagePicker(options, (response) => {
-        //     console.log('Response = ', response);
-            
-        //     if (response.didCancel) {
-        //         console.log('User cancelled image picker');
-        //     }
-        //     else if (response.error) {
-        //         console.log('ImagePicker Error: ', response.error);
-        //     }
-        //     else if (response.customButton) {
-        //         console.log('User tapped custom button: ', response.customButton);
-        //     }
-        //     else {
-        //         const source = { uri: response.uri };
-        //         const path = response.origURL;  
-
-        //         this.setState({
-        //             avatarSource: source,
-        //             responsePath: path
-        //         });
-        //     }
-        // });
     }
 
     sendItemForm() {
@@ -77,11 +49,17 @@ class AddItemForm extends Component {
             <View>
                 <CardSection>
                     <View style={{ flex: 1 }} >
-                        <TouchableOpacity style={container} onPress={this.handleAddImageButton.bind(this)}>
+                        <TouchableOpacity
+                            style={container}
+                            onPress={this.handleAddImageButton.bind(this)}
+                        >
                             <View style={[container, clothingItem, clothingItemContainer]}>
                                 { this.props.avatarSource === null
                                     ? <Text>Select a Photo</Text>
-                                    : <Image style={styles.clothingItem} source={this.props.avatarSource} />
+                                    : <Image 
+                                        style={styles.clothingItem} 
+                                        source={this.props.avatarSource} 
+                                    />
                                 }
                             </View>
                         </TouchableOpacity>
