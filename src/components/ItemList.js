@@ -1,8 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
-//import axios from 'axios';
 import {
     fetchEventItems
 } from '../actions';
@@ -10,14 +9,8 @@ import ItemDetail from './ItemDetail';
 
 
 class ItemList extends Component {
-    state = {
-        items: [{ image: 'http://images.clipartpanda.com/smiley-face-transparent-background-smile-triste-421a98.gif', title: 'smiley face' },
-        { image: 'http://images.clipartpanda.com/smiley-face-transparent-background-smile-triste-421a98.gif', title: 'smiley face2' }]
-    };
 
     componentWillMount() {
-        // axios.get('https://rallycoding.herokuapp.com/api/music_albums')
-        //     .then(response => this.setState({ albums: response.data }));
         this.props.fetchEventItems();
     }
 
@@ -38,9 +31,11 @@ class ItemList extends Component {
 
     render() {
         return (
-            <ScrollView>
-                {this.renderItems()}
-            </ScrollView>
+            <View style={{ flex: 1 }} >
+                <ScrollView>
+                    {this.renderItems()}
+                </ScrollView>
+            </View>
         );
     }
 }
