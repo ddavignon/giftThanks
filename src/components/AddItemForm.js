@@ -36,10 +36,10 @@ class AddItemForm extends Component {
         });
     }
 
-    sendItemForm() {
+    handleSendItemForm() {
         const { isFrom, description, responsePath } = this.props;
 
-        this.sendItemForm({ isFrom, description, responsePath });
+        this.props.sendItemForm({ isFrom, description, responsePath });
     }
 
     render() {
@@ -82,7 +82,7 @@ class AddItemForm extends Component {
                     />
                 </CardSection>*/}
                 <CardSection>
-                    <Button onPress={this.sendItemForm.bind(this)}>
+                    <Button onPress={this.handleSendItemForm.bind(this)}>
                         Add Item
                     </Button>
                 </CardSection>
