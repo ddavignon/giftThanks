@@ -13,7 +13,7 @@ class ItemDetail extends Component {
             headerTextStyle,
         } = styles;
 
-        const { image, title } = this.props.item;
+        const { image, title } = this.props;
 
         return (
             <TouchableOpacity

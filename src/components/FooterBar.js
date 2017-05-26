@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
 import BottomNavigation, { Tab } from 'react-native-material-bottom-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -7,12 +6,12 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 class FooterBar extends Component {
     render() {
         return (
-                <BottomNavigation
-                    labelColor="white"
-                    rippleColor="white"
-                    style={styles.footerStyle}
-                    //onTabChange={(newTabIndex) => alert(`New Tab at position ${newTabIndex}`)}
-                >
+            <BottomNavigation
+                labelColor="white"
+                rippleColor="white"
+                style={styles.footerStyle}
+                //onTabChange={(newTabIndex) => alert(`New Tab at position ${newTabIndex}`)}
+            >
                 <Tab
                     barBackgroundColor="#37474F"
                     label="Contacts"
@@ -28,7 +27,7 @@ class FooterBar extends Component {
                     label="Tokens"
                     icon={<Icon size={24} color="white" name="monetization-on" />}
                 />
-              </BottomNavigation>
+            </BottomNavigation>
         );
     }
 }
