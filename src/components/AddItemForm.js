@@ -70,7 +70,7 @@ class AddItemForm extends Component {
                         placeholder="Bob"
                         label="From"
                         value={this.props.isFrom}
-                        onChangeText={text => this.isFromTextChanged(text)}
+                        onChangeText={text => this.props.isFromTextChanged(text)}
                     />
                 </CardSection>
                 {/*<CardSection>
