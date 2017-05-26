@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { View } from 'react-native';
 import BottomNavigation, { Tab } from 'react-native-material-bottom-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -6,28 +7,28 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 class FooterBar extends Component {
     render() {
         return (
-            <BottomNavigation
-                labelColor="white"
-                rippleColor="white"
-                style={styles.footerStyle}
-                //onTabChange={(newTabIndex) => alert(`New Tab at position ${newTabIndex}`)}
-            >
-            <Tab
-                barBackgroundColor="#37474F"
-                label="Contacts"
-                icon={<Icon size={24} color="white" name="people" />}
-            />
-            <Tab
-                barBackgroundColor="#4f6b99"
-                label="Events"
-                icon={<Icon size={24} color="white" name="view-list" />}
-            />
-            <Tab
-                barBackgroundColor="#00796B"
-                label="Tokens"
-                icon={<Icon size={24} color="white" name="monetization-on" />}
-            />
-          </BottomNavigation>
+                <BottomNavigation
+                    labelColor="white"
+                    rippleColor="white"
+                    style={styles.footerStyle}
+                    //onTabChange={(newTabIndex) => alert(`New Tab at position ${newTabIndex}`)}
+                >
+                <Tab
+                    barBackgroundColor="#37474F"
+                    label="Contacts"
+                    icon={<Icon size={24} color="white" name="people" />}
+                />
+                <Tab
+                    barBackgroundColor="#4f6b99"
+                    label="Events"
+                    icon={<Icon size={24} color="white" name="view-list" />}
+                />
+                <Tab
+                    barBackgroundColor="#00796B"
+                    label="Tokens"
+                    icon={<Icon size={24} color="white" name="monetization-on" />}
+                />
+              </BottomNavigation>
         );
     }
 }
@@ -38,8 +39,9 @@ const styles = {
         elevation: 8,
         position: 'absolute',
         left: 0,
-        bottom: -74,
-        right: 0
+        bottom: 0,
+        right: 0,
+        justifyContent: 'space-between'
     }
 };
 
