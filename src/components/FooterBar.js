@@ -38,7 +38,7 @@ const styles = {
         elevation: 8,
         position: 'absolute',
         left: 0,
-        bottom: -74,
+        bottom: 0,
         right: 0
     }
 };
