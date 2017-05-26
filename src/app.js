@@ -42,7 +42,7 @@ class App extends Component {
                     <ScrollView>
                         <AddItemForm />
                         {/*<GetItemsList />*/}
-                    <ItemList />
+                        <ItemList />
                     </ScrollView>
                     <FooterBar />
                 </View>

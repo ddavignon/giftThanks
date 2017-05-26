@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
 import { connect } from 'react-redux';
@@ -21,12 +22,18 @@ class ItemList extends Component {
     }
 
     renderItems() {
-
         console.log(this.props.dbData);
-        return this.state.items.map(item => //map is an iterator good for arrays
-            //key needs to be unique so pick a field in the data that is unique
-            <ItemDetail key={item.title} item={item}/*item props we are sending to itemDetail*/ />
-        );
+        if (this.props.dbData) {
+            return _.map(this.props.dbData, (item, index) => {
+                return (
+                    <ItemDetail
+                        key={index}
+                        title={item.isFrom}/*item props we are sending to itemDetail*/
+                        image={item.itemURL}
+                    />
+                );
+            });
+        }
     }
 
     render() {
