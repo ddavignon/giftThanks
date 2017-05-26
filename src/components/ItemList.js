@@ -31,11 +31,13 @@ class ItemList extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1 }} >
+
                 <ScrollView>
-                    {this.renderItems()}
+                    <View style={{ marginBottom: 65 }} >
+                        {this.renderItems()}
+                    </View>
                 </ScrollView>
-            </View>
+
         );
     }
 }
