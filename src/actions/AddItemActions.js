@@ -3,7 +3,8 @@ import firebase from 'firebase';
 import {
     SEND_ITEM_FORM,
     FROM_TEXT_CHANGED,
-    ITEM_RESULTS
+    ITEM_RESULTS,
+    FETCH_ITEM_SUCCESS
 } from './types';
 
 const Blob = RNFetchBlob.polyfill.Blob;
@@ -14,6 +15,16 @@ export const isFromTextChanged = (text) => {
     return {
         type: FROM_TEXT_CHANGED,
         payload: text
+    };
+};
+
+export const fetchEventItems = () => {
+    // const { currentUser } = firebase.auth();
+
+    return (dispatch) => {
+        firebase.database().ref('items').on('value', snapshot => {
+            dispatch({ type: FETCH_ITEM_SUCCESS, payload: snapshot.val() });
+        });
     };
 };
 
