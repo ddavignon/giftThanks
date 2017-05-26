@@ -37,14 +37,18 @@ class App extends Component {
     render() {
         return (
             <Provider store={store}>
-                <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, flexDirection: 'column' }}>
+
                     <Header headerText="My Gifts" />
                     <ScrollView>
                         <AddItemForm />
                         {/*<GetItemsList />*/}
                         <ItemList />
                     </ScrollView>
-                    <FooterBar />
+
+                    <View>
+                    <FooterBar style={{ flex: 1 }} />
+                    </View>
                 </View>
             </Provider>
         );
