@@ -5,7 +5,7 @@ import ItemList from './components/ItemList';
 
 const RouterComponent = () => {
     return (
-        <Scene sceneStyle={{ paddingTop: 65 }}>
+        <Router sceneStyle={{ paddingTop: 65 }}>
             <Scene key="main">
                 <Scene 
                     onRight={() => Actions.addItemCreate()}
@@ -21,7 +21,7 @@ const RouterComponent = () => {
                     title="Add an Item"
                 />
             </Scene>
-        </Scene>
+        </Router>
     );
 };
 
