@@ -4,7 +4,7 @@ import {
 
 
 const INITIAL_STATE = {
-    pageIndex: ''
+    pageIndex: 1
 };
 
 export default(state = INITIAL_STATE, action) => {

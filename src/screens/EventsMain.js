@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { ScrollView } from 'react-native';
+import AddItemForm from '../components/AddItemForm';
+import ItemList from '../components/ItemList';
 
 
 class EventsMain extends Component {
     render() {
         return (
-            <View>EventsMain Screen</View>
+            <ScrollView>
+                <AddItemForm />
+                <ItemList />
+            </ScrollView>
         );
     }
 }
