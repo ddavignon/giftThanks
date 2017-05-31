@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { View, ScrollView, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Header } from './components/common';
-import AddItemForm from './components/AddItemForm';
 import FooterBar from './components/FooterBar';
-import ItemList from './components/ItemList';
 import EventsMain from './screens/EventsMain';
+import TokensMain from './screens/TokensMain';
 
 
 class Router extends Component {
@@ -18,9 +17,9 @@ class Router extends Component {
             case 1:
                 return <EventsMain />;
             case 2:
-                return <View><Text>Tokens!</Text></View>;
+                return <TokensMain />;
             default:
-                return <View><Text>Uh Oh!</Text></View>;
+                return <View><Text>Uh Oh! Something went wrong!</Text></View>;
         }
     }
 
