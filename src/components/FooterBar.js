@@ -4,13 +4,17 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
 class FooterBar extends Component {
+    handleTabChange(newTabIndex) {
+        alert(`New Tab at position ${newTabIndex}`);
+    }
+
     render() {
         return (
             <BottomNavigation
                 labelColor="white"
                 rippleColor="white"
                 style={styles.footerStyle}
-                //onTabChange={(newTabIndex) => alert(`New Tab at position ${newTabIndex}`)}
+                onTabChange={(newTabIndex) => this.handleTabChange(newTabIndex)}
             >
                 <Tab
                     barBackgroundColor="#37474F"

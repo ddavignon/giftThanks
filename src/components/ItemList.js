@@ -17,7 +17,7 @@ class ItemList extends Component {
     renderItems() {
         console.log(this.props.dbData);
         if (this.props.dbData) {
-            return _.map(this.props.dbData, (item, index) => {
+            return Object.values(this.props.dbData).map((item, index) => {
                 return (
                     <ItemDetail
                         key={index}
