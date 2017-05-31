@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import BottomNavigation, { Tab } from 'react-native-material-bottom-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
+import {
+    navTabChange
+} from '../actions';
 
 class FooterBar extends Component {
-    handleTabChange(newTabIndex) {
-        alert(`New Tab at position ${newTabIndex}`);
-    }
-
     render() {
         return (
             <BottomNavigation
                 labelColor="white"
                 rippleColor="white"
                 style={styles.footerStyle}
-                onTabChange={(newTabIndex) => this.handleTabChange(newTabIndex)}
+                onTabChange={(newTabIndex) => this.props.navTabChange(newTabIndex)}
             >
                 <Tab
                     barBackgroundColor="#37474F"
@@ -50,4 +49,4 @@ const styles = {
     }
 };
 
-export default FooterBar;
+export default connect(null, { navTabChange })(FooterBar);
