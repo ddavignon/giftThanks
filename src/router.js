@@ -28,25 +28,11 @@ class Router extends Component {
             <View style={{ flex: 1, flexDirection: 'column' }}>
                 <Header headerText="My Gifts" />
                 {this.renderPage()}
-                <FooterBar style={styles.footerStyle} />
+                <FooterBar style={{ flex: 1 }} />
             </View>
         );
     }
 }
-
-const styles = {
-    footerStyle: {
-        flex: 1,
-        // height: 56,
-        // elevation: 8,
-        position: 'absolute',
-        left: 0,
-        bottom: 0,
-        right: 0,
-        // marginTop: 10,
-        justifyContent: 'space-between'
-    }
-};
 
 const mapStateToProps = ({ navIndex }) => {
     const { pageIndex } = navIndex;
