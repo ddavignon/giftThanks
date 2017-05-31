@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
-import { View, ScrollView } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import firebase from 'firebase';
-import { Header } from './components/common';
 import reducers from './reducers';
-import AddItemForm from './components/AddItemForm';
-import GetItemsList from './components/GetItemsList';
-import FooterBar from './components/FooterBar';
-import ItemList from './components/ItemList';
+import Router from './router';
 
 
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+
 
 class App extends Component {
 
@@ -37,19 +33,7 @@ class App extends Component {
     render() {
         return (
             <Provider store={store}>
-            <View style={{ flex: 1, flexDirection: 'column' }}>
-
-                    <Header headerText="My Gifts" />
-                    <ScrollView>
-                        <AddItemForm />
-                        {/*<GetItemsList />*/}
-                        <ItemList />
-                    </ScrollView>
-
-                    <View>
-                    <FooterBar style={{ flex: 1 }} />
-                    </View>
-                </View>
+                <Router />
             </Provider>
         );
     }
