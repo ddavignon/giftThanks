@@ -6,6 +6,7 @@ import FooterBar from './components/FooterBar';
 import EventsMain from './screens/EventsMain';
 import TokensMain from './screens/TokensMain';
 import AddItemMain from './screens/AddItemMain';
+import ContactsMain from './screens/ContactsMain';
 
 
 class Router extends Component {
@@ -14,7 +15,7 @@ class Router extends Component {
         console.log(this.props.pageIndex);
         switch (this.props.pageIndex) {
             case 0:
-                return <View><Text>Contacts!</Text></View>;
+                return <ContactsMain />;
             case 1:
                 return <EventsMain />;
             case 2:
