@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
-import AddItemForm from '../components/AddItemForm';
 import ItemList from '../components/ItemList';
+import { Card, Button } from '../components/common';
 
 
 class EventsMain extends Component {
     render() {
         return (
             <ScrollView>
-                <AddItemForm />
-                <ItemList />
+                <Card>
+                    <Button>
+                        Add Event
+                    </Button>
+                </Card>
+                <ItemList screen="EventsMain" />
             </ScrollView>
         );
     }

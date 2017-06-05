@@ -5,6 +5,7 @@ import { Header } from './components/common';
 import FooterBar from './components/FooterBar';
 import EventsMain from './screens/EventsMain';
 import TokensMain from './screens/TokensMain';
+import AddItemMain from './screens/AddItemMain';
 
 
 class Router extends Component {
@@ -18,6 +19,8 @@ class Router extends Component {
                 return <EventsMain />;
             case 2:
                 return <TokensMain />;
+            case 3:
+                return <AddItemMain />;
             default:
                 return <View><Text>Uh Oh! Something went wrong!</Text></View>;
         }

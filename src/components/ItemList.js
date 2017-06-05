@@ -11,7 +11,10 @@ import ItemDetail from './ItemDetail';
 class ItemList extends Component {
 
     componentWillMount() {
-        this.props.fetchEventItems();
+        console.log(this.props.screen);
+        if (this.props.screen === 'EventsMain') {
+            this.props.fetchEventItems();
+        }
     }
 
     renderItems() {
