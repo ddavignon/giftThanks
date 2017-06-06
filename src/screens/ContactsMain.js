@@ -1,14 +1,34 @@
 import React, { Component } from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView } from 'react-native';
+import {
+    CardSection,
+    Card,
+    Button,
+    Input
+} from '../components/common';
 
 
 class ContactsMain extends Component {
+    state = {
+        contactName: ''
+    }
+
     render() {
         return (
             <ScrollView>
-                <Text>
-                    Tokens Coming Soon!
-                </Text>
+                <CardSection>
+                    <Input
+                        placeholder="Bob"
+                        label="Name"
+                        value={this.state.contactName}
+                        onChangeText={contactName => this.setState({ contactName })}
+                    />
+                </CardSection>
+                <Card>
+                    <Button>
+                        Add Contacts
+                    </Button>
+                </Card>
             </ScrollView>
         );
     }

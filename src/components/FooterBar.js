@@ -30,6 +30,11 @@ class FooterBar extends Component {
                     label="Tokens"
                     icon={<Icon size={24} color="white" name="monetization-on" />}
                 />
+                <Tab
+                    barBackgroundColor="#00796B"
+                    label="Add Item"
+                    icon={<Icon size={24} color="white" name="view-list" />}
+                />
             </BottomNavigation>
         );
     }
