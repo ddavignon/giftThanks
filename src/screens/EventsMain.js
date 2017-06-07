@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import firebase from 'firebase';
-import ItemList from '../components/ItemList';
+import ItemDetail from '../components/ItemDetail';
 import {
     CardSection,
     Card,
@@ -12,20 +12,60 @@ import {
 
 class EventsMain extends Component {
     state = {
-        eventName: ''
+        eventName: '',
+        dbData: {}
+    };
+
+
+    // read event
+    componentWillMount() {
+
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                console.log('get data');
+                const { currentUser } = firebase.auth();
+
+                firebase.database().ref(`users/${currentUser.uid}/events/`).on('value', snapshot => {
+                    console.log('Event snapshot', snapshot);
+                    this.setState({ dbData: snapshot.val() });
+                });
+            } else {
+                console.log('no user signed in');
+            }
+        }.bind(this));
     }
 
+
+    // create event
     handleButtonPress() {
         if (this.state.eventName) {
             const { currentUser } = firebase.auth();
 
-        firebase.database().ref(`users/${currentUser.uid}/events/`)
-            .push({ name: this.state.eventName })
-            .then(() => this.setState({ eventName: '' }));
+            firebase.database().ref(`/users/${currentUser.uid}/events`)
+                .push({ name: this.state.eventName })
+                .then(() => this.setState({ eventName: '' }));
         }
     }
 
+    renderItems() {
+        console.log('this render items', this.state.dbData);
+        if (this.state.dbData) {
+            return Object.values(this.state.dbData).map((item, index) => {
+                console.log(item.events, index);
+                return (
+                    <ItemDetail
+                        key={index}
+                        title="hold"/*item.state we are sending to itemDetail*/
+                        image="#"
+                    />
+                );
+            });
+        }
+    }
+
+
     render() {
+
         return (
             <ScrollView>
                 <CardSection>
@@ -41,7 +81,12 @@ class EventsMain extends Component {
                         Add Event
                     </Button>
                 </Card>
-                <ItemList screen="EventsMain" />
+                {/*<ItemList screen="EventsMain" />*/}
+                <ScrollView>
+                    <View style={{ marginBottom: 65 }} >
+                        {this.renderItems()}
+                    </View>
+                </ScrollView>
             </ScrollView>
         );
     }
