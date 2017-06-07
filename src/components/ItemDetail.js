@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
-import { Card, CardSection } from './common';
+import { Card, CardSection, Button } from './common';
 
 
 class ItemDetail extends Component {
@@ -30,6 +30,12 @@ class ItemDetail extends Component {
                         <View style={headerContentStyle}>
                             <Text style={headerTextStyle}>{title}</Text>
                         </View>
+                        <Button >
+                            Edit
+                        </Button>
+                        <Button onPress={this.props.onDeletePress}>
+                            Delete
+                        </Button>
                     </CardSection>
                 </Card>
             </TouchableOpacity>
