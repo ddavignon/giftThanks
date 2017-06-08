@@ -9,6 +9,7 @@ import ItemDetail from '../components/ItemDetail';
 import {
     CardSection,
     Card,
+    Confirm,
     Button,
     Input
 } from '../components/common';
@@ -17,6 +18,8 @@ import {
 class EventsMain extends Component {
     state = {
         eventName: '',
+        showDeleteModal: false,
+        deleteKeyId: '',
         dbData: {}
     };
 
@@ -51,12 +54,38 @@ class EventsMain extends Component {
         }
     }
 
-    handleDeletePress(key_id) {
-        console.log('delete data');
+    // edit event
+    handleEditPress(key_id) {
+        console.log('update data');
         const { currentUser } = firebase.auth();
-        firebase.database().ref(`users/${currentUser.uid}/events/${key_id}`).remove();
+
+        firebase.database().ref(`/users/${currentUser.uid}/events/${key_id}/`)
+            .set({ name: this.state.eventName })
+            .then(() => this.setState({ eventName: '' }));
     }
 
+    // delete event
+    handleDeletePress(key_id) {
+        console.log('On delete press');
+        this.setState({
+            showDeleteModal: !this.state.showDeleteModal,
+            deleteKeyId: key_id
+        });
+    }
+
+    // delete event
+    onAccept() {
+        console.log('delete data');
+        const { currentUser } = firebase.auth();
+
+        firebase.database().ref(`users/${currentUser.uid}/events/${this.state.deleteKeyId}`)
+            .remove()
+            .then(() => this.setState({ showDeleteModal: false, deleteKeyId: '' }));
+    }
+
+    onDecline() {
+        this.setState({ showDeleteModal: false });
+    }
 
 
     renderItems() {
@@ -70,8 +99,8 @@ class EventsMain extends Component {
                         key={index}
                         title={event.name}/*item.state we are sending to itemDetail*/
                         _id = {index}
-                        image="#"
-                        onEditPress=""
+                        image="http://placehold.it/30"
+                        onEditPress={() => this.handleEditPress(index)}
                         onDeletePress={() => this.handleDeletePress(index)}
                     />
                 );
@@ -91,18 +120,23 @@ class EventsMain extends Component {
                         value={this.state.eventName}
                         onChangeText={eventName => this.setState({ eventName })}
                     />
-                </CardSection>
-                <Card>
                     <Button onPress={this.handleButtonPress.bind(this)}>
                         Add Event
                     </Button>
-                </Card>
+                </CardSection>
                 {/*<ItemList screen="EventsMain" />*/}
                 <ScrollView>
                     <View style={{ marginBottom: 65 }} >
                         {this.renderItems()}
                     </View>
                 </ScrollView>
+                <Confirm
+                    visible={this.state.showDeleteModal}
+                    onAccept={this.onAccept.bind(this)}
+                    onDecline={this.onDecline.bind(this)}
+                >
+                    Are you sure you want to delete this?
+                </Confirm>
             </ScrollView>
         );
     }

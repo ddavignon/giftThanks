@@ -30,7 +30,7 @@ class ItemDetail extends Component {
                         <View style={headerContentStyle}>
                             <Text style={headerTextStyle}>{title}</Text>
                         </View>
-                        <Button >
+                        <Button onPress={this.props.onEditPress}>
                             Edit
                         </Button>
                         <Button onPress={this.props.onDeletePress}>
