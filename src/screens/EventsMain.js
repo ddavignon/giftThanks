@@ -4,7 +4,12 @@ import {
     ScrollView,
     View
 } from 'react-native';
+import { connect } from 'react-redux';
 import firebase from 'firebase';
+import {
+    navTabChange,
+    eventKeyIndex
+} from '../actions';
 import ItemDetail from '../components/ItemDetail';
 import {
     CardSection,
@@ -87,6 +92,13 @@ class EventsMain extends Component {
         this.setState({ showDeleteModal: false });
     }
 
+    handleOnItemPress(index) {
+
+        this.props.eventKeyIndex(index);
+
+        this.props.navTabChange(4);
+    }
+
 
     renderItems() {
         console.log('this render items', this.state.dbData);
@@ -102,6 +114,7 @@ class EventsMain extends Component {
                         image="http://placehold.it/30"
                         onEditPress={() => this.handleEditPress(index)}
                         onDeletePress={() => this.handleDeletePress(index)}
+                        onItemPress={() => this.handleOnItemPress(index)}
                     />
                 );
             });
@@ -142,4 +155,4 @@ class EventsMain extends Component {
     }
 }
 
-export default EventsMain;
+export default connect(null, { navTabChange, eventKeyIndex })(EventsMain);

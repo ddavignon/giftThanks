@@ -18,11 +18,11 @@ export const isFromTextChanged = (text) => {
     };
 };
 
-export const fetchEventItems = () => {
+export const fetchEventItems = (itemsPath) => {
     // const { currentUser } = firebase.auth();
 
     return (dispatch) => {
-        firebase.database().ref('items').on('value', snapshot => {
+        firebase.database().ref(itemsPath).on('value', snapshot => {
             dispatch({ type: FETCH_ITEM_SUCCESS, payload: snapshot.val() });
         });
     };

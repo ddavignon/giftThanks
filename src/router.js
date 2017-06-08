@@ -7,6 +7,7 @@ import EventsMain from './screens/EventsMain';
 import TokensMain from './screens/TokensMain';
 import AddItemMain from './screens/AddItemMain';
 import ContactsMain from './screens/ContactsMain';
+import EventItemList from './screens/EventItemList';
 
 
 class Router extends Component {
@@ -22,6 +23,8 @@ class Router extends Component {
                 return <TokensMain />;
             case 3:
                 return <AddItemMain />;
+            case 4:
+                return <EventItemList />;
             default:
                 return <View><Text>Uh Oh! Something went wrong!</Text></View>;
         }

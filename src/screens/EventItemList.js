@@ -2,25 +2,29 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
+import firebase from 'firebase';
 import {
     fetchEventItems
 } from '../actions';
-import ItemDetail from './ItemDetail';
+import ItemDetail from '../components/ItemDetail';
 
 
-class ItemList extends Component {
+class EventItemList extends Component {
 
     componentWillMount() {
         console.log(this.props.screen);
-        if (this.props.screen === 'EventsMain') {
-            this.props.fetchEventItems();
-        }
+
+        const { currentUser } = firebase.auth();
+
+        const { eventPathKey } = this.props;
+
+        this.props.fetchEventItems(`/users/${currentUser.uid}/events/${eventPathKey}`);
     }
 
     renderItems() {
         console.log(this.props.dbData);
         if (this.props.dbData) {
-            return Object.values(this.props.dbData).map((item, index) => {
+            return _.map(this.props.dbData, (item, index) => {
                 return (
                     <ItemDetail
                         key={index}
@@ -45,10 +49,12 @@ class ItemList extends Component {
     }
 }
 
-const mapStateToProps = ({ addItem }) => {
+const mapStateToProps = ({ addItem, navIndex }) => {
     const { dbData } = addItem;
 
-    return { dbData };
+    const { eventPathKey } = navIndex
+
+    return { dbData, eventPathKey };
 };
 
-export default connect(mapStateToProps, { fetchEventItems })(ItemList);
+export default connect(mapStateToProps, { fetchEventItems })(EventItemList);

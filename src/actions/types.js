@@ -6,4 +6,6 @@ export const FETCH_ITEM_SUCCESS = 'fetch_item_success';
 
 // navigation tabs
 export const TAB_INDEX = 'tab_index';
+export const EVENT_KEY_INDEX = 'event_key_index';
+
 

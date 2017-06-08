@@ -1,10 +1,12 @@
 import {
-    TAB_INDEX
+    TAB_INDEX,
+    EVENT_KEY_INDEX
 } from '../actions/types';
 
 
 const INITIAL_STATE = {
-    pageIndex: 1
+    pageIndex: 1,
+    eventPathKey: ''
 };
 
 export default(state = INITIAL_STATE, action) => {
@@ -13,6 +15,11 @@ export default(state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 pageIndex: action.payload
+            };
+        case EVENT_KEY_INDEX:
+            return {
+                ...state,
+                eventPathKey: action.payload
             };
         default:
             return state;     

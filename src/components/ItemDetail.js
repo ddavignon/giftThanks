@@ -17,7 +17,7 @@ class ItemDetail extends Component {
 
         return (
             <TouchableOpacity
-                onPress={() => console.log('I got touched!')}
+                onPress={() => this.props.onItemPress()}
             >
                 <Card>
                     <CardSection>
