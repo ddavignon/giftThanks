@@ -27,13 +27,14 @@ class EventsMain extends Component {
         this.setState({ visible: true });
     }
 
-    onAccept(eventName) {
-        console.log(this.state.eventName);
-        if (eventName) {
+    onAccept(eventText) {
+        this.setState({ eventName: eventText });
+        console.log('Passed props: ', this.state.eventName);
+        if (this.state.eventName) {
             const { currentUser } = firebase.auth();
 
             firebase.database().ref(`users/${currentUser.uid}/events/`)
-                .push({ name: eventName })
+                .push({ name: this.state.eventName })
                 .then(() => this.setState({ eventName: '', visible: false }));
 
         }
@@ -44,9 +45,6 @@ class EventsMain extends Component {
         Actions.events();
     }
 
-    onInputChange(text) {
-        this.setState({ text });
-    }
     renderModal() {
         if (!this.state.visible) {
             return;
@@ -56,7 +54,6 @@ class EventsMain extends Component {
                         visible={this.state.visible}
                         onAccept={this.onAccept.bind(this)}
                         onDecline={this.onDecline.bind(this)}
-                        eventName={this.onInputChange.bind(this)}
                     />
 
         );

@@ -20,8 +20,12 @@ class AddEventModal extends Component {
         this.setState({ visible: this.props.visible });
     }
 
+    getEventName() {
+        this.props.onAccept(this.state.eventName);
+    }
+
     render() {
-        const { visible, onAccept, onDecline } = this.props;
+        const { visible, onDecline } = this.props;
         const { containerStyle, textStyle, cardSectionStyle } = styles;
         return (
             <Modal
@@ -47,7 +51,7 @@ class AddEventModal extends Component {
                     </CardSection>
 
                     <CardSection>
-                    <Button onPress={onAccept}/*Not passing onAccept() says don't call imediately*/>
+                    <Button onPress={() => this.getEventName()}/*Not passing onAccept() says don't call imediately*/>
                         Create
                     </Button>
 
