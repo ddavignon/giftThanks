@@ -11,33 +11,33 @@ import ItemDetail from './ItemDetail';
 class ItemList extends Component {
 
     componentWillMount() {
-        console.log(this.props.screen);
-        // if (this.props.screen === 'EventsMain') {
-        //     this.props.fetchEventItems();
-        // }
+        //console.log(this.props.screen);
+        if (this.props.screen === 'EventsMain') {
+            this.props.fetchEventItems();
+        }
     }
 
-    // renderItems() {
-    //     console.log(this.props.dbData);
-    //     if (this.props.dbData) {
-    //         return Object.values(this.props.dbData).map((item, index) => {
-    //             return (
-    //                 <ItemDetail
-    //                     key={index}
-    //                     title={item.isFrom}/*item props we are sending to itemDetail*/
-    //                     image={item.itemURL}
-    //                 />
-    //             );
-    //         });
-    //     }
-    // }
+    renderItems() {
+        console.log(this.props.dbData);
+        if (this.props.dbData) {
+            return Object.values(this.props.dbData).map((item, index) => {
+                return (
+                    <ItemDetail
+                        key={index}
+                        title={item.isFrom}/*item props we are sending to itemDetail*/
+                        image={item.itemURL}
+                    />
+                );
+            });
+        }
+    }
 
     render() {
         return (
 
                 <ScrollView>
                     <View style={{ marginBottom: 65 }} >
-                        // {this.renderItems()}
+                        {this.renderItems()}
                     </View>
                 </ScrollView>
 
