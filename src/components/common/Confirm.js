@@ -22,7 +22,7 @@ const { containerStyle, textStyle, cardSectionStyle } = styles;
                 </CardSection>
 
                 <CardSection>
-                <Button onPress={onAccept}>//By not passing onAccept() says don't call imediately
+                <Button onPress={onAccept}>
                     Yes
                 </Button>
                 
