@@ -19,17 +19,6 @@ const RouterComponent = () => {
                 />
                 <Scene key='addEventModal' component={AddEventModal} />
             </Scene>
-            <Scene key='itemsScene' >
-                <Scene
-                    rightTitle='+'
-                    onRight={() => Actions.AddItemMain()}
-                    key='gifts'
-                    component={AddItemMain}
-                    title='Gifts'
-                    initial
-                />
-                Scene key='addItemScene' component={AddItemMain}
-            </Scene>
         </Router>
     );
 };
