@@ -13,6 +13,7 @@ class FooterBar extends Component {
                 labelColor="white"
                 rippleColor="white"
                 style={styles.footerStyle}
+                activeTab={1}
                 onTabChange={(newTabIndex) => this.props.navTabChange(newTabIndex)}
             >
                 <Tab

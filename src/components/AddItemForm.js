@@ -17,6 +17,9 @@ import { CardSection, Button, Input } from './common';
 
 
 class AddItemForm extends Component {
+    componentDidMount() {
+        console.log('id: ', this.props.eventId);
+    }
 
     handleAddImageButton() {
         const options = {
@@ -37,14 +40,14 @@ class AddItemForm extends Component {
     }
 
     handleSendItemForm() {
-        const { isFrom, description, responsePath } = this.props;
+        const { isFrom, description, responsePath, eventId } = this.props;
 
-        this.props.sendItemForm({ isFrom, description, responsePath });
+        this.props.sendItemForm({ isFrom, description, responsePath, eventId });
     }
 
     render() {
         const { container, clothingItem, clothingItemContainer } = styles;
-
+        console.log('id: ', this.props.eventId);
         return (
             <View>
                 <CardSection>
@@ -56,9 +59,9 @@ class AddItemForm extends Component {
                             <View style={[container, clothingItem, clothingItemContainer]}>
                                 { this.props.avatarSource === null
                                     ? <Text>Select a Photo</Text>
-                                    : <Image 
-                                        style={styles.clothingItem} 
-                                        source={this.props.avatarSource} 
+                                    : <Image
+                                        style={styles.clothingItem}
+                                        source={this.props.avatarSource}
                                     />
                                 }
                             </View>

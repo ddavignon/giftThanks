@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
-import { Card, CardSection } from './common';
+import { Actions } from 'react-native-router-flux';
+import { Card, CardSection, Button } from './common';
 
 
 class ItemDetail extends Component {
@@ -17,7 +18,7 @@ class ItemDetail extends Component {
 
         return (
             <TouchableOpacity
-                onPress={() => console.log('I got touched!')}
+                onPress={this.props.onItemPress}
             >
                 <Card>
                     <CardSection>
@@ -30,6 +31,12 @@ class ItemDetail extends Component {
                         <View style={headerContentStyle}>
                             <Text style={headerTextStyle}>{title}</Text>
                         </View>
+                        <Button onPress={this.props.onEditPress}>
+                            Edit
+                        </Button>
+                        <Button onPress={this.props.onDeletePress}>
+                            Delete
+                        </Button>
                     </CardSection>
                 </Card>
             </TouchableOpacity>

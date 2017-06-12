@@ -1,4 +1,5 @@
 import RNFetchBlob from 'react-native-fetch-blob';
+import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import {
     SEND_ITEM_FORM,
@@ -8,7 +9,7 @@ import {
 } from './types';
 
 const Blob = RNFetchBlob.polyfill.Blob;
-window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
+window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
 window.Blob = Blob;
 
 export const isFromTextChanged = (text) => {
@@ -31,7 +32,7 @@ export const fetchEventItems = () => {
 export const itemResults = ({ response }) => {
     return (dispatch) => {
         console.log('Response = ', response);
-        
+
         if (response.didCancel) {
             console.log('User cancelled image picker');
         }
@@ -43,7 +44,7 @@ export const itemResults = ({ response }) => {
         }
         else {
             const avatarSource = { uri: response.uri };
-            const responsePath = response.origURL;  
+            const responsePath = response.origURL;
 
             dispatch({
                 type: ITEM_RESULTS,
@@ -53,24 +54,28 @@ export const itemResults = ({ response }) => {
     };
 };
 
-export const sendItemForm = ({ isFrom, description, responsePath }) => {
+export const sendItemForm = ({ isFrom, description, responsePath, eventId }) => {
 
     const testImageName = `image-from-react-native-${new Date()}.jpg`;
+    const { currentUser } = firebase.auth();
+    const path = `users/${currentUser.uid}/events/${eventId}/items/`;
 
     return (dispatch) => {
         Blob.build(RNFetchBlob.wrap(responsePath), { type: 'image/jpeg' })
             .then((blob) => firebase.storage()
-                    .ref('images')
+                    .ref(path)
                     .child(testImageName)
                     .put(blob, { contentType: 'image/png' })
             )
             .then((snapshot) => {
                 // console.log(snapshot.downloadURL);
                 const itemURL = snapshot.downloadURL;
-                firebase.database().ref(`/items/`)
-                    .push({ isFrom, itemURL })
-                    .then(() => dispatch({ type: SEND_ITEM_FORM }));
+                firebase.database().ref(path)
+                    .push({ name: isFrom, URL: itemURL })
+                    .then(() => {
+                        dispatch({ type: SEND_ITEM_FORM });
+                        Actions.gifts({ eventId, type: 'reset' });
+                    });
             });
     };
 };
-
