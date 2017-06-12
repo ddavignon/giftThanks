@@ -6,7 +6,7 @@ class AddItemMain extends Component {
     render() {
         return (
             <ScrollView>
-                <AddItemForm />
+                <AddItemForm eventId={this.props.eventId} />
             </ScrollView>
         );
     }

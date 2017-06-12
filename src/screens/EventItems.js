@@ -39,7 +39,7 @@ class EventItems extends Component {
 componentDidMount() {
     Actions.refresh({
         rightTitle: 'Add',
-        onRight: () => Actions.addItemScene()
+        onRight: () => Actions.addItemScene({ eventId: this.props.eventId })
     });
 }
 
@@ -63,7 +63,6 @@ renderItems() {
         });
     }
 }
-
 
     render() {
         return (
