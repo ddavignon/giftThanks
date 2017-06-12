@@ -4,10 +4,15 @@ import { Input, Button, CardSection } from './common';
 
 
 class AddEventModal extends Component {
+    
     state = {
         eventName: '',
         visible: false
-    };
+    }
+
+    componentWillMount() {
+        this.setState({ visible: this.props.visible });
+    }
 
     getEventName() {
         this.props.onAccept(this.state.eventName);

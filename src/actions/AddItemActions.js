@@ -8,7 +8,7 @@ import {
 } from './types';
 
 const Blob = RNFetchBlob.polyfill.Blob;
-window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
+window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
 window.Blob = Blob;
 
 export const isFromTextChanged = (text) => {
@@ -31,7 +31,7 @@ export const fetchEventItems = () => {
 export const itemResults = ({ response }) => {
     return (dispatch) => {
         console.log('Response = ', response);
-        
+
         if (response.didCancel) {
             console.log('User cancelled image picker');
         }
@@ -43,7 +43,7 @@ export const itemResults = ({ response }) => {
         }
         else {
             const avatarSource = { uri: response.uri };
-            const responsePath = response.origURL;  
+            const responsePath = response.origURL;
 
             dispatch({
                 type: ITEM_RESULTS,
@@ -73,4 +73,3 @@ export const sendItemForm = ({ isFrom, description, responsePath }) => {
             });
     };
 };
-

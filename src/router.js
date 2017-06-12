@@ -3,6 +3,7 @@ import { Scene, Router, Actions } from 'react-native-router-flux';
 import EventsMain from './screens/EventsMain';
 import AddEventModal from './components/AddEventModal';
 import AddItemMain from './screens/AddItemMain';
+import EventItems from './screens/EventItems';
 
 
 const RouterComponent = () => {
@@ -18,6 +19,17 @@ const RouterComponent = () => {
                     initial
                 />
                 <Scene key='addEventModal' component={AddEventModal} />
+            </Scene>
+            <Scene key='itemsScene' >
+                <Scene
+                    rightTitle='+'
+                    onRight={() => {}}
+                    key='gifts'
+                    component={EventItems}
+                    title='Gifts'
+                    initial
+                />
+                <Scene key='addItemScene' component={AddItemMain} />
             </Scene>
         </Router>
     );

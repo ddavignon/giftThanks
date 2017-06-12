@@ -5,6 +5,7 @@ import { ScrollView, View } from 'react-native';
 import firebase from 'firebase';
 import ItemDetail from '../components/ItemDetail';
 import AddEventModal from '../components/AddEventModal';
+import FooterBar from '../components/FooterBar';
 import {
     Button,
     Card,
@@ -116,6 +117,13 @@ class EventsMain extends Component {
         this.setState({ showDeleteModal: false });
     }
 
+    handleItemPress(index) {
+        console.log('I got touched', index);
+        return (
+            Actions.itemsScene({ eventId: index })
+        );
+    }
+
     renderItems() {
         console.log('this render items', this.state.dbData);
         if (this.state.dbData) {
@@ -130,6 +138,7 @@ class EventsMain extends Component {
                         image="http://placehold.it/30"
                         onEditPress={() => this.handleEditPress(index, event.name)}
                         onDeletePress={() => this.handleDeletePress(index)}
+                        onItemPress={() => this.handleItemPress(index)}
                     />
                 );
             });
@@ -176,6 +185,7 @@ class EventsMain extends Component {
                 >
                     Are you sure you want to delete this?
                 </Confirm>
+                <FooterBar style={{ flex: 1 }} />
             </View>
         );
     }
