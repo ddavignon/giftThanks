@@ -17,7 +17,9 @@ import {
 
 class EventItems extends Component {
     state = {
-        dbData: {}
+        dbData: {},
+        showDeleteModal: false,
+        deleteKeyId: ''
     };
 
     componentWillMount() {
@@ -43,6 +45,27 @@ componentDidMount() {
     });
 }
 
+handleDeletePress(key_id) {
+    console.log('On delete press');
+    this.setState({
+        showDeleteModal: !this.state.showDeleteModal,
+        deleteKeyId: key_id
+    });
+}
+
+onDeleteAccept() {
+    console.log('delete data');
+    const { currentUser } = firebase.auth();
+
+    firebase.database().ref(`users/${currentUser.uid}/events/${this.props.eventId}/items/${this.state.deleteKeyId}`)
+        .remove()
+        .then(() => this.setState({ showDeleteModal: false, deleteKeyId: '' }));
+}
+
+onDeleteDecline() {
+    this.setState({ showDeleteModal: false });
+}
+
 renderItems() {
     console.log('this render items', this.state.dbData);
     if (this.state.dbData) {
@@ -56,7 +79,7 @@ renderItems() {
                     _id={index}
                     image={event.URL}
                     onEditPress={() => {}}
-                    onDeletePress={() => {}}
+                    onDeletePress={() => this.handleDeletePress(index)}
                     onItemPress={() => {}}
                 />
             );
@@ -68,6 +91,13 @@ renderItems() {
         return (
             <View>
                 {this.renderItems()}
+                <Confirm
+                    visible={this.state.showDeleteModal}
+                    onAccept={this.onDeleteAccept.bind(this)}
+                    onDecline={this.onDeleteDecline.bind(this)}
+                >
+                    Are you sure you want to delete this?
+                </Confirm>
             </View>
 
         );
