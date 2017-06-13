@@ -6,6 +6,7 @@ import firebase from 'firebase';
 import ItemDetail from '../components/ItemDetail';
 import ItemList from '../components/ItemList';
 import AddEventModal from '../components/AddEventModal';
+import FooterBar from '../components/FooterBar';
 import {
     Button,
     Card,
@@ -89,8 +90,13 @@ renderItems() {
 
     render() {
         return (
-            <View>
+            <View style={{ flex: 1, flexDirection: 'column' }}>
+            <ScrollView>
+                <View style={{ marginBottom: 65 }}>
+
                 {this.renderItems()}
+                </View>
+                </ScrollView>
                 <Confirm
                     visible={this.state.showDeleteModal}
                     onAccept={this.onDeleteAccept.bind(this)}
@@ -98,6 +104,10 @@ renderItems() {
                 >
                     Are you sure you want to delete this?
                 </Confirm>
+
+                <View>
+                <FooterBar style={{ flex: 1 }} />
+                </View>
             </View>
 
         );

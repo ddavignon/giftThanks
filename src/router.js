@@ -1,9 +1,10 @@
 import React from 'react';
-import { Scene, Router } from 'react-native-router-flux';
+import { Scene, Router, ActionConst } from 'react-native-router-flux';
 import EventsMain from './screens/EventsMain';
 import AddEventModal from './components/AddEventModal';
 import AddItemMain from './screens/AddItemMain';
 import EventItems from './screens/EventItems';
+import TokensMain from './screens/TokensMain';
 
 
 const RouterComponent = () => {
@@ -16,61 +17,33 @@ const RouterComponent = () => {
                     key='events'
                     component={EventsMain}
                     title='Events'
+                     type="reset"
                     initial
                 />
                 <Scene key='addEventModal' component={AddEventModal} />
             </Scene>
-            <Scene key='itemsScene' >
+            <Scene key='giftScene' >
                 <Scene
                     rightTitle='+'
                     onRight={() => {}}
                     key='gifts'
                     component={EventItems}
                     title='Gifts'
-                    initial
+                    //initial
                 />
                 <Scene key='addItemScene' component={AddItemMain} />
             </Scene>
+            <Scene key='tokensScene' >
+                <Scene
+                    key='tokens'
+                    component={TokensMain}
+                    title='Tokens'
+                    initial
+                />
+            </Scene>
+
         </Router>
     );
 };
 
 export default RouterComponent;
-// class Router extends Component {
-// <Scene key='singleEvent' component={EmployeeEdit} title='Edit Employee' />
-// <Scene key='addItemForm' component={AddItemForm} title='Add Item' />
-//
-//     renderPage() {
-//         console.log(this.props.pageIndex);
-//         switch (this.props.pageIndex) {
-//             case 0:
-//                 return <ContactsMain />;
-//             case 1:
-//                 return <EventsMain />;
-//             case 2:
-//                 return <TokensMain />;
-//             case 3:
-//                 return <AddItemMain />;
-//             default:
-//                 return <View><Text>Uh Oh! Something went wrong!</Text></View>;
-//         }
-//     }
-//
-//     render() {
-//         return (
-//             <View style={{ flex: 1, flexDirection: 'column' }}>
-//                 <Header headerText="My Gifts" />
-//                 {this.renderPage()}
-//                 <FooterBar style={{ flex: 1 }} />
-//             </View>
-//         );
-//     }
-// }
-//
-// const mapStateToProps = ({ navIndex }) => {
-//     const { pageIndex } = navIndex;
-//
-//     return { pageIndex };
-// };
-//
-// export default connect(mapStateToProps, null)(Router);

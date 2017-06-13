@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
+import FooterBar from '../components/FooterBar';
 
 
 class TokensMain extends Component {
     render() {
         return (
-            <ScrollView>
-                <Text>
-                    Tokens Coming Soon!
-                </Text>
-            </ScrollView>
+            <View style={{ flex: 1, flexDirection: 'column' }}>
+                <ScrollView>
+                    <View style={{ marginBottom: 65 }}>
+                        <Text>
+                            Tokens Coming Soon!
+                            </Text>
+                    </View>
+                </ScrollView>
+
+                <View>
+                    <FooterBar style={{ flex: 1 }} />
+                </View>
+            </View>
         );
     }
 }

@@ -63,7 +63,6 @@ class EventsMain extends Component {
             firebase.database().ref(`users/${currentUser.uid}/events/`)
                 .push({ name: this.state.eventName })
                 .then(() => this.setState({ eventName: '', visible: false }));
-
         }
     }
 
@@ -120,7 +119,7 @@ class EventsMain extends Component {
     handleItemPress(index) {
         console.log('I got touched', index);
         return (
-            Actions.itemsScene({ eventId: index })
+            Actions.giftScene({ eventId: index })
         );
     }
 
@@ -134,8 +133,8 @@ class EventsMain extends Component {
                     <ItemDetail
                         key={index}
                         title={event.name}/*item.state we are sending to itemDetail*/
-                        _id = {index}
-                        image="http://placehold.it/30"
+                        _id={index}
+                        //image="http://placehold.it/30"
                         onEditPress={() => this.handleEditPress(index, event.name)}
                         onDeletePress={() => this.handleDeletePress(index)}
                         onItemPress={() => this.handleItemPress(index)}
@@ -147,7 +146,7 @@ class EventsMain extends Component {
 
     render() {
         return (
-            <View>
+            <View style={{ flex: 1, flexDirection: 'column' }}>
                 <Card>
                     <AddEventModal
                         visible={this.state.visible}
@@ -173,7 +172,6 @@ class EventsMain extends Component {
                     </CardSection>
                 </Card>
                 <ScrollView>
-                    {/*<ItemList screen="EventsMain" />*/}
                     <View style={{ marginBottom: 65 }} >
                         {this.renderItems()}
                     </View>
