@@ -119,7 +119,7 @@ class EventsMain extends Component {
     handleItemPress(index) {
         console.log('I got touched', index);
         return (
-            Actions.giftScene({ eventId: index })
+            Actions.gifts({ eventId: index })
         );
     }
 
@@ -146,7 +146,7 @@ class EventsMain extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1, flexDirection: 'column' }}>
+            <View style={{ paddingTop: 50, flex: 1, flexDirection: 'column' }}>
                 <Card>
                     <AddEventModal
                         visible={this.state.visible}
@@ -183,7 +183,7 @@ class EventsMain extends Component {
                 >
                     Are you sure you want to delete this?
                 </Confirm>
-                <FooterBar style={{ flex: 1 }} />
+                {/*<FooterBar style={{ flex: 1 }} />*/}
             </View>
         );
     }

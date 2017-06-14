@@ -6,7 +6,7 @@ import FooterBar from '../components/FooterBar';
 class TokensMain extends Component {
     render() {
         return (
-            <View style={{ flex: 1, flexDirection: 'column' }}>
+            <View style={{ paddingTop: 70, flex: 1, flexDirection: 'column' }}>
                 <ScrollView>
                     <View style={{ marginBottom: 65 }}>
                         <Text>
@@ -14,10 +14,6 @@ class TokensMain extends Component {
                             </Text>
                     </View>
                 </ScrollView>
-
-                <View>
-                    <FooterBar style={{ flex: 1 }} />
-                </View>
             </View>
         );
     }

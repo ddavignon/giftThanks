@@ -90,7 +90,7 @@ renderItems() {
 
     render() {
         return (
-            <View style={{ flex: 1, flexDirection: 'column' }}>
+            <View style={{ paddingTop: 50, flex: 1, flexDirection: 'column' }}>
             <ScrollView>
                 <View style={{ marginBottom: 65 }}>
 
@@ -105,9 +105,9 @@ renderItems() {
                     Are you sure you want to delete this?
                 </Confirm>
 
-                <View>
+                {/*}<View>
                 <FooterBar style={{ flex: 1 }} />
-                </View>
+                </View>*/}
             </View>
 
         );
