@@ -5,7 +5,6 @@ import { ScrollView, View } from 'react-native';
 import firebase from 'firebase';
 import ItemDetail from '../components/ItemDetail';
 import AddEventModal from '../components/AddEventModal';
-import FooterBar from '../components/FooterBar';
 import {
     Button,
     Card,
@@ -183,7 +182,6 @@ class EventsMain extends Component {
                 >
                     Are you sure you want to delete this?
                 </Confirm>
-                {/*<FooterBar style={{ flex: 1 }} />*/}
             </View>
         );
     }

@@ -6,7 +6,6 @@ import firebase from 'firebase';
 import ItemDetail from '../components/ItemDetail';
 import ItemList from '../components/ItemList';
 import AddEventModal from '../components/AddEventModal';
-import FooterBar from '../components/FooterBar';
 import {
     Button,
     Card,
@@ -90,7 +89,7 @@ renderItems() {
 
     render() {
         return (
-            <View style={{ paddingTop: 50, flex: 1, flexDirection: 'column' }}>
+            <View style={{ paddingTop: 60, flex: 1, flexDirection: 'column' }}>
             <ScrollView>
                 <View style={{ marginBottom: 65 }}>
 
@@ -104,10 +103,6 @@ renderItems() {
                 >
                     Are you sure you want to delete this?
                 </Confirm>
-
-                {/*}<View>
-                <FooterBar style={{ flex: 1 }} />
-                </View>*/}
             </View>
 
         );
