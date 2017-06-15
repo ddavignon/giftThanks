@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { Scene, Router } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import EventsMain from './screens/EventsMain';
 import AddEventModal from './components/AddEventModal';
 import AddItemMain from './screens/AddItemMain';
@@ -8,10 +9,20 @@ import EventItems from './screens/EventItems';
 import TokensMain from './screens/TokensMain';
 import ContactsMain from './screens/ContactsMain';
 
+
 const TabIcon = ({ selected, title }) => {
   return (
     <Text style={{ color: selected ? 'red' : 'black' }}>{title}</Text>
   );
+}
+const navButton = ({ selected, title, iconName }) => {
+    return (
+        <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} >
+            <Icon size={24} color="black" name={iconName} backgroundColor="#FFFFFF" />
+            <Text style={{ color: selected ? 'red' : 'black' }}>{title}</Text>
+        </View>
+
+    );
 }
 
 const RouterComponent = () => {
@@ -26,7 +37,12 @@ const RouterComponent = () => {
                   tabBarStyle={{ backgroundColor: '#FFFFFF' }}
                 >
                 {/* Tab and it's scenes */}
-                    <Scene key="contactsScene" title="Contacts" icon={TabIcon}>
+                    <Scene
+                        key="contactsScene"
+                        title="Contacts"
+                        icon={navButton}
+                        iconName="people"
+                    >
                         <Scene
                             key="contacts"
                             component={ContactsMain}
@@ -34,7 +50,12 @@ const RouterComponent = () => {
                         />
                     </Scene>
                 {/* Tab and it's scenes */}
-                    <Scene key="eventsScene" title="Events" icon={TabIcon}>
+                    <Scene
+                        key="eventsScene"
+                        title="Events"
+                        icon={navButton}
+                        iconName="view-list"
+                    >
                         <Scene
                             rightTitle='+'
                             onRight={() => {}}
@@ -56,7 +77,13 @@ const RouterComponent = () => {
                         <Scene key='addItemScene' component={AddItemMain} />
                     </Scene>
                 {/* Tab and it's scenes*/}
-                    <Scene key='tokensScene' title="Tokens" icon={TabIcon}>
+                    <Scene
+                        key='tokensScene'
+                        title="Tokens"
+                        icon={TabIcon}
+                        icon={navButton}
+                        iconName="monetization-on"
+                    >
                         <Scene
                             key='tokens'
                             component={TokensMain}

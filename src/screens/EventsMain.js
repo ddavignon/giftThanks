@@ -26,6 +26,14 @@ class EventsMain extends Component {
 
     // read event
     componentWillMount() {
+    }
+
+
+    componentDidMount() {
+        Actions.refresh({
+            rightTitle: 'Add',
+            onRight: () => this.setState({ visible: true })
+        });
 
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
@@ -40,14 +48,6 @@ class EventsMain extends Component {
                 console.log('no user signed in');
             }
         }.bind(this));
-    }
-
-
-    componentDidMount() {
-        Actions.refresh({
-            rightTitle: 'Add',
-            onRight: () => this.setState({ visible: true })
-        });
     }
 
     // Create event
