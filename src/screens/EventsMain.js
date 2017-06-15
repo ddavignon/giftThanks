@@ -52,7 +52,6 @@ class EventsMain extends Component {
 
     // Create event
     onCreateAccept(eventText) {
-
         this.setState({ eventName: eventText });
         console.log('Passed props: ', this.state.eventName);
 
