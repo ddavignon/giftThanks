@@ -5,7 +5,6 @@ import { ScrollView, View } from 'react-native';
 import firebase from 'firebase';
 import ItemDetail from '../components/ItemDetail';
 import AddEventModal from '../components/AddEventModal';
-import FooterBar from '../components/FooterBar';
 import {
     Button,
     Card,
@@ -27,6 +26,14 @@ class EventsMain extends Component {
 
     // read event
     componentWillMount() {
+    }
+
+
+    componentDidMount() {
+        Actions.refresh({
+            rightTitle: 'Add',
+            onRight: () => this.setState({ visible: true })
+        });
 
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
@@ -43,17 +50,8 @@ class EventsMain extends Component {
         }.bind(this));
     }
 
-
-    componentDidMount() {
-        Actions.refresh({
-            rightTitle: 'Add',
-            onRight: () => this.setState({ visible: true })
-        });
-    }
-
     // Create event
     onCreateAccept(eventText) {
-
         this.setState({ eventName: eventText });
         console.log('Passed props: ', this.state.eventName);
 
@@ -63,7 +61,6 @@ class EventsMain extends Component {
             firebase.database().ref(`users/${currentUser.uid}/events/`)
                 .push({ name: this.state.eventName })
                 .then(() => this.setState({ eventName: '', visible: false }));
-
         }
     }
 
@@ -120,7 +117,7 @@ class EventsMain extends Component {
     handleItemPress(index) {
         console.log('I got touched', index);
         return (
-            Actions.itemsScene({ eventId: index })
+            Actions.gifts({ eventId: index })
         );
     }
 
@@ -134,8 +131,8 @@ class EventsMain extends Component {
                     <ItemDetail
                         key={index}
                         title={event.name}/*item.state we are sending to itemDetail*/
-                        _id = {index}
-                        image="http://placehold.it/30"
+                        _id={index}
+                        //image="http://placehold.it/30"
                         onEditPress={() => this.handleEditPress(index, event.name)}
                         onDeletePress={() => this.handleDeletePress(index)}
                         onItemPress={() => this.handleItemPress(index)}
@@ -147,7 +144,7 @@ class EventsMain extends Component {
 
     render() {
         return (
-            <View>
+            <View style={{ paddingTop: 50, flex: 1, flexDirection: 'column' }}>
                 <Card>
                     <AddEventModal
                         visible={this.state.visible}
@@ -173,7 +170,6 @@ class EventsMain extends Component {
                     </CardSection>
                 </Card>
                 <ScrollView>
-                    {/*<ItemList screen="EventsMain" />*/}
                     <View style={{ marginBottom: 65 }} >
                         {this.renderItems()}
                     </View>
@@ -185,7 +181,6 @@ class EventsMain extends Component {
                 >
                     Are you sure you want to delete this?
                 </Confirm>
-                <FooterBar style={{ flex: 1 }} />
             </View>
         );
     }

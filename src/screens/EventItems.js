@@ -89,8 +89,13 @@ renderItems() {
 
     render() {
         return (
-            <View>
+            <View style={{ paddingTop: 60, flex: 1, flexDirection: 'column' }}>
+            <ScrollView>
+                <View style={{ marginBottom: 65 }}>
+
                 {this.renderItems()}
+                </View>
+                </ScrollView>
                 <Confirm
                     visible={this.state.showDeleteModal}
                     onAccept={this.onDeleteAccept.bind(this)}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import BottomNavigation, { Tab } from 'react-native-material-bottom-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -7,6 +8,20 @@ import {
 } from '../actions';
 
 class FooterBar extends Component {
+
+    onTabChange(newTabIndex) {
+        console.log('Tab index: ', newTabIndex);
+        switch (newTabIndex) {
+            case 0:
+                return;
+            case 1:
+                return Actions.modal();
+            case 2:
+                return Actions.tokensScene();
+            default:
+                return;
+        }
+    }
     render() {
         return (
             <BottomNavigation
@@ -14,7 +29,7 @@ class FooterBar extends Component {
                 rippleColor="white"
                 style={styles.footerStyle}
                 activeTab={1}
-                onTabChange={(newTabIndex) => this.props.navTabChange(newTabIndex)}
+                onTabChange={(newTabIndex) => this.onTabChange(newTabIndex)}
             >
                 <Tab
                     barBackgroundColor="#37474F"
@@ -30,11 +45,6 @@ class FooterBar extends Component {
                     barBackgroundColor="#00796B"
                     label="Tokens"
                     icon={<Icon size={24} color="white" name="monetization-on" />}
-                />
-                <Tab
-                    barBackgroundColor="#00796B"
-                    label="Add Item"
-                    icon={<Icon size={24} color="white" name="view-list" />}
                 />
             </BottomNavigation>
         );

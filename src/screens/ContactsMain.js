@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import {
     CardSection,
     Card,
@@ -15,21 +15,23 @@ class ContactsMain extends Component {
 
     render() {
         return (
-            <ScrollView>
-                <CardSection>
-                    <Input
-                        placeholder="Bob"
-                        label="Name"
-                        value={this.state.contactName}
-                        onChangeText={contactName => this.setState({ contactName })}
-                    />
-                </CardSection>
-                <Card>
-                    <Button>
-                        Add Contacts
-                    </Button>
-                </Card>
-            </ScrollView>
+            <View style={{ paddingTop: 70, flex: 1, flexDirection: 'column' }}>
+                <ScrollView>
+                    <CardSection>
+                        <Input
+                            placeholder="Bob"
+                            label="Name"
+                            value={this.state.contactName}
+                            onChangeText={contactName => this.setState({ contactName })}
+                        />
+                    </CardSection>
+                    <Card>
+                        <Button>
+                            Add Contacts
+                        </Button>
+                    </Card>
+                </ScrollView>
+            </View>
         );
     }
 }
