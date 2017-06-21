@@ -35,19 +35,21 @@ class EventsMain extends Component {
             onRight: () => this.setState({ visible: true })
         });
 
-        firebase.auth().onAuthStateChanged(function(user) {
+        firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 console.log('get data');
                 const { currentUser } = firebase.auth();
 
-                firebase.database().ref(`users/${currentUser.uid}/events/`).on('value', snapshot => {
-                    console.log('Event snapshot', snapshot);
-                    this.setState({ dbData: snapshot.val() });
-                });
+                firebase
+                    .database()
+                    .ref(`users/${currentUser.uid}/events/`)
+                    .on('value', snapshot => {
+                        this.setState({ dbData: snapshot.val() });
+                    });
             } else {
                 console.log('no user signed in');
             }
-        }.bind(this));
+        });
     }
 
     // Create event
@@ -76,7 +78,6 @@ class EventsMain extends Component {
             eventName,
             editKeyId
         });
-
     }
 
     handleUpdateAcceptPress() {
@@ -93,11 +94,11 @@ class EventsMain extends Component {
     }
 
     // delete event
-    handleDeletePress(key_id) {
+    handleDeletePress(keyId) {
         console.log('On delete press');
         this.setState({
             showDeleteModal: !this.state.showDeleteModal,
-            deleteKeyId: key_id
+            deleteKeyId: keyId
         });
     }
 
