@@ -37,7 +37,6 @@ class EventsMain extends Component {
 
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                console.log('get data');
                 const { currentUser } = firebase.auth();
 
                 firebase
@@ -123,11 +122,8 @@ class EventsMain extends Component {
     }
 
     renderItems() {
-        console.log('this render items', this.state.dbData);
         if (this.state.dbData) {
-            // return Object.values(this.state.dbData).map((item, index) => {
             return _.map(this.state.dbData, (event, index) => {
-                console.log(event, index);
                 return (
                     <ItemDetail
                         key={index}
