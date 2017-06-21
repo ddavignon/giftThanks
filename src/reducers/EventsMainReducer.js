@@ -5,7 +5,7 @@ import {
 
 const INITIAL_STATE = {
     eventName: '',
-    visible: false,
+    showCreateModal: false,
     showDeleteModal: false,
     deleteKeyId: '',
     editKeyId: '',

@@ -17,7 +17,7 @@ import {
 class EventsMain extends Component {
     state = {
         eventName: '',
-        visible: false,
+        showCreateModal: false,
         showDeleteModal: false,
         deleteKeyId: '',
         editKeyId: '',
@@ -26,13 +26,9 @@ class EventsMain extends Component {
 
     // read event
     componentWillMount() {
-    }
-
-
-    componentDidMount() {
         Actions.refresh({
             rightTitle: 'Add',
-            onRight: () => this.setState({ visible: true })
+            onRight: () => this.setState({ showCreateModal: true })
         });
 
         firebase.auth().onAuthStateChanged(user => {
@@ -61,12 +57,12 @@ class EventsMain extends Component {
 
             firebase.database().ref(`users/${currentUser.uid}/events/`)
                 .push({ name: this.state.eventName })
-                .then(() => this.setState({ eventName: '', visible: false }));
+                .then(() => this.setState({ eventName: '', showCreateModal: false }));
         }
     }
 
     onCreateDecline() {
-        this.setState({ visible: false });
+        this.setState({ showCreateModal: false });
         //Actions.events();
     }
 
@@ -144,7 +140,7 @@ class EventsMain extends Component {
             <View style={{ paddingTop: 50, flex: 1, flexDirection: 'column' }}>
                 <Card>
                     <AddEventModal
-                        visible={this.state.visible}
+                        visible={this.state.showCreateModal}
                         onAccept={this.onCreateAccept.bind(this)}
                         onDecline={this.onCreateDecline.bind(this)}
                     />
