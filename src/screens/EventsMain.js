@@ -120,6 +120,7 @@ class EventsMain extends Component {
     renderItems() {
         if (this.state.dbData) {
             return _.map(this.state.dbData, (event, index) => {
+                console.log(event, index);
                 return (
                     <ItemDetail
                         key={index}
