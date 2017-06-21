@@ -1,18 +1,10 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import firebase from 'firebase';
 import ItemDetail from '../components/ItemDetail';
-import ItemList from '../components/ItemList';
-import AddEventModal from '../components/AddEventModal';
-import {
-    Button,
-    Card,
-    CardSection,
-    Confirm,
-    Input
-} from '../components/common';
+import { Confirm } from '../components/common';
 
 
 class EventItems extends Component {
