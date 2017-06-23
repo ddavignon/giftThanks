@@ -1,7 +1,11 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import { ScrollView, View } from 'react-native';
+import {
+    ScrollView,
+    View,
+    Platform,
+} from 'react-native';
 import firebase from 'firebase';
 import ItemDetail from '../components/ItemDetail';
 import AddEventModal from '../components/AddEventModal';
@@ -13,6 +17,7 @@ import {
     Input
 } from '../components/common';
 
+const Permissions = require('react-native-permissions');
 
 class EventsMain extends Component {
     state = {
@@ -21,7 +26,9 @@ class EventsMain extends Component {
         showDeleteModal: false,
         deleteKeyId: '',
         editKeyId: '',
-        dbData: {}
+        dbData: {},
+        androidPhotoPermission: 'undetermined',
+        androidStoragePermission: 'undetermined'
     };
 
     // read event
@@ -137,6 +144,20 @@ class EventsMain extends Component {
     }
 
     render() {
+        if (Platform.OS === 'android' && this.state.androidPhotoPermission !== 'authorized') {
+            Permissions.requestPermission('camera')
+              .then(response => {
+                this.setState({ androidPhotoPermission: response });
+              });
+        }
+
+        if (Platform.OS === 'android' && this.state.androidStoragePermission !== 'authorized') {
+            Permissions.requestPermission('photo')
+              .then(response => {
+                this.setState({ androidStoragePermission: response });
+              });
+        }
+
         return (
             <View style={{ paddingTop: 50, flex: 1, flexDirection: 'column' }}>
                 <Card>

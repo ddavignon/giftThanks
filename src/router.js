@@ -81,7 +81,6 @@ const RouterComponent = () => {
                     <Scene
                         key='tokensScene'
                         title="Tokens"
-                        icon={TabIcon}
                         icon={navButton}
                         iconName="monetization-on"
                     >
