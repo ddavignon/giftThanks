@@ -15,6 +15,7 @@ const TabIcon = ({ selected, title }) => {
     <Text style={{ color: selected ? 'red' : 'black' }}>{title}</Text>
   );
 }
+
 const navButton = ({ selected, title, iconName }) => {
     return (
         <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} >
@@ -80,7 +81,6 @@ const RouterComponent = () => {
                     <Scene
                         key='tokensScene'
                         title="Tokens"
-                        icon={TabIcon}
                         icon={navButton}
                         iconName="monetization-on"
                     >

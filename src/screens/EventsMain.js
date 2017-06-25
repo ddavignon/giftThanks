@@ -1,7 +1,11 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import { ScrollView, View } from 'react-native';
+import {
+    ScrollView,
+    View,
+    Platform,
+} from 'react-native';
 import firebase from 'firebase';
 import ItemDetail from '../components/ItemDetail';
 import AddEventModal from '../components/AddEventModal';
@@ -13,41 +17,41 @@ import {
     Input
 } from '../components/common';
 
+const Permissions = require('react-native-permissions');
 
 class EventsMain extends Component {
     state = {
         eventName: '',
-        visible: false,
+        showCreateModal: false,
         showDeleteModal: false,
         deleteKeyId: '',
         editKeyId: '',
-        dbData: {}
+        dbData: {},
+        androidPhotoPermission: 'undetermined',
+        androidStoragePermission: 'undetermined'
     };
 
     // read event
     componentWillMount() {
-    }
-
-
-    componentDidMount() {
         Actions.refresh({
             rightTitle: 'Add',
-            onRight: () => this.setState({ visible: true })
+            onRight: () => this.setState({ showCreateModal: true })
         });
 
-        firebase.auth().onAuthStateChanged(function(user) {
+        firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                console.log('get data');
                 const { currentUser } = firebase.auth();
 
-                firebase.database().ref(`users/${currentUser.uid}/events/`).on('value', snapshot => {
-                    console.log('Event snapshot', snapshot);
-                    this.setState({ dbData: snapshot.val() });
-                });
+                firebase
+                    .database()
+                    .ref(`users/${currentUser.uid}/events/`)
+                    .on('value', snapshot => {
+                        this.setState({ dbData: snapshot.val() });
+                    });
             } else {
                 console.log('no user signed in');
             }
-        }.bind(this));
+        });
     }
 
     // Create event
@@ -60,12 +64,12 @@ class EventsMain extends Component {
 
             firebase.database().ref(`users/${currentUser.uid}/events/`)
                 .push({ name: this.state.eventName })
-                .then(() => this.setState({ eventName: '', visible: false }));
+                .then(() => this.setState({ eventName: '', showCreateModal: false }));
         }
     }
 
     onCreateDecline() {
-        this.setState({ visible: false });
+        this.setState({ showCreateModal: false });
         //Actions.events();
     }
 
@@ -76,7 +80,6 @@ class EventsMain extends Component {
             eventName,
             editKeyId
         });
-
     }
 
     handleUpdateAcceptPress() {
@@ -93,11 +96,11 @@ class EventsMain extends Component {
     }
 
     // delete event
-    handleDeletePress(key_id) {
+    handleDeletePress(keyId) {
         console.log('On delete press');
         this.setState({
             showDeleteModal: !this.state.showDeleteModal,
-            deleteKeyId: key_id
+            deleteKeyId: keyId
         });
     }
 
@@ -122,9 +125,7 @@ class EventsMain extends Component {
     }
 
     renderItems() {
-        console.log('this render items', this.state.dbData);
         if (this.state.dbData) {
-            // return Object.values(this.state.dbData).map((item, index) => {
             return _.map(this.state.dbData, (event, index) => {
                 console.log(event, index);
                 return (
@@ -143,11 +144,25 @@ class EventsMain extends Component {
     }
 
     render() {
+        if (Platform.OS === 'android' && this.state.androidPhotoPermission !== 'authorized') {
+            Permissions.requestPermission('camera')
+              .then(response => {
+                this.setState({ androidPhotoPermission: response });
+              });
+        }
+
+        if (Platform.OS === 'android' && this.state.androidStoragePermission !== 'authorized') {
+            Permissions.requestPermission('photo')
+              .then(response => {
+                this.setState({ androidStoragePermission: response });
+              });
+        }
+
         return (
             <View style={{ paddingTop: 50, flex: 1, flexDirection: 'column' }}>
                 <Card>
                     <AddEventModal
-                        visible={this.state.visible}
+                        visible={this.state.showCreateModal}
                         onAccept={this.onCreateAccept.bind(this)}
                         onDecline={this.onCreateDecline.bind(this)}
                     />

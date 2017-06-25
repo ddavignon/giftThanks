@@ -26,7 +26,6 @@ class ItemList extends Component {
                         key={index}
                         title={item.isFrom}/*item props we are sending to itemDetail*/
                         image={item.itemURL}
-                        /*Need prop for value type (event/item)*/
                     />
                 );
             });
