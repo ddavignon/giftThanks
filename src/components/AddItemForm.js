@@ -79,8 +79,10 @@ class AddItemForm extends Component {
                 console.log('User tapped custom button: ', response.customButton);
             } else {
                 const avatarSource = { uri: response.uri };
-                const responsePath = response.origURL;
+                const responsePath = Platform.OS === 'android' ? response.path : response.origURL;
 
+                console.log('response', response);
+                console.log('Rpth', responsePath);
                 this.setState({
                     avatarSource,
                     responsePath
@@ -96,10 +98,14 @@ class AddItemForm extends Component {
         const testImageName = `image-from-react-native-${new Date()}.jpg`;
         const { currentUser } = firebase.auth();
         const path = `users/${currentUser.uid}/events/${eventId}/items/`;
+        
+        console.log(responsePath);
+
         const Blob = RNFetchBlob.polyfill.Blob;
 
-        // window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
-        // window.Blob = Blob;
+        window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
+        window.Blob = Blob;
+        console.log('add item pressed');
 
         Blob.build(RNFetchBlob.wrap(responsePath), { type: 'image/jpeg' })
             .then((blob) => firebase.storage()
@@ -107,8 +113,9 @@ class AddItemForm extends Component {
                     .child(testImageName)
                     .put(blob, { contentType: 'image/png' })
             )
+            .catch(console.log('Build blog failed!'))
             .then((snapshot) => {
-                // console.log(snapshot.downloadURL);
+                console.log('snap', snapshot.downloadURL);
                 const itemURL = snapshot.downloadURL;
                 firebase.database().ref(path)
                     .push({ name: isFromText, URL: itemURL })
