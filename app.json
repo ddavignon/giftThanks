@@ -1,4 +1,23 @@
 {
-  "name": "gifThanks",
-  "displayName": "gifThanks"
+  "expo": {
+    "name": "gift-thanks",
+    "description": "An empty new project",
+    "slug": "gift-thanks",
+    "privacy": "public",
+    "sdkVersion": "18.0.0",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "primaryColor": "#cccccc",
+    "icon": "./assets/icons/app.png",
+    "loading": {
+      "icon": "./assets/icons/loading.png",
+      "hideExponentText": false
+    },
+    "packagerOpts": {
+      "assetExts": ["ttf", "mp4"]
+    },
+    "ios": {
+      "supportsTablet": true
+    }
+  }
 }

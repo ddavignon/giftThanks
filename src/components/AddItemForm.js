@@ -9,7 +9,7 @@ import {
     PermissionsAndroid
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-import RNFetchBlob from 'react-native-fetch-blob';
+// import RNFetchBlob from 'react-native-fetch-blob';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import { CardSection, Button, Input } from './common';
@@ -101,35 +101,35 @@ class AddItemForm extends Component {
         
         console.log(responsePath);
 
-        const Blob = RNFetchBlob.polyfill.Blob;
+        // const Blob = RNFetchBlob.polyfill.Blob;
 
-        window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
-        window.Blob = Blob;
-        console.log('add item pressed');
+        // window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
+        // window.Blob = Blob;
+        // console.log('add item pressed');
 
-        Blob.build(RNFetchBlob.wrap(responsePath), { type: 'image/jpeg' })
-            .then((blob) => firebase.storage()
-                    .ref(path)
-                    .child(testImageName)
-                    .put(blob, { contentType: 'image/png' })
-            )
-            .catch(console.log('Build blog failed!'))
-            .then((snapshot) => {
-                console.log('snap', snapshot.downloadURL);
-                const itemURL = snapshot.downloadURL;
-                firebase.database().ref(path)
-                    .push({ name: isFromText, URL: itemURL })
-                    .then(() => {
-                        this.setState({
-                            isFromText: '',
-                            description: '',
-                            responsePath: '',
-                            avatarSource: null,
-                            dbData: ''
-                        });
-                        Actions.gifts({ eventId, type: 'reset' });
-                    });
-            });
+        // Blob.build(RNFetchBlob.wrap(responsePath), { type: 'image/jpeg' })
+        //     .then((blob) => firebase.storage()
+        //             .ref(path)
+        //             .child(testImageName)
+        //             .put(blob, { contentType: 'image/png' })
+        //     )
+        //     .catch(console.log('Build blog failed!'))
+        //     .then((snapshot) => {
+        //         console.log('snap', snapshot.downloadURL);
+        //         const itemURL = snapshot.downloadURL;
+        //         firebase.database().ref(path)
+        //             .push({ name: isFromText, URL: itemURL })
+        //             .then(() => {
+        //                 this.setState({
+        //                     isFromText: '',
+        //                     description: '',
+        //                     responsePath: '',
+        //                     avatarSource: null,
+        //                     dbData: ''
+        //                 });
+        //                 Actions.gifts({ eventId, type: 'reset' });
+        //             });
+        //     });
     }
 
     // async requestPhotoPermission() {
