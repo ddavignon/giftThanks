@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import {
     ScrollView,
+    ListView,
     View,
     Platform,
 } from 'react-native';
@@ -42,19 +43,24 @@ class EventsMain extends Component {
 
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                // const { currentUser } = firebase.auth();
-
-                // firebase
-                //     .database()
-                //     .ref(`users/${currentUser.uid}/events/`)
-                //     .on('value', snapshot => {
-                //         this.setState({ dbData: snapshot.val() });
-                //     });
                 this.props.eventsFetch();
+                this.createDataSource(this.props);
             } else {
                 console.log('no user signed in');
             }
         });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.createDataSource(nextProps);
+    }
+
+    createDataSource({ events }) {
+        const ds = new ListView.DataSource({
+            rowHasChanged: (r1, r2) => r1 !== r2
+        });
+
+        this.dataSource = ds.cloneWithRows(events);
     }
 
     // Create event
