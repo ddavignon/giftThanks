@@ -4,7 +4,7 @@ import {
     EVENTS_FETCH_SUCCESS
 } from './types';
 
-export const fetchEvents = () => {
+export const eventsFetch = () => {
     const { currentUser } = firebase.auth();
 
     return (dispatch) => {

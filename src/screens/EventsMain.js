@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import {
     ScrollView,
@@ -7,6 +8,7 @@ import {
     Platform,
 } from 'react-native';
 import firebase from 'firebase';
+import { eventsFetch } from '../actions';
 import ItemDetail from '../components/ItemDetail';
 import AddEventModal from '../components/AddEventModal';
 import {
@@ -32,7 +34,7 @@ class EventsMain extends Component {
     };
 
     // read event
-    componentWillMount() {
+    componentDidMount() {
         Actions.refresh({
             rightTitle: 'Add',
             onRight: () => this.setState({ showCreateModal: true })
@@ -201,4 +203,14 @@ class EventsMain extends Component {
     }
 }
 
-export default EventsMain;
+// const mapStateToProps = state => {
+//     // const events = _.map(state.eventsMain, (val, uid) => {
+//     //     return { ...val, uid };
+//     // });
+
+//     console.log(state.eventsMain);
+
+//     return {  };
+// };
+
+export default connect(null, { eventsFetch })(EventsMain);
