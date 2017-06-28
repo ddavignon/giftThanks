@@ -1,6 +1,6 @@
 import {
     EVENTS_FETCH_SUCCESS
-} from './types';
+} from '../actions/types';
 
 const INITIAL_STATE = {
     dbData: {}

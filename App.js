@@ -7,6 +7,7 @@ import reducers from './src/reducers';
 import Router from './src/router';
 
 
+const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
 export default class App extends React.Component {
   componentWillMount() {
@@ -29,6 +30,10 @@ export default class App extends React.Component {
   }
 
   render() {
-    return <Router />;
+    return (
+        <Provider store={store}>
+            <Router />
+        </Provider>
+    );
   }
 }
