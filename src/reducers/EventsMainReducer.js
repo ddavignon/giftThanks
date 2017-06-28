@@ -3,7 +3,6 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
-    dbData: {}
 };
 
 export default (state = INITIAL_STATE, action) => {

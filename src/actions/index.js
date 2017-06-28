@@ -12,7 +12,6 @@ export const eventsFetch = () => {
             .database()
             .ref(`users/${currentUser.uid}/events/`)
             .on('value', snapshot => {
-                //this.setState({ dbData: snapshot.val() });
                 dispatch({ type: EVENTS_FETCH_SUCCESS, payload: snapshot.val() })
             });
     }

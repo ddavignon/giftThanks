@@ -34,7 +34,7 @@ class EventsMain extends Component {
     };
 
     // read event
-    componentDidMount() {
+    componentWillMount() {
         Actions.refresh({
             rightTitle: 'Add',
             onRight: () => this.setState({ showCreateModal: true })
@@ -42,14 +42,15 @@ class EventsMain extends Component {
 
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                const { currentUser } = firebase.auth();
+                // const { currentUser } = firebase.auth();
 
-                firebase
-                    .database()
-                    .ref(`users/${currentUser.uid}/events/`)
-                    .on('value', snapshot => {
-                        this.setState({ dbData: snapshot.val() });
-                    });
+                // firebase
+                //     .database()
+                //     .ref(`users/${currentUser.uid}/events/`)
+                //     .on('value', snapshot => {
+                //         this.setState({ dbData: snapshot.val() });
+                //     });
+                this.props.eventsFetch();
             } else {
                 console.log('no user signed in');
             }
@@ -203,14 +204,12 @@ class EventsMain extends Component {
     }
 }
 
-// const mapStateToProps = state => {
-//     // const events = _.map(state.eventsMain, (val, uid) => {
-//     //     return { ...val, uid };
-//     // });
+const mapStateToProps = state => {
+    const events = _.map(state.eventsMain, (val, uid) => {
+        return { ...val, uid };
+    });
 
-//     console.log(state.eventsMain);
+    return { events };
+};
 
-//     return {  };
-// };
-
-export default connect(null, { eventsFetch })(EventsMain);
+export default connect(mapStateToProps, { eventsFetch })(EventsMain);
