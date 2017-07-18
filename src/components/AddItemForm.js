@@ -8,8 +8,9 @@ import {
     Platform,
     PermissionsAndroid
 } from 'react-native';
-import ImagePicker from 'react-native-image-picker';
-// import RNFetchBlob from 'react-native-fetch-blob';
+import { ImagePicker } from 'expo';
+//import ImagePicker from 'react-native-image-picker';
+import RNFetchBlob from 'react-native-fetch-blob';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import { CardSection, Button, Input } from './common';
@@ -98,86 +99,107 @@ class AddItemForm extends Component {
         const testImageName = `image-from-react-native-${new Date()}.jpg`;
         const { currentUser } = firebase.auth();
         const path = `users/${currentUser.uid}/events/${eventId}/items/`;
-        
+
         console.log(responsePath);
 
-        // const Blob = RNFetchBlob.polyfill.Blob;
+        const Blob = RNFetchBlob.polyfill.Blob;
 
-        // window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
-        // window.Blob = Blob;
-        // console.log('add item pressed');
+        window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
+        window.Blob = Blob;
+        console.log('add item pressed');
 
-        // Blob.build(RNFetchBlob.wrap(responsePath), { type: 'image/jpeg' })
-        //     .then((blob) => firebase.storage()
-        //             .ref(path)
-        //             .child(testImageName)
-        //             .put(blob, { contentType: 'image/png' })
-        //     )
-        //     .catch(console.log('Build blog failed!'))
-        //     .then((snapshot) => {
-        //         console.log('snap', snapshot.downloadURL);
-        //         const itemURL = snapshot.downloadURL;
-        //         firebase.database().ref(path)
-        //             .push({ name: isFromText, URL: itemURL })
-        //             .then(() => {
-        //                 this.setState({
-        //                     isFromText: '',
-        //                     description: '',
-        //                     responsePath: '',
-        //                     avatarSource: null,
-        //                     dbData: ''
-        //                 });
-        //                 Actions.gifts({ eventId, type: 'reset' });
-        //             });
-        //     });
+        Blob.build(RNFetchBlob.wrap(responsePath), { type: 'image/jpeg' })
+            .then((blob) => firebase.storage()
+                    .ref(path)
+                    .child(testImageName)
+                    .put(blob, { contentType: 'image/png' })
+            )
+            .catch(console.log('Build blog failed!'))
+            .then((snapshot) => {
+                console.log('snap', snapshot.downloadURL);
+                const itemURL = snapshot.downloadURL;
+                firebase.database().ref(path)
+                    .push({ name: isFromText, URL: itemURL })
+                    .then(() => {
+                        this.setState({
+                            isFromText: '',
+                            description: '',
+                            responsePath: '',
+                            avatarSource: null,
+                            dbData: ''
+                        });
+                        Actions.gifts({ eventId, type: 'reset' });
+                    });
+            });
     }
 
-    // async requestPhotoPermission() {
-    //     try {
-    //          const granted = await PermissionsAndroid.request(
-    //             PermissionsAndroid.PERMISSIONS.CAMERA, {
-    //             'title': 'gifThanks needs photo permission',
-    //             'message': 'gifThanks needs access to your camera so you can send thanks.'
-    //             }
-    //          );
-    //          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-    //              this.setState({ androidPhotoPermission: 'authorized' });
-    //          } else {
-    //              console.log('Photo permission denied');
-    //          }
-    //     } catch (err) {
-    //          console.warn(err);
-    //     }
-    //  }
-    //
-    //  async requestStoragePermission() {
-    //      try {
-    //           const granted = await PermissionsAndroid.request(
-    //              PermissionsAndroid.PERMISSIONS.EXTERNAL_STORAGE, {
-    //              title: 'gifThanks needs storage permission',
-    //              message: 'gifThanks needs access to your photos so you can send thanks.'
-    //              }
-    //          );
-    //           if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-    //               this.setState({ androidStoragePermission: 'authorized' });
-    //           } else {
-    //               console.log('External Storage permission denied');
-    //           }
-    //      } catch (err) {
-    //           console.warn(err);
-    //      }
-    //   }
+    _pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+        const avatarSource = { uri: result.uri };
+        const responsePath = Platform.OS === 'android' ? result.path : result.origURL;
+
+        console.log('result', result);
+        console.log('Rpth', responsePath);
+        this.setState({
+            avatarSource,
+            responsePath
+        });
+    }
+  };
+
+    async requestPhotoPermission() {
+        try {
+             const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.CAMERA, {
+                'title': 'gifThanks needs photo permission',
+                'message': 'gifThanks needs access to your camera so you can send thanks.'
+                }
+             );
+             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                 this.setState({ androidPhotoPermission: 'authorized' });
+             } else {
+                 console.log('Photo permission denied');
+             }
+        } catch (err) {
+             console.warn(err);
+        }
+     }
+
+     async requestStoragePermission() {
+         try {
+              const granted = await PermissionsAndroid.request(
+                 PermissionsAndroid.PERMISSIONS.EXTERNAL_STORAGE, {
+                 title: 'gifThanks needs storage permission',
+                 message: 'gifThanks needs access to your photos so you can send thanks.'
+                 }
+             );
+              if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                  this.setState({ androidStoragePermission: 'authorized' });
+              } else {
+                  console.log('External Storage permission denied');
+              }
+         } catch (err) {
+              console.warn(err);
+         }
+      }
 
     render() {
         const { container, clothingItem, clothingItemContainer } = styles;
 
-        // if (Platform.OS === 'android' && this.state.androidPhotoPermission !== 'authorized') {
-        //     this.requestPhotoPermission();
-        // }
-        //
-        // if (Platform.OS === 'android' && this.state.androidStoragePermission !== 'authorized') {
-        //     this.requestStoragePermission();
-        // }
+        if (Platform.OS === 'android' && this.state.androidPhotoPermission !== 'authorized') {
+            this.requestPhotoPermission();
+        }
+
+        if (Platform.OS === 'android' && this.state.androidStoragePermission !== 'authorized') {
+            this.requestStoragePermission();
+        }
 
         return (
             <View>
@@ -185,7 +207,7 @@ class AddItemForm extends Component {
                     <View style={{ flex: 1 }} >
                         <TouchableOpacity
                             style={container}
-                            onPress={this.handleAddImageButton.bind(this)}
+                            onPress={this._pickImage.bind(this)}
                         >
                             <View style={[container, clothingItem, clothingItemContainer]}>
                                 { this.state.avatarSource === null
