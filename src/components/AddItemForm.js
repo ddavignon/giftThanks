@@ -10,10 +10,10 @@ import {
 } from 'react-native';
 import { ImagePicker } from 'expo';
 //import ImagePicker from 'react-native-image-picker';
-import RNFetchBlob from 'react-native-fetch-blob';
+//import RNFetchBlob from 'react-native-fetch-blob';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
-import { CardSection, Button, Input } from './common';
+import { CardSection, Button, Input, Confirm } from './common';
 
 // const Permissions = require('react-native-permissions');
 
@@ -21,6 +21,7 @@ class AddItemForm extends Component {
 
     state = {
         isFromText: '',
+        showAddImageModal: false,
         description: '',
         responsePath: '',
         avatarSource: null,
@@ -102,38 +103,38 @@ class AddItemForm extends Component {
 
         console.log(responsePath);
 
-        const Blob = RNFetchBlob.polyfill.Blob;
+        // const Blob = RNFetchBlob.polyfill.Blob;
+        //
+        // window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
+        // window.Blob = Blob;
+        // console.log('add item pressed');
 
-        window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
-        window.Blob = Blob;
-        console.log('add item pressed');
-
-        Blob.build(RNFetchBlob.wrap(responsePath), { type: 'image/jpeg' })
-            .then((blob) => firebase.storage()
-                    .ref(path)
-                    .child(testImageName)
-                    .put(blob, { contentType: 'image/png' })
-            )
-            .catch(console.log('Build blog failed!'))
-            .then((snapshot) => {
-                console.log('snap', snapshot.downloadURL);
-                const itemURL = snapshot.downloadURL;
-                firebase.database().ref(path)
-                    .push({ name: isFromText, URL: itemURL })
-                    .then(() => {
-                        this.setState({
-                            isFromText: '',
-                            description: '',
-                            responsePath: '',
-                            avatarSource: null,
-                            dbData: ''
-                        });
-                        Actions.gifts({ eventId, type: 'reset' });
-                    });
-            });
+        // Blob.build(RNFetchBlob.wrap(responsePath), { type: 'image/jpeg' })
+        //     .then((blob) => firebase.storage()
+        //             .ref(path)
+        //             .child(testImageName)
+        //             .put(blob, { contentType: 'image/png' })
+        //     )
+        //     .catch(console.log('Build blog failed!'))
+        //     .then((snapshot) => {
+        //         console.log('snap', snapshot.downloadURL);
+        //         const itemURL = snapshot.downloadURL;
+        //         firebase.database().ref(path)
+        //             .push({ name: isFromText, URL: itemURL })
+        //             .then(() => {
+        //                 this.setState({
+        //                     isFromText: '',
+        //                     description: '',
+        //                     responsePath: '',
+        //                     avatarSource: null,
+        //                     dbData: ''
+        //                 });
+        //                 Actions.gifts({ eventId, type: 'reset' });
+        //             });
+        //     });
     }
 
-    _pickImage = async () => {
+    _pickCamerarollImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       aspect: [4, 3],
@@ -143,7 +144,7 @@ class AddItemForm extends Component {
 
     if (!result.cancelled) {
         const avatarSource = { uri: result.uri };
-        const responsePath = Platform.OS === 'android' ? result.path : result.origURL;
+        const responsePath = Platform.OS === 'android' ? result.uri : result.uri;
 
         console.log('result', result);
         console.log('Rpth', responsePath);
@@ -153,6 +154,27 @@ class AddItemForm extends Component {
         });
     }
   };
+
+  _cameraImage = async () => {
+  let result = await ImagePicker.launchCameraAsync({
+    allowsEditing: true,
+    aspect: [4, 3],
+  });
+
+  console.log('Camera result: ', result);
+
+  // if (!result.cancelled) {
+  //     const avatarSource = { uri: result.uri };
+  //     const responsePath = Platform.OS === 'android' ? result.uri : result.uri;
+  //
+  //     console.log('result', result);
+  //     console.log('Rpth', responsePath);
+  //     this.setState({
+  //         avatarSource,
+  //         responsePath
+  //     });
+  // }
+};
 
     async requestPhotoPermission() {
         try {
@@ -207,7 +229,7 @@ class AddItemForm extends Component {
                     <View style={{ flex: 1 }} >
                         <TouchableOpacity
                             style={container}
-                            onPress={this._pickImage.bind(this)}
+                            onPress={this._pickCamerarollImage.bind(this)}
                         >
                             <View style={[container, clothingItem, clothingItemContainer]}>
                                 { this.state.avatarSource === null
