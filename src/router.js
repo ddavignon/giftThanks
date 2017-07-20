@@ -39,19 +39,6 @@ const RouterComponent = () => {
                 >
                 {/* Tab and it's scenes */}
                     <Scene
-                        key="contactsScene"
-                        title="Contacts"
-                        icon={navButton}
-                        iconName="people"
-                    >
-                        <Scene
-                            key="contacts"
-                            component={ContactsMain}
-                            title="Contacts"
-                        />
-                    </Scene>
-                {/* Tab and it's scenes */}
-                    <Scene
                         key="eventsScene"
                         title="Events"
                         icon={navButton}
