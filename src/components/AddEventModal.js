@@ -4,7 +4,7 @@ import { Input, Button, CardSection } from './common';
 
 
 class AddEventModal extends Component {
-    
+
     state = {
         eventName: '',
         visible: false

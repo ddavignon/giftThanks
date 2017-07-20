@@ -33,10 +33,10 @@ class EventsMain extends Component {
 
     // read event
     componentWillMount() {
-        Actions.refresh({
-            rightTitle: 'Add',
-            onRight: () => this.setState({ showCreateModal: true })
-        });
+        // Actions.refresh({
+        //     rightTitle: 'Add',
+        //     onRight: () => this.setState({ showCreateModal: true })
+        // });
 
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
@@ -54,17 +54,22 @@ class EventsMain extends Component {
         });
     }
 
+    componentDidMount() {
+        Actions.refresh({
+            rightTitle: 'Add',
+            onRight: () => this.setState({ showCreateModal: true })
+        });
+    }
     // Create event
     onCreateAccept(eventText) {
-        this.setState({ eventName: eventText });
-        console.log('Passed props: ', this.state.eventName);
+        //console.log('Passed props: ', this.state.eventName, 'EventText: ', eventText);
 
-        if (this.state.eventName) {
+        if (eventText) {
             const { currentUser } = firebase.auth();
 
             firebase.database().ref(`users/${currentUser.uid}/events/`)
-                .push({ name: this.state.eventName })
-                .then(() => this.setState({ eventName: '', showCreateModal: false }));
+                .push({ name: eventText })
+                .then(() => this.setState({ showCreateModal: false }));
         }
     }
 
@@ -166,23 +171,6 @@ class EventsMain extends Component {
                         onAccept={this.onCreateAccept.bind(this)}
                         onDecline={this.onCreateDecline.bind(this)}
                     />
-                </Card>
-                <Card>
-                    <CardSection>
-                        <Input
-                            label="Name"
-                            value={this.state.eventName}
-                            onChangeText={eventName => this.setState({ eventName })}
-                        />
-                    </CardSection>
-                    <CardSection>
-                        <Button onPress={this.handleUpdateAcceptPress.bind(this)}>
-                            Update
-                        </Button>
-                        <Button onPress={this.handleUpdateCancelPress.bind(this)}>
-                            Cancel
-                        </Button>
-                    </CardSection>
                 </Card>
                 <ScrollView>
                     <View style={{ marginBottom: 65 }} >
