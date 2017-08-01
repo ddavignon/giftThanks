@@ -24,6 +24,7 @@ class ItemList extends Component {
                 return (
                     <ItemDetail
                         key={index}
+                        type='items'
                         title={item.isFrom}/*item props we are sending to itemDetail*/
                         image={item.itemURL}
                     />

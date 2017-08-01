@@ -7,6 +7,23 @@ import { Card, CardSection } from './common';
 
 class ItemDetail extends Component {
     //This is a destructured props object using album instead of props
+    renderForType(type) {
+        console.log('type: ', this.props);
+        if (type === 'items') {
+            return (
+                <Icon
+                    onPress={this.props.onEditPress}
+                    name='create'
+                    color='#65c3d8'
+                    iconStyle={{
+                        justifyContent: 'space-between',
+                        marginLeft: 10,
+                        marginRight: 20 }}
+                />
+            );
+        }
+    }
+
     render() {
         const {
             thumbnailStyle,
@@ -15,7 +32,7 @@ class ItemDetail extends Component {
             headerTextStyle,
         } = styles;
 
-        const { image, title } = this.props;
+        const { image, title, type } = this.props;
 
 
         return (
@@ -34,15 +51,7 @@ class ItemDetail extends Component {
                             <Text style={headerTextStyle}>{title}</Text>
                         </View>
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
-                            <Icon
-                                onPress={this.props.onEditPress}
-                                name='create'
-                                color='#65c3d8'
-                                iconStyle={{
-                                    justifyContent: 'space-between',
-                                    marginLeft: 10,
-                                    marginRight: 20 }}
-                            />
+                            {this.renderForType(type)}
                             <Icon
                                 onPress={this.props.onDeletePress}
                                 name='not-interested'

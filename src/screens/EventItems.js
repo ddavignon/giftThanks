@@ -71,6 +71,7 @@ class EventItems extends Component {
                 return (
                     <ItemDetail
                         key={index}
+                        type='items'
                         title={event.name}/*item.state we are sending to itemDetail*/
                         _id={index}
                         image={event.URL}

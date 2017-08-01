@@ -59,6 +59,20 @@ class EventsMain extends Component {
             rightTitle: 'Add',
             onRight: () => this.setState({ showCreateModal: true })
         });
+        // firebase.auth().onAuthStateChanged(user => {
+        //     if (user) {
+        //         const { currentUser } = firebase.auth();
+        //
+        //         firebase
+        //             .database()
+        //             .ref(`users/${currentUser.uid}/events/`)
+        //             .on('value', snapshot => {
+        //                 this.setState({ dbData: snapshot.val() });
+        //             });
+        //     } else {
+        //         console.log('no user signed in');
+        //     }
+        // });
     }
     // Create event
     onCreateAccept(eventText) {
@@ -136,6 +150,7 @@ class EventsMain extends Component {
                 return (
                     <ItemDetail
                         key={index}
+                        type='events'
                         title={event.name}/*item.state we are sending to itemDetail*/
                         _id={index}
                         //image="http://placehold.it/30"
