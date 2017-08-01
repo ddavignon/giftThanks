@@ -80,7 +80,7 @@ class EventsMain extends Component {
 
     // edit event
     handleEditPress(editKeyId, eventName) {
-        console.log('On delete press');
+        console.log('On edit press');
         this.setState({
             eventName,
             editKeyId

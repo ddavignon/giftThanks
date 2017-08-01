@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
+import { Button, Icon } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
-import { Card, CardSection, Button } from './common';
+import { Card, CardSection } from './common';
 
 
 class ItemDetail extends Component {
@@ -15,6 +16,7 @@ class ItemDetail extends Component {
         } = styles;
 
         const { image, title } = this.props;
+
 
         return (
             <TouchableOpacity
@@ -31,12 +33,26 @@ class ItemDetail extends Component {
                         <View style={headerContentStyle}>
                             <Text style={headerTextStyle}>{title}</Text>
                         </View>
-                        <Button onPress={this.props.onEditPress}>
-                            Edit
-                        </Button>
-                        <Button onPress={this.props.onDeletePress}>
-                            Delete
-                        </Button>
+                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
+                            <Icon
+                                onPress={this.props.onEditPress}
+                                name='create'
+                                color='#65c3d8'
+                                iconStyle={{
+                                    justifyContent: 'space-between',
+                                    marginLeft: 10,
+                                    marginRight: 20 }}
+                            />
+                            <Icon
+                                onPress={this.props.onDeletePress}
+                                name='not-interested'
+                                color='#d66035'
+                                iconStyle={{
+                                    justifyContent: 'flex-end',
+                                    marginLeft: 10,
+                                    marginRight: 20 }}
+                            />
+                        </View>
                     </CardSection>
                 </Card>
             </TouchableOpacity>
