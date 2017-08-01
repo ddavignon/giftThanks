@@ -98,7 +98,7 @@ class AddItemForm extends Component {
         const testImageName = `image-from-react-native-${new Date()}.jpg`;
         const { currentUser } = firebase.auth();
         const path = `users/${currentUser.uid}/events/${eventId}/items/`;
-        
+
         console.log(responsePath);
 
         const Blob = RNFetchBlob.polyfill.Blob;
@@ -180,7 +180,7 @@ class AddItemForm extends Component {
         // }
 
         return (
-            <View>
+            <View style={{ flex: 1, paddingTop: 70, }}>
                 <CardSection>
                     <View style={{ flex: 1 }} >
                         <TouchableOpacity

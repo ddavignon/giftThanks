@@ -8,7 +8,7 @@ import { Card, CardSection } from './common';
 class ItemDetail extends Component {
     //This is a destructured props object using album instead of props
     renderForType(type) {
-        console.log('type: ', this.props);
+        //console.log('type: ', this.props);
         if (type === 'items') {
             return (
                 <Icon
@@ -33,7 +33,7 @@ class ItemDetail extends Component {
         } = styles;
 
         const { image, title, type } = this.props;
-
+        console.log('props: ', this.props);
 
         return (
             <TouchableOpacity

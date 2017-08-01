@@ -12,7 +12,8 @@ class EventItems extends Component {
     state = {
         dbData: {},
         showDeleteModal: false,
-        deleteKeyId: ''
+        deleteKeyId: '',
+        editKeyId: ''
     };
 
     componentWillMount() {
@@ -41,13 +42,6 @@ class EventItems extends Component {
         });
     }
 
-    handleDeletePress(keyId) {
-        console.log('On delete press');
-        this.setState({
-            showDeleteModal: !this.state.showDeleteModal,
-            deleteKeyId: keyId
-        });
-    }
 
     onDeleteAccept() {
         console.log('delete data');
@@ -64,10 +58,26 @@ class EventItems extends Component {
         this.setState({ showDeleteModal: false });
     }
 
+    handleDeletePress(keyId) {
+        console.log('On delete press');
+        this.setState({
+            showDeleteModal: !this.state.showDeleteModal,
+            deleteKeyId: keyId
+        });
+    }
+
+    handleEditPress(editKeyId, eventName) {
+        console.log('On edit press');
+        this.setState({
+            eventName,
+            editKeyId
+        });
+    }
+
     renderItems() {
         if (this.state.dbData) {
             return _.map(this.state.dbData, (event, index) => {
-                console.log(event, index);
+                console.log('event name: ', event.name, index);
                 return (
                     <ItemDetail
                         key={index}
@@ -75,7 +85,7 @@ class EventItems extends Component {
                         title={event.name}/*item.state we are sending to itemDetail*/
                         _id={index}
                         image={event.URL}
-                        onEditPress={() => {}}
+                        onEditPress={() => this.handleEditPress(index, event.name)}
                         onDeletePress={() => this.handleDeletePress(index)}
                         onItemPress={() => {}}
                     />
@@ -86,7 +96,7 @@ class EventItems extends Component {
 
     render() {
         return (
-            <View style={{ paddingTop: 60, flex: 1, flexDirection: 'column' }}>
+            <View style={styles.screenStyle}>
             <ScrollView>
                 <View style={{ marginBottom: 65 }}>
                     {this.renderItems()}
@@ -105,4 +115,12 @@ class EventItems extends Component {
     }
 }
 
+const styles = {
+    screenStyle: {
+        paddingTop: 60,
+        flex: 1,
+        flexDirection: 'column',
+        backgroundColor: '#D7FAEE'
+    }
+};
 export default EventItems;
