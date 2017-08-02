@@ -14,7 +14,7 @@ const TabIcon = ({ selected, title }) => {
   return (
     <Text style={{ color: selected ? 'red' : 'black' }}>{title}</Text>
   );
-}
+};
 
 const navButton = ({ selected, title, iconName }) => {
     return (
@@ -24,7 +24,7 @@ const navButton = ({ selected, title, iconName }) => {
         </View>
 
     );
-}
+};
 
 const RouterComponent = () => {
     return (

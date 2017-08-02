@@ -9,7 +9,13 @@ import {
 import firebase from 'firebase';
 import ItemDetail from '../components/ItemDetail';
 import AddEventModal from '../components/AddEventModal';
-import { Card, Confirm } from '../components/common';
+import {
+    Button,
+    Card,
+    CardSection,
+    Confirm,
+    Input
+} from '../components/common';
 
 const Permissions = require('react-native-permissions');
 
@@ -86,6 +92,14 @@ class EventsMain extends Component {
         //Actions.events();
     }
 
+    // edit event
+    handleEditPress(editKeyId, eventName) {
+        console.log('On edit press');
+        this.setState({
+            eventName,
+            editKeyId
+        });
+    }
 
     handleUpdateAcceptPress() {
         console.log('update data');
@@ -122,15 +136,6 @@ class EventsMain extends Component {
         this.setState({ showDeleteModal: false });
     }
 
-    // edit event
-    handleEditPress(editKeyId, eventName) {
-        console.log('On edit press');
-        this.setState({
-            eventName,
-            editKeyId
-        });
-    }
-
     handleItemPress(index) {
         console.log('I got touched', index);
         return (
@@ -149,7 +154,7 @@ class EventsMain extends Component {
                         title={event.name}/*item.state we are sending to itemDetail*/
                         _id={index}
                         //image="http://placehold.it/30"
-                        //onEditPress={() => this.handleEditPress(index, event.name)}
+                        onEditPress={() => this.handleEditPress(index, event.name)}
                         onDeletePress={() => this.handleDeletePress(index)}
                         onItemPress={() => this.handleItemPress(index)}
                     />
