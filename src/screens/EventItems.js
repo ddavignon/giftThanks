@@ -66,12 +66,9 @@ class EventItems extends Component {
         });
     }
 
-    handleEditPress(editKeyId, eventName) {
+    handleEditPress(event, index) {
         console.log('On edit press');
-        this.setState({
-            eventName,
-            editKeyId
-        });
+        Actions.editItemScene({ event, eventId: this.props.eventId, editKeyId: index });
     }
 
     renderItems() {
@@ -85,7 +82,7 @@ class EventItems extends Component {
                         title={event.name}/*item.state we are sending to itemDetail*/
                         _id={index}
                         image={event.URL}
-                        onEditPress={() => this.handleEditPress(index, event.name)}
+                        onEditPress={() => this.handleEditPress(event, index)}
                         onDeletePress={() => this.handleDeletePress(index)}
                         onItemPress={() => {}}
                     />

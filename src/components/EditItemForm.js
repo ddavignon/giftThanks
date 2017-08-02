@@ -44,7 +44,12 @@ class EditItemForm extends Component {
     }
 
     componentDidMount() {
-        console.log('id: ', this.props.eventId);
+        console.log('event item: ', this.props.eventItem);
+        const { URL, name } = this.props.eventItem;
+        this.setState({
+            avatarSource: { uri: URL },
+            isFromText: name
+        });
     //     Permissions.checkMultiplePermissions(['camera', 'photo'])
     //   .then(response => {
     //     //response is an object mapping type to permission
@@ -93,11 +98,11 @@ class EditItemForm extends Component {
 
     handleSendItemForm() {
         const { description, responsePath, isFromText } = this.state;
-        const { eventId } = this.props;
-
+        const { eventId, editKeyId } = this.props;
+        console.log('event id: ', this.props.eventItem);
         const testImageName = `image-from-react-native-${new Date()}.jpg`;
         const { currentUser } = firebase.auth();
-        const path = `users/${currentUser.uid}/events/${eventId}/items/`;
+        const path = `users/${currentUser.uid}/events/${eventId}/items/${editKeyId}`;
 
         console.log(responsePath);
 
@@ -105,7 +110,7 @@ class EditItemForm extends Component {
 
         window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
         window.Blob = Blob;
-        console.log('add item pressed');
+        console.log('edit item pressed');
 
         Blob.build(RNFetchBlob.wrap(responsePath), { type: 'image/jpeg' })
             .then((blob) => firebase.storage()
@@ -113,12 +118,12 @@ class EditItemForm extends Component {
                     .child(testImageName)
                     .put(blob, { contentType: 'image/png' })
             )
-            .catch(console.log('Build blog failed!'))
+            .catch(console.log('Build blob failed!'))
             .then((snapshot) => {
                 console.log('snap', snapshot.downloadURL);
                 const itemURL = snapshot.downloadURL;
                 firebase.database().ref(path)
-                    .push({ name: isFromText, URL: itemURL })
+                    .set({ name: isFromText, URL: itemURL })
                     .then(() => {
                         this.setState({
                             isFromText: '',
@@ -217,7 +222,7 @@ class EditItemForm extends Component {
                 </CardSection>*/}
                 <CardSection>
                     <Button onPress={this.handleSendItemForm.bind(this)}>
-                        Add Item
+                        Update Item
                     </Button>
                 </CardSection>
             </View>

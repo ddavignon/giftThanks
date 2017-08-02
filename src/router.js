@@ -7,6 +7,7 @@ import AddEventModal from './components/AddEventModal';
 import AddItemMain from './screens/AddItemMain';
 import EventItems from './screens/EventItems';
 import TokensMain from './screens/TokensMain';
+import EditItemMain from './screens/EditItemMain';
 import ContactsMain from './screens/ContactsMain';
 
 
@@ -63,6 +64,7 @@ const RouterComponent = () => {
 
                         />
                         <Scene key='addItemScene' component={AddItemMain} />
+                        <Scene key='editItemScene' component={EditItemMain} />
                     </Scene>
                 {/* Tab and it's scenes*/}
                     <Scene
