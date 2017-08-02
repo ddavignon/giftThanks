@@ -5,7 +5,7 @@ import EditItemForm from '../components/EditItemForm';
 class EditItemMain extends Component {
     render() {
         return (
-            <ScrollView keyboardShouldPersistTaps>
+            <ScrollView keyboardShouldPersistTaps="always">
                 <EditItemForm eventItem={this.props.event} eventId={this.props.eventId} editKeyId={this.props.editKeyId} />
             </ScrollView>
         );
