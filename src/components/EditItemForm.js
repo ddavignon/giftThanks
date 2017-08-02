@@ -44,7 +44,12 @@ class EditItemForm extends Component {
     }
 
     componentDidMount() {
-        console.log('id: ', this.props.eventId);
+        console.log('event item: ', this.props.eventItem);
+        const { URL, name } = this.props.eventItem;
+        this.setState({
+            avatarSource: { uri: URL },
+            isFromText: name
+        });
     //     Permissions.checkMultiplePermissions(['camera', 'photo'])
     //   .then(response => {
     //     //response is an object mapping type to permission
@@ -93,11 +98,12 @@ class EditItemForm extends Component {
 
     handleSendItemForm() {
         const { description, responsePath, isFromText } = this.state;
-        const { eventId } = this.props;
-
+        const { eventId, editKeyId } = this.props;
+        console.log('event id: ', this.props.eventItem);
         const testImageName = `image-from-react-native-${new Date()}.jpg`;
         const { currentUser } = firebase.auth();
-        const path = `users/${currentUser.uid}/events/${eventId}/items/`;
+        const path = `users/${currentUser.uid}/events/${eventId}/items/${editKeyId}`;
+        const storagePath = `users/${currentUser.uid}/events/${eventId}/items/`;
 
         console.log(responsePath);
 
@@ -105,31 +111,49 @@ class EditItemForm extends Component {
 
         window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
         window.Blob = Blob;
-        console.log('add item pressed');
-
-        Blob.build(RNFetchBlob.wrap(responsePath), { type: 'image/jpeg' })
-            .then((blob) => firebase.storage()
-                    .ref(path)
-                    .child(testImageName)
-                    .put(blob, { contentType: 'image/png' })
-            )
-            .catch(console.log('Build blog failed!'))
-            .then((snapshot) => {
-                console.log('snap', snapshot.downloadURL);
-                const itemURL = snapshot.downloadURL;
-                firebase.database().ref(path)
-                    .push({ name: isFromText, URL: itemURL })
-                    .then(() => {
-                        this.setState({
-                            isFromText: '',
-                            description: '',
-                            responsePath: '',
-                            avatarSource: null,
-                            dbData: ''
+        console.log('edit item pressed');
+        if (responsePath) {
+            Blob.build(RNFetchBlob.wrap(responsePath), { type: 'image/jpeg' })
+                .then((blob) => firebase.storage()
+                        .ref(storagePath)
+                        .child(testImageName)
+                        .put(blob, { contentType: 'image/png' })
+                )
+                .catch(console.log('Build blob failed!'))
+                .then((snapshot) => {
+                    console.log('snap', snapshot.downloadURL);
+                    const itemURL = snapshot.downloadURL;
+                    firebase.database().ref(path)
+                        .set({ name: isFromText, URL: itemURL })
+                        .then(() => {
+                            this.setState({
+                                isFromText: '',
+                                description: '',
+                                responsePath: '',
+                                avatarSource: null,
+                                dbData: ''
+                            });
+                            const deletePhotoRef = firebase.storage().refFromURL(this.props.eventItem.URL);
+                            deletePhotoRef.delete().then(() => {
+                                Actions.gifts({ eventId, type: 'reset' });
+                            });
                         });
-                        Actions.gifts({ eventId, type: 'reset' });
+                });
+        } else {
+            console.log('same URL');
+            firebase.database().ref(path)
+                .set({ name: isFromText, URL: this.props.eventItem.URL })
+                .then(() => {
+                    this.setState({
+                        isFromText: '',
+                        description: '',
+                        responsePath: '',
+                        avatarSource: null,
+                        dbData: ''
                     });
-            });
+                    Actions.gifts({ eventId, type: 'reset' });
+                });
+        }
     }
 
     // async requestPhotoPermission() {
@@ -217,7 +241,7 @@ class EditItemForm extends Component {
                 </CardSection>*/}
                 <CardSection>
                     <Button onPress={this.handleSendItemForm.bind(this)}>
-                        Add Item
+                        Update Item
                     </Button>
                 </CardSection>
             </View>

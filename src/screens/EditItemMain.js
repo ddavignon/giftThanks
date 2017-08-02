@@ -6,7 +6,7 @@ class EditItemMain extends Component {
     render() {
         return (
             <ScrollView>
-                <EditItemForm eventId={this.props.eventId} />
+                <EditItemForm eventItem={this.props.event} eventId={this.props.eventId} editKeyId={this.props.editKeyId} />
             </ScrollView>
         );
     }
