@@ -111,30 +111,45 @@ class EditItemForm extends Component {
         window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
         window.Blob = Blob;
         console.log('edit item pressed');
-
-        Blob.build(RNFetchBlob.wrap(responsePath), { type: 'image/jpeg' })
-            .then((blob) => firebase.storage()
-                    .ref(path)
-                    .child(testImageName)
-                    .put(blob, { contentType: 'image/png' })
-            )
-            .catch(console.log('Build blob failed!'))
-            .then((snapshot) => {
-                console.log('snap', snapshot.downloadURL);
-                const itemURL = snapshot.downloadURL;
-                firebase.database().ref(path)
-                    .set({ name: isFromText, URL: itemURL })
-                    .then(() => {
-                        this.setState({
-                            isFromText: '',
-                            description: '',
-                            responsePath: '',
-                            avatarSource: null,
-                            dbData: ''
+        if (responsePath) {
+            Blob.build(RNFetchBlob.wrap(responsePath), { type: 'image/jpeg' })
+                .then((blob) => firebase.storage()
+                        .ref(path)
+                        .child(testImageName)
+                        .put(blob, { contentType: 'image/png' })
+                )
+                .catch(console.log('Build blob failed!'))
+                .then((snapshot) => {
+                    console.log('snap', snapshot.downloadURL);
+                    const itemURL = snapshot.downloadURL;
+                    firebase.database().ref(path)
+                        .set({ name: isFromText, URL: itemURL })
+                        .then(() => {
+                            this.setState({
+                                isFromText: '',
+                                description: '',
+                                responsePath: '',
+                                avatarSource: null,
+                                dbData: ''
+                            });
+                            Actions.gifts({ eventId, type: 'reset' });
                         });
-                        Actions.gifts({ eventId, type: 'reset' });
+                });
+        } else {
+            console.log('same URL');
+            firebase.database().ref(path)
+                .set({ name: isFromText, URL: this.props.eventItem.URL })
+                .then(() => {
+                    this.setState({
+                        isFromText: '',
+                        description: '',
+                        responsePath: '',
+                        avatarSource: null,
+                        dbData: ''
                     });
-            });
+                    Actions.gifts({ eventId, type: 'reset' });
+                });
+        }
     }
 
     // async requestPhotoPermission() {
