@@ -103,6 +103,7 @@ class EditItemForm extends Component {
         const testImageName = `image-from-react-native-${new Date()}.jpg`;
         const { currentUser } = firebase.auth();
         const path = `users/${currentUser.uid}/events/${eventId}/items/${editKeyId}`;
+        const storagePath = `users/${currentUser.uid}/events/${eventId}/items/`;
 
         console.log(responsePath);
 
@@ -114,7 +115,7 @@ class EditItemForm extends Component {
         if (responsePath) {
             Blob.build(RNFetchBlob.wrap(responsePath), { type: 'image/jpeg' })
                 .then((blob) => firebase.storage()
-                        .ref(path)
+                        .ref(storagePath)
                         .child(testImageName)
                         .put(blob, { contentType: 'image/png' })
                 )
@@ -132,7 +133,10 @@ class EditItemForm extends Component {
                                 avatarSource: null,
                                 dbData: ''
                             });
-                            Actions.gifts({ eventId, type: 'reset' });
+                            const deletePhotoRef = firebase.storage().refFromURL(this.props.eventItem.URL);
+                            deletePhotoRef.delete().then(() => {
+                                Actions.gifts({ eventId, type: 'reset' });
+                            });
                         });
                 });
         } else {

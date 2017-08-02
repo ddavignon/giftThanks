@@ -13,7 +13,8 @@ class EventItems extends Component {
         dbData: {},
         showDeleteModal: false,
         deleteKeyId: '',
-        editKeyId: ''
+        editKeyId: '',
+        url: ''
     };
 
     componentWillMount() {
@@ -51,18 +52,25 @@ class EventItems extends Component {
             .database()
             .ref(`users/${currentUser.uid}/events/${this.props.eventId}/items/${this.state.deleteKeyId}`)
             .remove()
-            .then(() => this.setState({ showDeleteModal: false, deleteKeyId: '' }));
+            .then(() => {
+                this.setState({ showDeleteModal: false, deleteKeyId: '' });
+                const deletePhotoRef = firebase.storage().refFromURL(this.state.url);
+                deletePhotoRef.delete().then(() => {
+                    Actions.gifts({ eventId: this.props.eventId, type: 'reset' });
+                });
+        });
     }
 
     onDeleteDecline() {
         this.setState({ showDeleteModal: false });
     }
 
-    handleDeletePress(keyId) {
+    handleDeletePress(keyId, url) {
         console.log('On delete press');
         this.setState({
             showDeleteModal: !this.state.showDeleteModal,
-            deleteKeyId: keyId
+            deleteKeyId: keyId,
+            url
         });
     }
 
@@ -83,7 +91,7 @@ class EventItems extends Component {
                         _id={index}
                         image={event.URL}
                         onEditPress={() => this.handleEditPress(event, index)}
-                        onDeletePress={() => this.handleDeletePress(index)}
+                        onDeletePress={() => this.handleDeletePress(index, event.URL)}
                         onItemPress={() => {}}
                     />
                 );
