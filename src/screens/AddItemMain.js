@@ -5,7 +5,7 @@ import AddItemForm from '../components/AddItemForm';
 class AddItemMain extends Component {
     render() {
         return (
-            <ScrollView>
+            <ScrollView keyboardShouldPersistTaps>
                 <AddItemForm eventId={this.props.eventId} />
             </ScrollView>
         );
