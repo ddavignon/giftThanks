@@ -84,28 +84,31 @@ class EditItemForm extends Component {
                 console.log('User tapped custom button: ', response.customButton);
             } else {
                 const avatarSource = { uri: response.uri };
-                const responsePath = Platform.OS === 'android' ? response.path : response.origURL;
-
-                console.log('response', response);
-                console.log('Rpth', responsePath);
+                //const responsePath = '';
+                if (Platform.OS === 'android') {
+                    this.setState({ responsePath: response.path });
+                }
+                const iosResponsePath = response.uri.replace('file://', '');
+                this.setState({ responsePath: iosResponsePath });
+                //console.log('response', response);
+                console.log('Rpth', this.state.responsePath);
                 this.setState({
-                    avatarSource,
-                    responsePath
+                    avatarSource
                 });
             }
         });
     }
 
     handleSendItemForm() {
-        const { description, responsePath, isFromText } = this.state;
+        const { responsePath, isFromText } = this.state;
         const { eventId, editKeyId } = this.props;
-        console.log('event id: ', this.props.eventItem);
+        //console.log('event id: ', this.props.eventItem);
         const testImageName = `image-from-react-native-${new Date()}.jpg`;
         const { currentUser } = firebase.auth();
         const path = `users/${currentUser.uid}/events/${eventId}/items/${editKeyId}`;
         const storagePath = `users/${currentUser.uid}/events/${eventId}/items/`;
 
-        console.log(responsePath);
+        //console.log(responsePath);
 
         const Blob = RNFetchBlob.polyfill.Blob;
 

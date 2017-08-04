@@ -17,7 +17,15 @@ class EventItems extends Component {
         url: ''
     };
 
-    componentWillMount() {
+
+    componentDidMount() {
+        Actions.refresh({
+            rightTitle: 'Add',
+            onRight: () => Actions.addItemScene({ eventId: this.props.eventId })
+        });
+    }
+
+    componentWillReceiveProps() {
         console.log(this.props.eventId);
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
@@ -35,14 +43,6 @@ class EventItems extends Component {
             }
         });
     }
-
-    componentDidMount() {
-        Actions.refresh({
-            rightTitle: 'Add',
-            onRight: () => Actions.addItemScene({ eventId: this.props.eventId })
-        });
-    }
-
 
     onDeleteAccept() {
         console.log('delete data');

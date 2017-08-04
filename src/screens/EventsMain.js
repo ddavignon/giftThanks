@@ -37,21 +37,23 @@ class EventsMain extends Component {
         //     rightTitle: 'Add',
         //     onRight: () => this.setState({ showCreateModal: true })
         // });
+        console.log('dbData: ', Object.keys(this.state.dbData).length);
+        if (Object.keys(this.state.dbData).length === 0) {
+            firebase.auth().onAuthStateChanged(user => {
+                if (user) {
+                    const { currentUser } = firebase.auth();
 
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                const { currentUser } = firebase.auth();
-
-                firebase
-                    .database()
-                    .ref(`users/${currentUser.uid}/events/`)
-                    .on('value', snapshot => {
-                        this.setState({ dbData: snapshot.val() });
-                    });
-            } else {
-                console.log('no user signed in');
-            }
-        });
+                    firebase
+                        .database()
+                        .ref(`users/${currentUser.uid}/events/`)
+                        .on('value', snapshot => {
+                            this.setState({ dbData: snapshot.val() });
+                        });
+                } else {
+                    console.log('no user signed in');
+                }
+            });
+        }
     }
 
     componentDidMount() {
@@ -59,21 +61,9 @@ class EventsMain extends Component {
             rightTitle: 'Add',
             onRight: () => this.setState({ showCreateModal: true })
         });
-        // firebase.auth().onAuthStateChanged(user => {
-        //     if (user) {
-        //         const { currentUser } = firebase.auth();
-        //
-        //         firebase
-        //             .database()
-        //             .ref(`users/${currentUser.uid}/events/`)
-        //             .on('value', snapshot => {
-        //                 this.setState({ dbData: snapshot.val() });
-        //             });
-        //     } else {
-        //         console.log('no user signed in');
-        //     }
-        // });
     }
+
+
     // Create event
     onCreateAccept(eventText) {
         //console.log('Passed props: ', this.state.eventName, 'EventText: ', eventText);
@@ -92,37 +82,6 @@ class EventsMain extends Component {
         //Actions.events();
     }
 
-    // edit event
-    handleEditPress(editKeyId, eventName) {
-        console.log('On edit press');
-        this.setState({
-            eventName,
-            editKeyId
-        });
-    }
-
-    handleUpdateAcceptPress() {
-        console.log('update data');
-        const { currentUser } = firebase.auth();
-
-        firebase.database().ref(`/users/${currentUser.uid}/events/${this.state.editKeyId}/`)
-            .set({ name: this.state.eventName })
-            .then(() => this.setState({ eventName: '' }));
-    }
-
-    handleUpdateCancelPress() {
-        alert('Cancel update!!!!');
-    }
-
-    // delete event
-    handleDeletePress(keyId) {
-        console.log('On delete press');
-        this.setState({
-            showDeleteModal: !this.state.showDeleteModal,
-            deleteKeyId: keyId
-        });
-    }
-
     onDeleteAccept() {
         console.log('delete data');
         const { currentUser } = firebase.auth();
@@ -136,6 +95,38 @@ class EventsMain extends Component {
         this.setState({ showDeleteModal: false });
     }
 
+    // delete event
+    handleDeletePress(keyId) {
+        console.log('On delete press');
+        this.setState({
+            showDeleteModal: !this.state.showDeleteModal,
+            deleteKeyId: keyId
+        });
+    }
+
+    handleUpdateCancelPress() {
+        alert('Cancel update!!!!');
+    }
+
+
+    handleUpdateAcceptPress() {
+        console.log('update data');
+        const { currentUser } = firebase.auth();
+
+        firebase.database().ref(`/users/${currentUser.uid}/events/${this.state.editKeyId}/`)
+            .set({ name: this.state.eventName })
+            .then(() => this.setState({ eventName: '' }));
+    }
+
+    // edit event
+    handleEditPress(editKeyId, eventName) {
+        console.log('On edit press');
+        this.setState({
+            eventName,
+            editKeyId
+        });
+    }
+
     handleItemPress(index) {
         console.log('I got touched', index);
         return (
@@ -146,7 +137,7 @@ class EventsMain extends Component {
     renderItems() {
         if (this.state.dbData) {
             return _.map(this.state.dbData, (event, index) => {
-                console.log(event, index);
+                //console.log(event, index);
                 return (
                     <ItemDetail
                         key={index}
