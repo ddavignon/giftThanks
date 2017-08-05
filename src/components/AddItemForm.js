@@ -33,34 +33,15 @@ class AddItemForm extends Component {
     componentWillMount() {
         console.log('camera permission: ', this.state.androidPhotoPermission);
         console.log('storage permission: ', this.state.androidStoragePermission);
-        //
-        // if (Platform.OS === 'android' && this.state.androidPhotoPermission !== 'authorized') {
-        //     this.requestPhotoPermission();
-        // }
-        //
-        // if (Platform.OS === 'android' && this.state.androidStoragePermission !== 'authorized') {
-        //     this.requestStoragePermission();
-        // }
     }
 
     componentDidMount() {
         console.log('id: ', this.props.eventId);
-    //     Permissions.checkMultiplePermissions(['camera', 'photo'])
-    //   .then(response => {
-    //     //response is an object mapping type to permission
-    //     this.setState({
-    //       cameraPermission: response.camera,
-    //       photoPermission: response.photo,
-    //   });
-    //   });
     }
 
     handleAddImageButton() {
         const options = {
             title: 'Select Item',
-            // customButtons: [
-            //     {name: 'fb', title: 'Choose Photo from Facebook'},
-            // ],
             storageOptions: {
                 skipBackup: true,
                 path: 'images'
@@ -135,52 +116,8 @@ class AddItemForm extends Component {
             });
     }
 
-    // async requestPhotoPermission() {
-    //     try {
-    //          const granted = await PermissionsAndroid.request(
-    //             PermissionsAndroid.PERMISSIONS.CAMERA, {
-    //             'title': 'gifThanks needs photo permission',
-    //             'message': 'gifThanks needs access to your camera so you can send thanks.'
-    //             }
-    //          );
-    //          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-    //              this.setState({ androidPhotoPermission: 'authorized' });
-    //          } else {
-    //              console.log('Photo permission denied');
-    //          }
-    //     } catch (err) {
-    //          console.warn(err);
-    //     }
-    //  }
-    //
-    //  async requestStoragePermission() {
-    //      try {
-    //           const granted = await PermissionsAndroid.request(
-    //              PermissionsAndroid.PERMISSIONS.EXTERNAL_STORAGE, {
-    //              title: 'gifThanks needs storage permission',
-    //              message: 'gifThanks needs access to your photos so you can send thanks.'
-    //              }
-    //          );
-    //           if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-    //               this.setState({ androidStoragePermission: 'authorized' });
-    //           } else {
-    //               console.log('External Storage permission denied');
-    //           }
-    //      } catch (err) {
-    //           console.warn(err);
-    //      }
-    //   }
-
     render() {
         const { container, clothingItem, clothingItemContainer } = styles;
-
-        // if (Platform.OS === 'android' && this.state.androidPhotoPermission !== 'authorized') {
-        //     this.requestPhotoPermission();
-        // }
-        //
-        // if (Platform.OS === 'android' && this.state.androidStoragePermission !== 'authorized') {
-        //     this.requestStoragePermission();
-        // }
 
         return (
             <View style={{ flex: 1, paddingTop: 70 }}>

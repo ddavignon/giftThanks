@@ -44,14 +44,14 @@ class AddEventModal extends Component {
                         />
                     </CardSection>
 
-                    <CardSection>
-                    <Button onPress={() => this.getEventName()}/*Not passing onAccept() says don't call imediately*/>
-                        Create
-                    </Button>
+                    <CardSection style={cardSectionStyle}>
+                        <Button onPress={() => this.getEventName()} >
+                            Create
+                        </Button>
 
-                    <Button onPress={onDecline}>
-                        Cancel
-                    </Button>
+                        <Button onPress={onDecline}>
+                            Cancel
+                        </Button>
                     </CardSection>
                 </View>
             </Modal>

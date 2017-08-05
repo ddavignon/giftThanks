@@ -10,11 +10,8 @@ import firebase from 'firebase';
 import ItemDetail from '../components/ItemDetail';
 import AddEventModal from '../components/AddEventModal';
 import {
-    Button,
     Card,
-    CardSection,
-    Confirm,
-    Input
+    Confirm
 } from '../components/common';
 
 const Permissions = require('react-native-permissions');
@@ -33,10 +30,6 @@ class EventsMain extends Component {
 
     // read event
     componentWillMount() {
-        // Actions.refresh({
-        //     rightTitle: 'Add',
-        //     onRight: () => this.setState({ showCreateModal: true })
-        // });
         console.log('dbData: ', Object.keys(this.state.dbData).length);
         if (Object.keys(this.state.dbData).length === 0) {
             firebase.auth().onAuthStateChanged(user => {
