@@ -25,7 +25,11 @@ class EventItems extends Component {
         });
     }
 
-    componentWillReceiveProps() {
+    componentWillReceiveProps(nextProps) {
+        if (this.props === nextProps) {
+            console.log('nothing changed!');
+            return;
+        }
         console.log(this.props.eventId);
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
@@ -42,6 +46,10 @@ class EventItems extends Component {
                 console.log('no user signed in');
             }
         });
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state !== nextState;
     }
 
     onDeleteAccept() {

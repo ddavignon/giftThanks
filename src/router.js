@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { Scene, Router } from 'react-native-router-flux';
+import { Scene, Router, Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import EventsMain from './screens/EventsMain';
 import AddEventModal from './components/AddEventModal';
@@ -47,11 +47,11 @@ const RouterComponent = () => {
                     >
                         <Scene
                             rightTitle='+'
-                            onRight={() => {}}
+                            onRight={() => Actions.refresh({ showCreateModal: true })}
                             key='events'
                             component={EventsMain}
                             title='Events'
-                            type="reset"
+                            type='refresh'
                             initial
                         />
                         <Scene key='addEventModal' component={AddEventModal} />

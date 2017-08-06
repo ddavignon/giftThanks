@@ -29,25 +29,25 @@ class EventsMain extends Component {
     };
 
     // read event
-    componentWillMount() {
-        console.log('dbData: ', Object.keys(this.state.dbData).length);
-        if (Object.keys(this.state.dbData).length === 0) {
-            firebase.auth().onAuthStateChanged(user => {
-                if (user) {
-                    const { currentUser } = firebase.auth();
-
-                    firebase
-                        .database()
-                        .ref(`users/${currentUser.uid}/events/`)
-                        .on('value', snapshot => {
-                            this.setState({ dbData: snapshot.val() });
-                        });
-                } else {
-                    console.log('no user signed in');
-                }
-            });
-        }
-    }
+    // componentWillMount() {
+    //     console.log('dbData: ', Object.keys(this.state.dbData).length);
+    //     if (Object.keys(this.state.dbData).length === 0) {
+    //         firebase.auth().onAuthStateChanged(user => {
+    //             if (user) {
+    //                 const { currentUser } = firebase.auth();
+    //
+    //                 firebase
+    //                     .database()
+    //                     .ref(`users/${currentUser.uid}/events/`)
+    //                     .on('value', snapshot => {
+    //                         this.setState({ dbData: snapshot.val() });
+    //                     });
+    //             } else {
+    //                 console.log('no user signed in');
+    //             }
+    //         });
+    //     }
+    // }
 
     componentDidMount() {
         Actions.refresh({
@@ -82,6 +82,35 @@ class EventsMain extends Component {
         firebase.database().ref(`users/${currentUser.uid}/events/${this.state.deleteKeyId}`)
             .remove()
             .then(() => this.setState({ showDeleteModal: false, deleteKeyId: '' }));
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state !== nextState;
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props === nextProps) {
+            console.log('nothing changed!');
+            return;
+        }
+        console.log('dbData: ', Object.keys(this.state.dbData).length);
+        // if (Object.keys(this.state.dbData).length === 0) {
+        //
+        // }
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                const { currentUser } = firebase.auth();
+
+                firebase
+                    .database()
+                    .ref(`users/${currentUser.uid}/events/`)
+                    .on('value', snapshot => {
+                        this.setState({ dbData: snapshot.val() });
+                    });
+            } else {
+                console.log('no user signed in');
+            }
+        });
     }
 
     onDeleteDecline() {

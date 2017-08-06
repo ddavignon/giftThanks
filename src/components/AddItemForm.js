@@ -111,7 +111,7 @@ class AddItemForm extends Component {
                             avatarSource: null,
                             dbData: ''
                         });
-                        Actions.gifts({ eventId, type: 'reset' });
+                        Actions.gifts({ eventId, type: 'back' });
                     });
             });
     }

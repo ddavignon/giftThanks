@@ -114,7 +114,7 @@ class EditItemForm extends Component {
                             });
                             const deletePhotoRef = firebase.storage().refFromURL(this.props.eventItem.URL);
                             deletePhotoRef.delete().then(() => {
-                                Actions.gifts({ eventId, type: 'reset' });
+                                Actions.gifts({ eventId, type: 'back' });
                             });
                         });
                 });
@@ -130,7 +130,7 @@ class EditItemForm extends Component {
                         avatarSource: null,
                         dbData: ''
                     });
-                    Actions.gifts({ eventId, type: 'reset' });
+                    Actions.gifts({ eventId, type: 'back' });
                 });
         }
     }
