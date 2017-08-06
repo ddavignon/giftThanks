@@ -64,7 +64,7 @@ class EventItems extends Component {
                 this.setState({ showDeleteModal: false, deleteKeyId: '' });
                 const deletePhotoRef = firebase.storage().refFromURL(this.state.url);
                 deletePhotoRef.delete().then(() => {
-                    Actions.gifts({ eventId: this.props.eventId, type: 'back' });
+                    Actions.gifts({ eventId: this.props.eventId });
                 });
         });
     }
