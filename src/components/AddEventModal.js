@@ -16,6 +16,7 @@ class AddEventModal extends Component {
 
     getEventName() {
         this.props.onAccept(this.state.eventName);
+        this.setState({ eventName: '' });
     }
 
     render() {

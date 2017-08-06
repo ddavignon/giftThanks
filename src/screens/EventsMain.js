@@ -66,7 +66,7 @@ class EventsMain extends Component {
 
             firebase.database().ref(`users/${currentUser.uid}/events/`)
                 .push({ name: eventText })
-                .then(() => this.setState({ showCreateModal: false }));
+                .then(() => this.setState({ showCreateModal: false, eventName: '' }));
         }
     }
 

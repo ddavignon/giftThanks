@@ -47,7 +47,7 @@ const RouterComponent = () => {
                     >
                         <Scene
                             rightTitle='+'
-                            onRight={() => Actions.refresh({ showCreateModal: true })}
+                            onRight={() => {}}
                             key='events'
                             component={EventsMain}
                             title='Events'
