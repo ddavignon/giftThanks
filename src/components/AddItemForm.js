@@ -180,8 +180,8 @@ const styles = {
   },
   clothingItem: {
     borderRadius: 5,
-    width: 275,
-    height: 275
+    width: 300,
+    height: 300
   }
 };
 

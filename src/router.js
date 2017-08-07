@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { Scene, Router, Actions } from 'react-native-router-flux';
+import { Scene, Router, Actions, ActionConst } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import EventsMain from './screens/EventsMain';
 import AddEventModal from './components/AddEventModal';
@@ -28,6 +28,7 @@ const navButton = ({ selected, title, iconName }) => {
 };
 
 const RouterComponent = () => {
+
     return (
 
         <Router>
@@ -44,6 +45,7 @@ const RouterComponent = () => {
                         title="Events"
                         icon={navButton}
                         iconName="view-list"
+
                     >
                         <Scene
                             rightTitle='+'
@@ -55,6 +57,7 @@ const RouterComponent = () => {
                             initial
                         />
                         <Scene key='addEventModal' component={AddEventModal} />
+
                         <Scene
                             rightTitle='+'
                             onRight={() => {}}

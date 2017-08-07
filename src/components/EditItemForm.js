@@ -136,7 +136,7 @@ class EditItemForm extends Component {
     }
 
     render() {
-        const { container, clothingItem, clothingItemContainer } = styles;
+        const { container, clothingItem, clothingItemContainer, paragraph } = styles;
 
         return (
             <View style={{ flex: 1, paddingTop: 70, }}>
@@ -152,7 +152,13 @@ class EditItemForm extends Component {
                                     : <Image
                                         style={styles.clothingItem}
                                         source={this.state.avatarSource}
-                                    />
+                                    >
+                                    <Text
+                                        style={paragraph}
+                                    >
+                                        Tap to update image
+                                    </Text>
+                                    </Image>
                                 }
                             </View>
                         </TouchableOpacity>
@@ -198,9 +204,15 @@ const styles = {
   },
   clothingItem: {
     borderRadius: 5,
-    width: 275,
-    height: 275
-  }
+    width: 300,
+    height: 300
+  },
+  paragraph: {
+    textAlign: 'center',
+    color: 'white',
+    backgroundColor: 'rgba(0,0,0,0)',
+    fontSize: 25
+  },
 };
 
 export default EditItemForm;

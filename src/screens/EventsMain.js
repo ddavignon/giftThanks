@@ -56,38 +56,6 @@ class EventsMain extends Component {
         });
     }
 
-
-    // Create event
-    onCreateAccept(eventText) {
-        //console.log('Passed props: ', this.state.eventName, 'EventText: ', eventText);
-
-        if (eventText) {
-            const { currentUser } = firebase.auth();
-
-            firebase.database().ref(`users/${currentUser.uid}/events/`)
-                .push({ name: eventText })
-                .then(() => this.setState({ showCreateModal: false, eventName: '' }));
-        }
-    }
-
-    onCreateDecline() {
-        this.setState({ showCreateModal: false });
-        //Actions.events();
-    }
-
-    onDeleteAccept() {
-        console.log('delete data');
-        const { currentUser } = firebase.auth();
-
-        firebase.database().ref(`users/${currentUser.uid}/events/${this.state.deleteKeyId}`)
-            .remove()
-            .then(() => this.setState({ showDeleteModal: false, deleteKeyId: '' }));
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        return this.state !== nextState;
-    }
-
     componentWillReceiveProps(nextProps) {
         if (this.props === nextProps) {
             console.log('nothing changed!');
@@ -113,6 +81,37 @@ class EventsMain extends Component {
         });
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state !== nextState;
+    }
+
+    onDeleteAccept() {
+        console.log('delete data');
+        const { currentUser } = firebase.auth();
+
+        firebase.database().ref(`users/${currentUser.uid}/events/${this.state.deleteKeyId}`)
+            .remove()
+            .then(() => this.setState({ showDeleteModal: false, deleteKeyId: '' }));
+    }
+
+    onCreateDecline() {
+        this.setState({ showCreateModal: false });
+        //Actions.events();
+    }
+
+    // Create event
+    onCreateAccept(eventText) {
+        //console.log('Passed props: ', this.state.eventName, 'EventText: ', eventText);
+
+        if (eventText) {
+            const { currentUser } = firebase.auth();
+
+            firebase.database().ref(`users/${currentUser.uid}/events/`)
+                .push({ name: eventText })
+                .then(() => this.setState({ showCreateModal: false, eventName: '' }));
+        }
+    }
+
     onDeleteDecline() {
         this.setState({ showDeleteModal: false });
     }
@@ -126,9 +125,9 @@ class EventsMain extends Component {
         });
     }
 
-    handleUpdateCancelPress() {
-        alert('Cancel update!!!!');
-    }
+    // handleUpdateCancelPress() {
+    //     alert('Cancel update!!!!');
+    // }
 
 
     handleUpdateAcceptPress() {
