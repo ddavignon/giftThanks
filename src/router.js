@@ -45,29 +45,15 @@ const RouterComponent = () => {
                         title="Events"
                         icon={navButton}
                         iconName="view-list"
-
                     >
                         <Scene
                             rightTitle='+'
-                            onRight={() => {}}
+                            onRight={() => Actions.addEventModal()}
                             key='events'
                             component={EventsMain}
                             title='Events'
-                            type='refresh'
                             initial
                         />
-                        <Scene key='addEventModal' component={AddEventModal} />
-
-                        <Scene
-                            rightTitle='+'
-                            onRight={() => {}}
-                            key='gifts'
-                            component={EventItems}
-                            title='Gifts'
-
-                        />
-                        <Scene key='addItemScene' component={AddItemMain} />
-                        <Scene key='editItemScene' component={EditItemMain} />
                     </Scene>
                 {/* Tab and it's scenes*/}
                     <Scene
@@ -85,6 +71,24 @@ const RouterComponent = () => {
                     </Scene>
                 </Scene>
             </Scene>
+            <Scene
+                rightTitle='+'
+                onRight={() => {}}
+                key='gifts'
+                component={EventItems}
+                title='Gifts'
+
+            />
+            <Scene key='addItemScene' component={AddItemMain} />
+            <Scene key='editItemScene' component={EditItemMain} />
+            <Scene
+                key='addEventModal'
+                direction='vertical'
+                component={AddEventModal}
+                title="Create Event"
+                hideNavBar
+            />
+
         </Router>
     );
 };

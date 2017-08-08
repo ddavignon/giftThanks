@@ -49,19 +49,19 @@ class EventsMain extends Component {
     //     }
     // }
 
-    componentDidMount() {
-        Actions.refresh({
-            rightTitle: 'Add',
-            onRight: () => this.setState({ showCreateModal: true })
-        });
-    }
+    // componentDidMount() {
+    //     Actions.refresh({
+    //         rightTitle: 'Add',
+    //         onRight: () => this.setState({ showCreateModal: true })
+    //     });
+    // }
 
     componentWillReceiveProps(nextProps) {
         if (this.props === nextProps) {
             console.log('nothing changed!');
             return;
         }
-        console.log('dbData: ', Object.keys(this.state.dbData).length);
+        //console.log('dbData: ', Object.keys(this.state.dbData).length);
         // if (Object.keys(this.state.dbData).length === 0) {
         //
         // }
@@ -96,7 +96,7 @@ class EventsMain extends Component {
 
     onCreateDecline() {
         this.setState({ showCreateModal: false });
-        //Actions.events();
+        Actions.pop();
     }
 
     // Create event
@@ -109,6 +109,7 @@ class EventsMain extends Component {
             firebase.database().ref(`users/${currentUser.uid}/events/`)
                 .push({ name: eventText })
                 .then(() => this.setState({ showCreateModal: false, eventName: '' }));
+            Actions.pop();
         }
     }
 
