@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, Modal } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { Input, Button, CardSection } from './common';
 
 
@@ -50,7 +51,7 @@ class AddEventModal extends Component {
                             Create
                         </Button>
 
-                        <Button onPress={onDecline}>
+                        <Button onPress={() => Actions.pop()}>
                             Cancel
                         </Button>
                     </CardSection>

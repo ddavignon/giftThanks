@@ -115,6 +115,7 @@ class EventsMain extends Component {
 
     onDeleteDecline() {
         this.setState({ showDeleteModal: false });
+        Actions.pop();
     }
 
     // delete event
@@ -193,13 +194,7 @@ class EventsMain extends Component {
 
         return (
             <View style={styles.screenStyle}>
-                <Card>
-                    <AddEventModal
-                        visible={this.state.showCreateModal}
-                        onAccept={this.onCreateAccept.bind(this)}
-                        onDecline={this.onCreateDecline.bind(this)}
-                    />
-                </Card>
+                
                 <ScrollView>
                     <View style={{ marginBottom: 65 }} >
                         {this.renderItems()}
