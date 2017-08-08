@@ -19,6 +19,7 @@ const Permissions = require('react-native-permissions');
 class EventsMain extends Component {
     state = {
         eventName: '',
+        update: false,
         showCreateModal: false,
         showDeleteModal: false,
         deleteKeyId: '',
@@ -61,10 +62,13 @@ class EventsMain extends Component {
             console.log('nothing changed!');
             return;
         }
-        console.log('dbData: ', Object.keys(this.state.dbData).length);
+        //console.log('dbData: ', Object.keys(this.state.dbData).length);
         // if (Object.keys(this.state.dbData).length === 0) {
         //
         // }
+        console.log('passed props: ', this.props);
+        this.setState({ update: this.props.update });
+        console.log('state update: ', this.state.update);
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 const { currentUser } = firebase.auth();

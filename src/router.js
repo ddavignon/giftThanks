@@ -28,7 +28,6 @@ const navButton = ({ selected, title, iconName }) => {
 };
 
 const RouterComponent = () => {
-
     return (
 
         <Router>
@@ -45,7 +44,6 @@ const RouterComponent = () => {
                         title="Events"
                         icon={navButton}
                         iconName="view-list"
-
                     >
                         <Scene
                             rightTitle='+'
@@ -53,11 +51,10 @@ const RouterComponent = () => {
                             key='events'
                             component={EventsMain}
                             title='Events'
-                            type='refresh'
+                            type="reset"
                             initial
                         />
                         <Scene key='addEventModal' component={AddEventModal} />
-
                         <Scene
                             rightTitle='+'
                             onRight={() => {}}
