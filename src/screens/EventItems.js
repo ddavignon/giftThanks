@@ -79,10 +79,17 @@ class EventItems extends Component {
         Actions.editItemScene({ event, eventId: this.props.eventId, editKeyId: index });
     }
 
+
+    handleItemPress(event, index) {
+        console.log('I got touched', index);
+        Actions.sendItemScene({ event, eventId: this.props.eventId, sendKeyId: index });
+    }
+
+
     renderItems() {
         if (this.state.dbData) {
             return _.map(this.state.dbData, (event, index) => {
-                console.log('event name: ', event.name, index);
+                console.log('item name: ', event.name, index);
                 return (
                     <ItemDetail
                         key={index}
@@ -92,7 +99,7 @@ class EventItems extends Component {
                         image={event.URL}
                         onEditPress={() => this.handleEditPress(event, index)}
                         onDeletePress={() => this.handleDeletePress(index, event.URL)}
-                        onItemPress={() => {}}
+                        onItemPress={() => this.handleItemPress(event, index)}
                     />
                 );
             });

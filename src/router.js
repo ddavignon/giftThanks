@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import EventsMain from './screens/EventsMain';
 import AddEventModal from './components/AddEventModal';
 import AddItemMain from './screens/AddItemMain';
+import SendItemMain from './screens/SendItemMain';
 import EventItems from './screens/EventItems';
 import TokensMain from './screens/TokensMain';
 import EditItemMain from './screens/EditItemMain';
@@ -65,6 +66,7 @@ const RouterComponent = () => {
                         />
                         <Scene key='addItemScene' component={AddItemMain} />
                         <Scene key='editItemScene' component={EditItemMain} />
+                        <Scene key='sendItemScene' component={SendItemMain} />
                     </Scene>
                 {/* Tab and it's scenes*/}
                     <Scene

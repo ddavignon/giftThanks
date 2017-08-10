@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Text, View, Modal } from 'react-native';
+import { connect } from 'react-redux';
 import { Input, Button, CardSection } from './common';
+import { eventTextChanged } from '../actions';
 
 
 class AddEventModal extends Component {
 
     state = {
-        eventName: '',
         visible: false
     }
 
@@ -15,11 +16,11 @@ class AddEventModal extends Component {
     }
 
     getEventName() {
-        this.props.onAccept(this.state.eventName);
+        this.props.onAccept(this.props.eventName);
     }
 
     render() {
-        const { visible, onDecline } = this.props;
+        const { visible, onDecline, eventName } = this.props;
         const { containerStyle, textStyle, cardSectionStyle } = styles;
         return (
             <Modal
@@ -39,8 +40,8 @@ class AddEventModal extends Component {
                         <Input
                             label='Event Name:'
                             placeholder='Birthday!'
-                            value={this.state.eventName}
-                            onChangeText={eventName => this.setState({ eventName })}
+                            value={eventName}
+                            onChangeText={text => this.eventTextChanged(text)}
                         />
                     </CardSection>
 
@@ -77,5 +78,16 @@ const styles = {
     }
 };
 
+const mapStateToProps = ({ eventMain }) => {
+    const {
+        eventName
+    } = eventMain;
 
-export default AddEventModal;
+    return {
+        eventName
+    };
+};
+
+export default connect(mapStateToProps, {
+    eventTextChanged
+})(AddEventModal);
