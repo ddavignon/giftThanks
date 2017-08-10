@@ -6,9 +6,11 @@ import {
     View,
     Platform,
 } from 'react-native';
+import { connect } from 'react-redux';
 import firebase from 'firebase';
 import ItemDetail from '../components/ItemDetail';
 import AddEventModal from '../components/AddEventModal';
+import { eventTextChanged, eventTextCompleted } from '../actions';
 import {
     Button,
     Card,
@@ -21,7 +23,6 @@ const Permissions = require('react-native-permissions');
 
 class EventsMain extends Component {
     state = {
-        eventName: '',
         showCreateModal: false,
         showDeleteModal: false,
         deleteKeyId: '',
@@ -93,21 +94,21 @@ class EventsMain extends Component {
     }
 
     // edit event
-    handleEditPress(editKeyId, eventName) {
-        console.log('On edit press');
-        this.setState({
-            eventName,
-            editKeyId
-        });
-    }
+    // handleEditPress(editKeyId, eventName) {
+    //     console.log('On edit press');
+    //     this.setState({
+    //         eventName,
+    //         editKeyId
+    //     });
+    // }
 
     handleUpdateAcceptPress() {
         console.log('update data');
         const { currentUser } = firebase.auth();
 
         firebase.database().ref(`/users/${currentUser.uid}/events/${this.state.editKeyId}/`)
-            .set({ name: this.state.eventName })
-            .then(() => this.setState({ eventName: '' }));
+            .set({ name: this.props.eventName })
+            .then(() => this.props.eventTextCompleted());
     }
 
     handleUpdateCancelPress() {
@@ -213,4 +214,16 @@ const styles = {
     }
 };
 
-export default EventsMain;
+const mapStateToProps = ({ eventMain }) => {
+    const {
+        eventName
+    } = eventMain;
+
+    return {
+        eventName
+    };
+};
+
+export default connect(mapStateToProps, {
+    eventTextChanged, eventTextCompleted
+})(EventsMain);
