@@ -33,7 +33,7 @@ class ItemDetail extends Component {
         } = styles;
 
         const { image, title, type } = this.props;
-        console.log('props: ', this.props);
+        //console.log('props: ', this.props);
 
         return (
             <TouchableOpacity

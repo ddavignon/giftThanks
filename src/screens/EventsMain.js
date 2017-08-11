@@ -1,14 +1,16 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 import {
     ScrollView,
     View,
     Platform,
 } from 'react-native';
+import { connect } from 'react-redux';
 import firebase from 'firebase';
 import ItemDetail from '../components/ItemDetail';
 import AddEventModal from '../components/AddEventModal';
+import { eventTextChanged, eventTextCompleted } from '../actions';
 import {
     Card,
     Confirm
@@ -29,34 +31,63 @@ class EventsMain extends Component {
     };
 
     // read event
-    // componentWillMount() {
-    //     console.log('dbData: ', Object.keys(this.state.dbData).length);
-    //     if (Object.keys(this.state.dbData).length === 0) {
-    //         firebase.auth().onAuthStateChanged(user => {
-    //             if (user) {
-    //                 const { currentUser } = firebase.auth();
-    //
-    //                 firebase
-    //                     .database()
-    //                     .ref(`users/${currentUser.uid}/events/`)
-    //                     .on('value', snapshot => {
-    //                         this.setState({ dbData: snapshot.val() });
-    //                     });
-    //             } else {
-    //                 console.log('no user signed in');
-    //             }
-    //         });
-    //     }
-    // }
+    componentWillMount() {
+        // if (this.props.eventName !== '') {
+        //     //this.setState({ eventName: this.props.eventName });
+        //     const { currentUser } = firebase.auth();
+        //     firebase.database().ref(`users/${currentUser.uid}/events/`)
+        //         .push({ name: this.props.eventName })
+        //         //.then(() => this.setState({ eventName: this.props.eventName }))
+        //         .then(() => this.props.eventTextChanged(''));
+        //     console.log('creating event: ', this.props.eventName);
+        // }
+        // this.setState({ eventName: '' });
+    //}
+        console.log('dbData: ', Object.keys(this.state.dbData).length);
+        if (Object.keys(this.state.dbData).length === 0) {
+            firebase.auth().onAuthStateChanged(user => {
+                if (user) {
+                    const { currentUser } = firebase.auth();
 
-    // componentDidMount() {
-    //     Actions.refresh({
-    //         rightTitle: 'Add',
-    //         onRight: () => this.setState({ showCreateModal: true })
-    //     });
-    // }
+                    firebase
+                        .database()
+                        .ref(`users/${currentUser.uid}/events/`)
+                        .on('value', snapshot => {
+                            this.setState({ dbData: snapshot.val() });
+                        });
+                } else {
+                    console.log('no user signed in');
+                }
+            });
+        }
+    }
+
+    componentDidMount() {
+        // Actions.refresh({
+        //     rightTitle: 'Add',
+        //     onRight: () => this.setState({ showCreateModal: true })
+        // });
+        // console.log('eventsMain props: ', this.props);
+        // if (Object.keys(this.state.dbData).length >= 0) {
+        //     firebase.auth().onAuthStateChanged(user => {
+        //         if (user) {
+        //             const { currentUser } = firebase.auth();
+        //
+        //             firebase
+        //                 .database()
+        //                 .ref(`users/${currentUser.uid}/events/`)
+        //                 .on('value', snapshot => {
+        //                     this.setState({ dbData: snapshot.val() });
+        //                 });
+        //         } else {
+        //             console.log('no user signed in');
+        //         }
+        //     });
+        // }
+    }
 
     componentWillReceiveProps(nextProps) {
+        //console.log('eventsMain props: ', this.props);
         if (this.props === nextProps) {
             console.log('nothing changed!');
             return;
@@ -65,20 +96,30 @@ class EventsMain extends Component {
         // if (Object.keys(this.state.dbData).length === 0) {
         //
         // }
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                const { currentUser } = firebase.auth();
-
-                firebase
-                    .database()
-                    .ref(`users/${currentUser.uid}/events/`)
-                    .on('value', snapshot => {
-                        this.setState({ dbData: snapshot.val() });
-                    });
-            } else {
-                console.log('no user signed in');
-            }
-        });
+        if (this.props.eventName !== '') {
+            //this.setState({ eventName: this.props.eventName });
+            const { currentUser } = firebase.auth();
+            firebase.database().ref(`users/${currentUser.uid}/events/`)
+                .push({ name: this.props.eventName })
+                //.then(() => this.setState({ eventName: '' }))
+                .then(() => this.props.eventTextChanged(''));
+            console.log('creating event: ', this.props.eventName);
+        }
+        // firebase.auth().onAuthStateChanged(user => {
+        //     if (user) {
+        //         const { currentUser } = firebase.auth();
+        //
+        //         firebase
+        //             .database()
+        //             .ref(`users/${currentUser.uid}/events/`)
+        //             .on('value', snapshot => {
+        //                 this.setState({ dbData: snapshot.val() });
+        //             });
+        //     } else {
+        //         console.log('no user signed in');
+        //     }
+        // });
+        //this.setState({ eventName: '' });
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -100,17 +141,17 @@ class EventsMain extends Component {
     }
 
     // Create event
-    onCreateAccept(eventText) {
+    onCreateAccept() {
         //console.log('Passed props: ', this.state.eventName, 'EventText: ', eventText);
 
-        if (eventText) {
-            const { currentUser } = firebase.auth();
-
-            firebase.database().ref(`users/${currentUser.uid}/events/`)
-                .push({ name: eventText })
-                .then(() => this.setState({ showCreateModal: false, eventName: '' }));
-            Actions.pop();
-        }
+        // if (this.props.eventName !== '') {
+        //     const { currentUser } = firebase.auth();
+        //
+        //     firebase.database().ref(`users/${currentUser.uid}/events/`)
+        //         .push({ name: this.props.eventName })
+        //         .then(() => this.props.eventTextCompleted());
+        //     //ActionConst.REFRESH();
+        // }
     }
 
     onDeleteDecline() {
@@ -194,7 +235,7 @@ class EventsMain extends Component {
 
         return (
             <View style={styles.screenStyle}>
-                
+
                 <ScrollView>
                     <View style={{ marginBottom: 65 }} >
                         {this.renderItems()}
@@ -221,4 +262,16 @@ const styles = {
     }
 };
 
-export default EventsMain;
+const mapStateToProps = ({ eventMain }) => {
+     const {
+         eventName
+     } = eventMain;
+
+     return {
+         eventName
+     };
+ };
+
+ export default connect(mapStateToProps, {
+     eventTextChanged, eventTextCompleted
+ })(EventsMain);

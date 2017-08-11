@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { Scene, Router, Actions, ActionConst } from 'react-native-router-flux';
+import { Scene, Router, Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import EventsMain from './screens/EventsMain';
 import AddEventModal from './components/AddEventModal';
@@ -27,6 +27,14 @@ const navButton = ({ selected, title, iconName }) => {
     );
 };
 
+// const reducerCreate = params=>{
+//     const defaultReducer = Reducer(params);
+//     return (state, action)=>{
+//         console.log("ACTION:", action);
+//         return defaultReducer(state, action);
+//     }
+// };
+
 const RouterComponent = () => {
 
     return (
@@ -52,8 +60,19 @@ const RouterComponent = () => {
                             key='events'
                             component={EventsMain}
                             title='Events'
+                            type='reset'
                             initial
                         />
+                        <Scene
+                            rightTitle='+'
+                            onRight={() => {}}
+                            key='gifts'
+                            component={EventItems}
+                            title='Gifts'
+
+                        />
+                        <Scene key='addItemScene' component={AddItemMain} />
+                        <Scene key='editItemScene' component={EditItemMain} />
                     </Scene>
                 {/* Tab and it's scenes*/}
                     <Scene
@@ -71,16 +90,7 @@ const RouterComponent = () => {
                     </Scene>
                 </Scene>
             </Scene>
-            <Scene
-                rightTitle='+'
-                onRight={() => {}}
-                key='gifts'
-                component={EventItems}
-                title='Gifts'
 
-            />
-            <Scene key='addItemScene' component={AddItemMain} />
-            <Scene key='editItemScene' component={EditItemMain} />
             <Scene
                 key='addEventModal'
                 direction='vertical'

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Text, View, Modal } from 'react-native';
+import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { Input, Button, CardSection } from './common';
+import { eventTextChanged, eventTextCompleted } from '../actions';
 
 
 class AddEventModal extends Component {
@@ -15,13 +17,27 @@ class AddEventModal extends Component {
         this.setState({ visible: this.props.visible });
     }
 
-    getEventName() {
-        this.props.onAccept(this.state.eventName);
-        this.setState({ eventName: '' });
+    getEventName(eventName) {
+        //this.props.onAccept(this.state.eventName);
+        const tempName = eventName;
+        console.log('eventName: ', eventName);
+        //this.setState({ eventName: '' });
+        this.props.eventTextChanged(tempName);
+        //Actions.pop();
+        //Actions.pop({ refresh: { eventText: this.state.eventName } });
+        //Actions.refresh({ eventText: this.state.eventName });
+        Actions.popTo('events');
+        setTimeout(() => {
+            Actions.refresh({ name: 'zzzzar' });
+            console.log('zzzz');
+        }, 10);
+        //this.props.eventTextCompleted();
+        Actions.pop();
     }
 
     render() {
-        const { visible, onDecline } = this.props;
+        const { visible } = this.props;
+        //console.log('eventName= ', eventName);
         const { containerStyle, textStyle, cardSectionStyle } = styles;
         return (
             <Modal
@@ -47,7 +63,7 @@ class AddEventModal extends Component {
                     </CardSection>
 
                     <CardSection style={cardSectionStyle}>
-                        <Button onPress={() => this.getEventName()} >
+                        <Button onPress={() => this.getEventName(this.state.eventName)} >
                             Create
                         </Button>
 
@@ -80,4 +96,14 @@ const styles = {
 };
 
 
-export default AddEventModal;
+const mapStateToProps = ({ eventMain }) => {
+     const {
+         eventName
+     } = eventMain;
+
+     return {
+         eventName
+    };
+ };
+
+ export default connect(mapStateToProps, { eventTextChanged, eventTextCompleted })(AddEventModal);
