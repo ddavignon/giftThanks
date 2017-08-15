@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { Scene, Router } from 'react-native-router-flux';
+import { Scene, Router, Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import EventsMain from './screens/EventsMain';
 import AddEventModal from './components/AddEventModal';
@@ -28,7 +28,16 @@ const navButton = ({ selected, title, iconName }) => {
     );
 };
 
+// const reducerCreate = params=>{
+//     const defaultReducer = Reducer(params);
+//     return (state, action)=>{
+//         console.log("ACTION:", action);
+//         return defaultReducer(state, action);
+//     }
+// };
+
 const RouterComponent = () => {
+
     return (
 
         <Router>
@@ -48,14 +57,13 @@ const RouterComponent = () => {
                     >
                         <Scene
                             rightTitle='+'
-                            onRight={() => {}}
+                            onRight={() => Actions.addEventModal()}
                             key='events'
                             component={EventsMain}
                             title='Events'
-                            type="reset"
+                            type='reset'
                             initial
                         />
-                        <Scene key='addEventModal' component={AddEventModal} />
                         <Scene
                             rightTitle='+'
                             onRight={() => {}}
@@ -84,6 +92,15 @@ const RouterComponent = () => {
                     </Scene>
                 </Scene>
             </Scene>
+
+            <Scene
+                key='addEventModal'
+                direction='vertical'
+                component={AddEventModal}
+                title="Create Event"
+                hideNavBar
+            />
+
         </Router>
     );
 };

@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { Text, View, Modal } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 import { Input, Button, CardSection } from './common';
-import { eventTextChanged } from '../actions';
+import { eventTextChanged, eventTextCompleted } from '../actions';
 
 
 class AddEventModal extends Component {
 
     state = {
+        eventName: '',
         visible: false
     }
 
@@ -15,12 +17,27 @@ class AddEventModal extends Component {
         this.setState({ visible: this.props.visible });
     }
 
-    getEventName() {
-        this.props.onAccept(this.props.eventName);
+    getEventName(eventName) {
+        //this.props.onAccept(this.state.eventName);
+        const tempName = eventName;
+        console.log('eventName: ', eventName);
+        //this.setState({ eventName: '' });
+        this.props.eventTextChanged(tempName);
+        //Actions.pop();
+        //Actions.pop({ refresh: { eventText: this.state.eventName } });
+        //Actions.refresh({ eventText: this.state.eventName });
+        Actions.popTo('events');
+        setTimeout(() => {
+            Actions.refresh({ name: 'zzzzar' });
+            console.log('zzzz');
+        }, 10);
+        //this.props.eventTextCompleted();
+        Actions.pop();
     }
 
     render() {
-        const { visible, onDecline, eventName } = this.props;
+        const { visible } = this.props;
+        //console.log('eventName= ', eventName);
         const { containerStyle, textStyle, cardSectionStyle } = styles;
         return (
             <Modal
@@ -40,19 +57,19 @@ class AddEventModal extends Component {
                         <Input
                             label='Event Name:'
                             placeholder='Birthday!'
-                            value={eventName}
-                            onChangeText={text => this.eventTextChanged(text)}
+                            value={this.state.eventName}
+                            onChangeText={eventName => this.setState({ eventName })}
                         />
                     </CardSection>
 
-                    <CardSection>
-                    <Button onPress={() => this.getEventName()}/*Not passing onAccept() says don't call imediately*/>
-                        Create
-                    </Button>
+                    <CardSection style={cardSectionStyle}>
+                        <Button onPress={() => this.getEventName(this.state.eventName)} >
+                            Create
+                        </Button>
 
-                    <Button onPress={onDecline}>
-                        Cancel
-                    </Button>
+                        <Button onPress={() => Actions.pop()}>
+                            Cancel
+                        </Button>
                     </CardSection>
                 </View>
             </Modal>
@@ -78,16 +95,15 @@ const styles = {
     }
 };
 
+
 const mapStateToProps = ({ eventMain }) => {
-    const {
-        eventName
-    } = eventMain;
+     const {
+         eventName
+     } = eventMain;
 
-    return {
-        eventName
+     return {
+         eventName
     };
-};
+ };
 
-export default connect(mapStateToProps, {
-    eventTextChanged
-})(AddEventModal);
+ export default connect(mapStateToProps, { eventTextChanged, eventTextCompleted })(AddEventModal);

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 import {
     ScrollView,
     View,
@@ -12,17 +12,15 @@ import ItemDetail from '../components/ItemDetail';
 import AddEventModal from '../components/AddEventModal';
 import { eventTextChanged, eventTextCompleted } from '../actions';
 import {
-    Button,
     Card,
-    CardSection,
-    Confirm,
-    Input
+    Confirm
 } from '../components/common';
 
 const Permissions = require('react-native-permissions');
 
 class EventsMain extends Component {
     state = {
+        eventName: '',
         showCreateModal: false,
         showDeleteModal: false,
         deleteKeyId: '',
@@ -34,32 +32,79 @@ class EventsMain extends Component {
 
     // read event
     componentWillMount() {
+        // if (this.props.eventName !== '') {
+        //     //this.setState({ eventName: this.props.eventName });
+        //     const { currentUser } = firebase.auth();
+        //     firebase.database().ref(`users/${currentUser.uid}/events/`)
+        //         .push({ name: this.props.eventName })
+        //         //.then(() => this.setState({ eventName: this.props.eventName }))
+        //         .then(() => this.props.eventTextChanged(''));
+        //     console.log('creating event: ', this.props.eventName);
+        // }
+        // this.setState({ eventName: '' });
+    //}
+        console.log('dbData: ', Object.keys(this.state.dbData).length);
+        if (Object.keys(this.state.dbData).length === 0) {
+            firebase.auth().onAuthStateChanged(user => {
+                if (user) {
+                    const { currentUser } = firebase.auth();
+
+                    firebase
+                        .database()
+                        .ref(`users/${currentUser.uid}/events/`)
+                        .on('value', snapshot => {
+                            this.setState({ dbData: snapshot.val() });
+                        });
+                } else {
+                    console.log('no user signed in');
+                }
+            });
+        }
+    }
+
+    componentDidMount() {
         // Actions.refresh({
         //     rightTitle: 'Add',
         //     onRight: () => this.setState({ showCreateModal: true })
         // });
-
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                const { currentUser } = firebase.auth();
-
-                firebase
-                    .database()
-                    .ref(`users/${currentUser.uid}/events/`)
-                    .on('value', snapshot => {
-                        this.setState({ dbData: snapshot.val() });
-                    });
-            } else {
-                console.log('no user signed in');
-            }
-        });
+        // console.log('eventsMain props: ', this.props);
+        // if (Object.keys(this.state.dbData).length >= 0) {
+        //     firebase.auth().onAuthStateChanged(user => {
+        //         if (user) {
+        //             const { currentUser } = firebase.auth();
+        //
+        //             firebase
+        //                 .database()
+        //                 .ref(`users/${currentUser.uid}/events/`)
+        //                 .on('value', snapshot => {
+        //                     this.setState({ dbData: snapshot.val() });
+        //                 });
+        //         } else {
+        //             console.log('no user signed in');
+        //         }
+        //     });
+        // }
     }
 
-    componentDidMount() {
-        Actions.refresh({
-            rightTitle: 'Add',
-            onRight: () => this.setState({ showCreateModal: true })
-        });
+    componentWillReceiveProps(nextProps) {
+        //console.log('eventsMain props: ', this.props);
+        if (this.props === nextProps) {
+            console.log('nothing changed!');
+            return;
+        }
+        //console.log('dbData: ', Object.keys(this.state.dbData).length);
+        // if (Object.keys(this.state.dbData).length === 0) {
+        //
+        // }
+        if (this.props.eventName !== '') {
+            //this.setState({ eventName: this.props.eventName });
+            const { currentUser } = firebase.auth();
+            firebase.database().ref(`users/${currentUser.uid}/events/`)
+                .push({ name: this.props.eventName })
+                //.then(() => this.setState({ eventName: '' }))
+                .then(() => this.props.eventTextChanged(''));
+            console.log('creating event: ', this.props.eventName);
+        }
         // firebase.auth().onAuthStateChanged(user => {
         //     if (user) {
         //         const { currentUser } = firebase.auth();
@@ -74,54 +119,11 @@ class EventsMain extends Component {
         //         console.log('no user signed in');
         //     }
         // });
-    }
-    // Create event
-    onCreateAccept(eventText) {
-        //console.log('Passed props: ', this.state.eventName, 'EventText: ', eventText);
-
-        if (eventText) {
-            const { currentUser } = firebase.auth();
-
-            firebase.database().ref(`users/${currentUser.uid}/events/`)
-                .push({ name: eventText })
-                .then(() => this.setState({ showCreateModal: false }));
-        }
+        //this.setState({ eventName: '' });
     }
 
-    onCreateDecline() {
-        this.setState({ showCreateModal: false });
-        //Actions.events();
-    }
-
-    // edit event
-    // handleEditPress(editKeyId, eventName) {
-    //     console.log('On edit press');
-    //     this.setState({
-    //         eventName,
-    //         editKeyId
-    //     });
-    // }
-
-    handleUpdateAcceptPress() {
-        console.log('update data');
-        const { currentUser } = firebase.auth();
-
-        firebase.database().ref(`/users/${currentUser.uid}/events/${this.state.editKeyId}/`)
-            .set({ name: this.props.eventName })
-            .then(() => this.props.eventTextCompleted());
-    }
-
-    handleUpdateCancelPress() {
-        alert('Cancel update!!!!');
-    }
-
-    // delete event
-    handleDeletePress(keyId) {
-        console.log('On delete press');
-        this.setState({
-            showDeleteModal: !this.state.showDeleteModal,
-            deleteKeyId: keyId
-        });
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state !== nextState;
     }
 
     onDeleteAccept() {
@@ -133,8 +135,60 @@ class EventsMain extends Component {
             .then(() => this.setState({ showDeleteModal: false, deleteKeyId: '' }));
     }
 
+    onCreateDecline() {
+        this.setState({ showCreateModal: false });
+        Actions.pop();
+    }
+
+    // Create event
+    onCreateAccept() {
+        //console.log('Passed props: ', this.state.eventName, 'EventText: ', eventText);
+
+        // if (this.props.eventName !== '') {
+        //     const { currentUser } = firebase.auth();
+        //
+        //     firebase.database().ref(`users/${currentUser.uid}/events/`)
+        //         .push({ name: this.props.eventName })
+        //         .then(() => this.props.eventTextCompleted());
+        //     //ActionConst.REFRESH();
+        // }
+    }
+
     onDeleteDecline() {
         this.setState({ showDeleteModal: false });
+        Actions.pop();
+    }
+
+    // delete event
+    handleDeletePress(keyId) {
+        console.log('On delete press');
+        this.setState({
+            showDeleteModal: !this.state.showDeleteModal,
+            deleteKeyId: keyId
+        });
+    }
+
+    // handleUpdateCancelPress() {
+    //     alert('Cancel update!!!!');
+    // }
+
+
+    handleUpdateAcceptPress() {
+        console.log('update data');
+        const { currentUser } = firebase.auth();
+
+        firebase.database().ref(`/users/${currentUser.uid}/events/${this.state.editKeyId}/`)
+            .set({ name: this.state.eventName })
+            .then(() => this.setState({ eventName: '' }));
+    }
+
+    // edit event
+    handleEditPress(editKeyId, eventName) {
+        console.log('On edit press');
+        this.setState({
+            eventName,
+            editKeyId
+        });
     }
 
     handleItemPress(index) {
@@ -147,7 +201,7 @@ class EventsMain extends Component {
     renderItems() {
         if (this.state.dbData) {
             return _.map(this.state.dbData, (event, index) => {
-                console.log(event, index);
+                //console.log(event, index);
                 return (
                     <ItemDetail
                         key={index}
@@ -181,13 +235,7 @@ class EventsMain extends Component {
 
         return (
             <View style={styles.screenStyle}>
-                <Card>
-                    <AddEventModal
-                        visible={this.state.showCreateModal}
-                        onAccept={this.onCreateAccept.bind(this)}
-                        onDecline={this.onCreateDecline.bind(this)}
-                    />
-                </Card>
+
                 <ScrollView>
                     <View style={{ marginBottom: 65 }} >
                         {this.renderItems()}
@@ -215,15 +263,15 @@ const styles = {
 };
 
 const mapStateToProps = ({ eventMain }) => {
-    const {
-        eventName
-    } = eventMain;
+     const {
+         eventName
+     } = eventMain;
 
-    return {
-        eventName
-    };
-};
+     return {
+         eventName
+     };
+ };
 
-export default connect(mapStateToProps, {
-    eventTextChanged, eventTextCompleted
-})(EventsMain);
+ export default connect(mapStateToProps, {
+     eventTextChanged, eventTextCompleted
+ })(EventsMain);

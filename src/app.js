@@ -8,7 +8,6 @@ import reducers from './reducers';
 
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
-
 class App extends Component {
 
     componentWillMount() {
@@ -34,7 +33,7 @@ class App extends Component {
         return (
             <Provider store={store}>
                 <Router />
-            </Provider>    
+            </Provider>
         );
     }
 }

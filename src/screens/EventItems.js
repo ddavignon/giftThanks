@@ -17,7 +17,19 @@ class EventItems extends Component {
         url: ''
     };
 
-    componentWillMount() {
+
+    componentDidMount() {
+        Actions.refresh({
+            rightTitle: 'Add',
+            onRight: () => Actions.addItemScene({ eventId: this.props.eventId })
+        });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props === nextProps) {
+            console.log('nothing changed!');
+            return;
+        }
         console.log(this.props.eventId);
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
@@ -36,13 +48,9 @@ class EventItems extends Component {
         });
     }
 
-    componentDidMount() {
-        Actions.refresh({
-            rightTitle: 'Add',
-            onRight: () => Actions.addItemScene({ eventId: this.props.eventId })
-        });
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state !== nextState;
     }
-
 
     onDeleteAccept() {
         console.log('delete data');
@@ -56,7 +64,7 @@ class EventItems extends Component {
                 this.setState({ showDeleteModal: false, deleteKeyId: '' });
                 const deletePhotoRef = firebase.storage().refFromURL(this.state.url);
                 deletePhotoRef.delete().then(() => {
-                    Actions.gifts({ eventId: this.props.eventId, type: 'reset' });
+                    Actions.gifts({ eventId: this.props.eventId });
                 });
         });
     }
