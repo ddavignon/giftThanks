@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import RNFetchBlob from 'react-native-fetch-blob';
+import ImageResizer from 'react-native-image-resizer';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import { CardSection, Button, Input } from './common';
@@ -61,15 +62,16 @@ class AddItemForm extends Component {
             } else {
                 const avatarSource = { uri: response.uri };
                 //const responsePath = '';
-                if (Platform.OS === 'android') {
-                    this.setState({ responsePath: response.path });
-                }
-                const iosResponsePath = response.uri.replace('file://', '');
-                this.setState({ responsePath: iosResponsePath });
+                // if (Platform.OS === 'android') {
+                //     this.setState({ responsePath: response.path });
+                // }
+                // const iosResponsePath = response.uri.replace('file://', '');
+                // this.setState({ responsePath: iosResponsePath });
                 //console.log('response', response);
                 console.log('Rpth', this.state.responsePath);
                 this.setState({
-                    avatarSource
+                    avatarSource,
+                    responsePath: response.uri
                 });
             }
         });
@@ -91,28 +93,35 @@ class AddItemForm extends Component {
         window.Blob = Blob;
         console.log('add item pressed');
 
-        Blob.build(RNFetchBlob.wrap(responsePath), { type: 'image/jpeg' })
-            .then((blob) => firebase.storage()
-                    .ref(path)
-                    .child(testImageName)
-                    .put(blob, { contentType: 'image/png' })
-            )
-            .catch(console.log('Build blog failed!'))
-            .then((snapshot) => {
-                console.log('snap', snapshot.downloadURL);
-                const itemURL = snapshot.downloadURL;
-                firebase.database().ref(path)
-                    .push({ name: isFromText, URL: itemURL })
-                    .then(() => {
-                        this.setState({
-                            isFromText: '',
-                            description: '',
-                            responsePath: '',
-                            avatarSource: null,
-                            dbData: ''
-                        });
-                        Actions.gifts({ eventId, type: 'back' });
+
+        ImageResizer.createResizedImage(responsePath, 600, 600, 'JPEG', 80)
+            .then((resizedImageUri) => {
+                Blob.build(RNFetchBlob.wrap(resizedImageUri), { type: 'image/jpeg' })
+                    .then((blob) => firebase.storage()
+                            .ref(path)
+                            .child(testImageName)
+                            .put(blob, { contentType: 'image/png' })
+                    )
+                    .catch(console.log('Build blog failed!'))
+                    .then((snapshot) => {
+                        console.log('snap', snapshot.downloadURL);
+                        const itemURL = snapshot.downloadURL;
+                        firebase.database().ref(path)
+                            .push({ name: isFromText, URL: itemURL })
+                            .then(() => {
+                                this.setState({
+                                    isFromText: '',
+                                    description: '',
+                                    responsePath: '',
+                                    avatarSource: null,
+                                    dbData: ''
+                                });
+                                Actions.gifts({ eventId, type: 'back' });
+                            });
                     });
+            }).catch((err) => {
+                console.log(err);
+                return alert('Unable to resize the photo Check the console for full the error message');
             });
     }
 
