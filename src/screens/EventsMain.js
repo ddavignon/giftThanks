@@ -96,14 +96,17 @@ class EventsMain extends Component {
         // if (Object.keys(this.state.dbData).length === 0) {
         //
         // }
-        if (this.props.eventName !== '') {
+        console.log('creating event next props triggered', nextProps);
+        console.log('creating event next props event Name', nextProps.eventName);
+        // if (this.props.eventName !== '') {
+        if (nextProps.eventName !== '') {
             //this.setState({ eventName: this.props.eventName });
             const { currentUser } = firebase.auth();
             firebase.database().ref(`users/${currentUser.uid}/events/`)
-                .push({ name: this.props.eventName })
+                .push({ name: nextProps.eventName })
                 //.then(() => this.setState({ eventName: '' }))
-                .then(() => this.props.eventTextChanged(''));
-            console.log('creating event: ', this.props.eventName);
+                .then(() => this.props.eventTextCompleted());
+            console.log('creating event: ', nextProps.eventName);
         }
         // firebase.auth().onAuthStateChanged(user => {
         //     if (user) {

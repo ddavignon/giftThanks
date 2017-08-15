@@ -12,10 +12,7 @@ import { EVENT_NAME, EVENT_COMPLETE } from '../actions/types';
                   eventName: action.payload
               };
          case EVENT_COMPLETE:
-             return {
-                 ...state,
-                 INITIAL_STATE
-             };
+             return INITIAL_STATE;
           default:
               return state;
       }

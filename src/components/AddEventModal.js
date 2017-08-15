@@ -27,10 +27,10 @@ class AddEventModal extends Component {
         //Actions.pop({ refresh: { eventText: this.state.eventName } });
         //Actions.refresh({ eventText: this.state.eventName });
         Actions.popTo('events');
-        setTimeout(() => {
-            Actions.refresh({ name: 'zzzzar' });
-            console.log('zzzz');
-        }, 10);
+        // setTimeout(() => {
+        //     Actions.refresh({ name: 'zzzzar' });
+        //     console.log('zzzz');
+        // }, 10);
         //this.props.eventTextCompleted();
         Actions.pop();
     }
