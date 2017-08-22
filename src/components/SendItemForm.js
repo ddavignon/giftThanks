@@ -7,6 +7,7 @@ import {
     PixelRatio
 } from 'react-native';
 import ContactsWrapper from 'react-native-contacts-wrapper';
+import Communications from 'react-native-communications';
 import { CardSection, Button, Input } from './common';
 
 class SendItemForm extends Component {
@@ -37,6 +38,10 @@ class SendItemForm extends Component {
             console.log("ERROR CODE: ", error.code);
             console.log("ERROR MESSAGE: ", error.message);
         });
+    }
+
+    onSendButtonPressed() {
+        Communications.email([this.state.emailText], null, null, 'thank you !', 'Thanks for using Gift Thanks!');
     }
 
     validateEmail(email) {
@@ -77,7 +82,7 @@ class SendItemForm extends Component {
                 <CardSection>
                     {
                         this.validateEmail(this.state.emailText) ?
-                        <Button onPress={() => {}}>
+                        <Button onPress={this.onSendButtonPressed.bind(this)}>
                             Send Item
                         </Button> :
                         <Button onPress={this.onButtonPressed.bind(this)}>
