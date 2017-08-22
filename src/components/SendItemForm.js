@@ -6,6 +6,7 @@ import {
     Text,
     PixelRatio
 } from 'react-native';
+import ContactsWrapper from 'react-native-contacts-wrapper';
 import { CardSection, Button, Input } from './common';
 
 class SendItemForm extends Component {
@@ -21,6 +22,18 @@ class SendItemForm extends Component {
         this.setState({
             avatarSource: { uri: URL },
             isFromText: name
+        });
+    }
+
+    onButtonPressed() {
+        ContactsWrapper.getContact()
+        .then((contact) => {
+            // Replace this code
+            console.log(contact);
+        })
+        .catch((error) => {
+            console.log("ERROR CODE: ", error.code);
+            console.log("ERROR MESSAGE: ", error.message);
         });
     }
 
@@ -56,7 +69,7 @@ class SendItemForm extends Component {
                     />
                 </CardSection>
                 <CardSection>
-                    <Button onPress={() => {}}>
+                    <Button onPress={this.onButtonPressed}>
                         Send Item
                     </Button>
                 </CardSection>

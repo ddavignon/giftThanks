@@ -61,13 +61,14 @@ class AddItemForm extends Component {
                 console.log('User tapped custom button: ', response.customButton);
             } else {
                 const avatarSource = { uri: response.uri };
-                //const responsePath = '';
+                // //const responsePath = '';
                 // if (Platform.OS === 'android') {
                 //     this.setState({ responsePath: response.path });
+                // } else {
+                //     const iosResponsePath = response.uri.replace('file://', '');
+                //     this.setState({ responsePath: iosResponsePath });
                 // }
-                // const iosResponsePath = response.uri.replace('file://', '');
-                // this.setState({ responsePath: iosResponsePath });
-                //console.log('response', response);
+                console.log('response', response);
                 console.log('Rpth', this.state.responsePath);
                 this.setState({
                     avatarSource,
@@ -85,14 +86,13 @@ class AddItemForm extends Component {
         const { currentUser } = firebase.auth();
         const path = `users/${currentUser.uid}/events/${eventId}/items/`;
 
-        //console.log(responsePath);
+        console.log('respnse path', responsePath);
 
         const Blob = RNFetchBlob.polyfill.Blob;
 
         window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
         window.Blob = Blob;
         console.log('add item pressed');
-
 
         ImageResizer.createResizedImage(responsePath, 600, 600, 'JPEG', 80)
             .then((resizedImageUri) => {
@@ -120,7 +120,7 @@ class AddItemForm extends Component {
                             });
                     });
             }).catch((err) => {
-                console.log(err);
+                console.log('error for resize', err);
                 return alert('Unable to resize the photo Check the console for full the error message');
             });
     }
