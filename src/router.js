@@ -72,9 +72,9 @@ const RouterComponent = () => {
                             title='Gifts'
 
                         />
-                        <Scene key='addItemScene' component={AddItemMain} />
-                        <Scene key='editItemScene' component={EditItemMain} />
-                        <Scene key='sendItemScene' component={SendItemMain} />
+                        <Scene key='addItemScene' title='Add a gift' component={AddItemMain} />
+                        <Scene key='editItemScene' title='Edit Item' component={EditItemMain} />
+                        <Scene key='sendItemScene' title='Send Thanks!' component={SendItemMain} />
                     </Scene>
                 {/* Tab and it's scenes*/}
                     <Scene

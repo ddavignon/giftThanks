@@ -5,7 +5,8 @@ import {
     View,
     Text,
     TextInput,
-    PixelRatio
+    PixelRatio,
+    Switch
 } from 'react-native';
 import ContactsWrapper from 'react-native-contacts-wrapper';
 import Communications from 'react-native-communications';
@@ -20,10 +21,12 @@ class SendItemForm extends Component {
         emailContactText: '',
         emailBodyText: '',
         emailSubjectText: '',
-        eventId: ''
+        eventId: '',
+        addPhotoSwitch: false
     }
 
     componentDidMount() {
+        console.log('event: ', this.props.event);
         console.log('event item: ', this.props.eventItem);
         const { URL, name } = this.props.eventItem;
         this.setState({
@@ -86,6 +89,14 @@ class SendItemForm extends Component {
                         onChangeText={emailContactText => this.setState({ emailContactText })}
                     />
                 </CardSection>
+                <CardSection>
+                <Switch
+                    onValueChange={(value) => this.setState({ addPhotoSwitch: value })}
+                    style={{ marginBottom: 10, marginTop: 10 }}
+                    value={this.state.addPhotoSwitch}
+                />
+                <Text style={{ fontSize: 18, marginTop: 12, marginLeft: 20 }}> Add photo to email</Text>
+                </CardSection>
                 <View>
                     <TextInput
                         style={textArea}
@@ -93,7 +104,7 @@ class SendItemForm extends Component {
                         placeholder={'Mom@mail.com'}
                         editable={true}
                         maxLength={200}
-                        numberOfLines={6}
+                        numberOfLines={10}
                         onChangeText={(emailBodyText) => this.setState({ emailBodyText })}
                         value={this.state.emailBodyText}
                     />
@@ -136,7 +147,7 @@ const styles = {
 },
 textArea: {
     paddingLeft: 5,
-    height: 100,
+    height: 140,
     fontSize: 18
 }
 

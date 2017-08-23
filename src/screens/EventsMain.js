@@ -258,7 +258,7 @@ class EventsMain extends Component {
 
 const styles = {
     screenStyle: {
-        paddingTop: 50,
+        paddingTop: 60,
         flex: 1,
         flexDirection: 'column',
         backgroundColor: '#DCDDDE'
