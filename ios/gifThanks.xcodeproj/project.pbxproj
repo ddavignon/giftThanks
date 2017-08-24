@@ -45,6 +45,7 @@
 		7607D491272D43CABF06FDB7 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D789F01826244C8883E72F92 /* Zocial.ttf */; };
 		7E42D0A774E14E849D9309E7 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1A387DFF61114FA4BFB2ACE8 /* EvilIcons.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		A5452B99EC2B4E32AA4D43B3 /* libRNMail.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B6F57958B142B3A28D08ED /* libRNMail.a */; };
 		A5751AF964E24BA394D176F9 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17B11430CA2E477EB275B0E5 /* Entypo.ttf */; };
 		ABA38081DE4B4B638513A09F /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B89C895940941DBA63940BC /* libReactNativePermissions.a */; };
 		B34739091E7A451295A432F1 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A5DF7FC8C1F64032A8B5200C /* SimpleLineIcons.ttf */; };
@@ -285,6 +286,20 @@
 			remoteGlobalIDString = 2B58405A1D10DE8700235F31;
 			remoteInfo = RCTContactsWrapper;
 		};
+		F4C8FA391F4E3BB500A8B63D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D13A8C51194C4EA0BDFF5165 /* RNMail.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 46FEDE7F1AFF192F00D3261C;
+			remoteInfo = RNMail;
+		};
+		F4C8FA3B1F4E3BB500A8B63D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D13A8C51194C4EA0BDFF5165 /* RNMail.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 46FEDE8A1AFF192F00D3261C;
+			remoteInfo = RNMailTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -326,8 +341,10 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		84CCFB0767F045C68B042E6A /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		A3F672D78482454F8F7EB173 /* ContactsWrapper.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ContactsWrapper.xcodeproj; path = "../node_modules/react-native-contacts-wrapper/ios/ContactsWrapper.xcodeproj"; sourceTree = "<group>"; };
+		A4B6F57958B142B3A28D08ED /* libRNMail.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNMail.a; sourceTree = "<group>"; };
 		A5DF7FC8C1F64032A8B5200C /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		CBAC1B6AAA6E4F36A8EF6340 /* libRCTContactsWrapper.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTContactsWrapper.a; sourceTree = "<group>"; };
+		D13A8C51194C4EA0BDFF5165 /* RNMail.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNMail.xcodeproj; path = "../node_modules/react-native-mail/RNMail.xcodeproj"; sourceTree = "<group>"; };
 		D685E85F823240408413B8B5 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		D789F01826244C8883E72F92 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		F62731DB27BA4CE985CEC9EF /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
@@ -363,6 +380,7 @@
 				ABA38081DE4B4B638513A09F /* libReactNativePermissions.a in Frameworks */,
 				357DE4869E4A45D8B9989F1A /* libRCTImageResizer.a in Frameworks */,
 				C3220DE5EDA64F799107ECDC /* libRCTContactsWrapper.a in Frameworks */,
+				A5452B99EC2B4E32AA4D43B3 /* libRNMail.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,6 +569,7 @@
 				1AEB9860174643D3A69D65D9 /* ReactNativePermissions.xcodeproj */,
 				2C7C10E41BBF40639F5A6153 /* RCTImageResizer.xcodeproj */,
 				A3F672D78482454F8F7EB173 /* ContactsWrapper.xcodeproj */,
+				D13A8C51194C4EA0BDFF5165 /* RNMail.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -632,6 +651,15 @@
 			isa = PBXGroup;
 			children = (
 				F4C8F9E71F4CE47F00A8B63D /* libRCTContactsWrapper.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F4C8FA171F4E3BB500A8B63D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F4C8FA3A1F4E3BB500A8B63D /* libRNMail.a */,
+				F4C8FA3C1F4E3BB500A8B63D /* RNMailTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -816,6 +844,10 @@
 				{
 					ProductGroup = DA0E63491EB1B9D70037067F /* Products */;
 					ProjectRef = 3AB48BD2D5514F289E1F2E2B /* RNImagePicker.xcodeproj */;
+				},
+				{
+					ProductGroup = F4C8FA171F4E3BB500A8B63D /* Products */;
+					ProjectRef = D13A8C51194C4EA0BDFF5165 /* RNMail.xcodeproj */;
 				},
 				{
 					ProductGroup = DA4D94311EFAEF5700B4B96F /* Products */;
@@ -1050,6 +1082,20 @@
 			remoteRef = F4C8F9E61F4CE47F00A8B63D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		F4C8FA3A1F4E3BB500A8B63D /* libRNMail.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNMail.a;
+			remoteRef = F4C8FA391F4E3BB500A8B63D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F4C8FA3C1F4E3BB500A8B63D /* RNMailTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RNMailTests.xctest;
+			remoteRef = F4C8FA3B1F4E3BB500A8B63D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1194,12 +1240,14 @@
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-image-resizer/ios/RCTImageResizer",
 					"$(SRCROOT)/../node_modules/react-native-contacts-wrapper/ios/RCTContactsWrapper",
+					"$(SRCROOT)/../node_modules/react-native-mail/RNMail",
 				);
 				INFOPLIST_FILE = gifThanksTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1230,12 +1278,14 @@
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-image-resizer/ios/RCTImageResizer",
 					"$(SRCROOT)/../node_modules/react-native-contacts-wrapper/ios/RCTContactsWrapper",
+					"$(SRCROOT)/../node_modules/react-native-mail/RNMail",
 				);
 				INFOPLIST_FILE = gifThanksTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1268,6 +1318,7 @@
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-image-resizer/ios/RCTImageResizer",
 					"$(SRCROOT)/../node_modules/react-native-contacts-wrapper/ios/RCTContactsWrapper",
+					"$(SRCROOT)/../node_modules/react-native-mail/RNMail",
 				);
 				INFOPLIST_FILE = gifThanks/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
@@ -1299,6 +1350,7 @@
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-image-resizer/ios/RCTImageResizer",
 					"$(SRCROOT)/../node_modules/react-native-contacts-wrapper/ios/RCTContactsWrapper",
+					"$(SRCROOT)/../node_modules/react-native-mail/RNMail",
 				);
 				INFOPLIST_FILE = gifThanks/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
@@ -1336,11 +1388,13 @@
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-image-resizer/ios/RCTImageResizer",
 					"$(SRCROOT)/../node_modules/react-native-contacts-wrapper/ios/RCTContactsWrapper",
+					"$(SRCROOT)/../node_modules/react-native-mail/RNMail",
 				);
 				INFOPLIST_FILE = "gifThanks-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1381,11 +1435,13 @@
 					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 					"$(SRCROOT)/../node_modules/react-native-image-resizer/ios/RCTImageResizer",
 					"$(SRCROOT)/../node_modules/react-native-contacts-wrapper/ios/RCTContactsWrapper",
+					"$(SRCROOT)/../node_modules/react-native-mail/RNMail",
 				);
 				INFOPLIST_FILE = "gifThanks-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1427,6 +1483,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.gifThanks-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1452,6 +1509,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

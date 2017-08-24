@@ -10,6 +10,7 @@ class SendItemMain extends Component {
                     eventItem={this.props.event}
                     eventId={this.props.eventId}
                     sendKeyId={this.props.sendKeyId}
+                    eventName={this.props.eventName}
                 />
             </ScrollView>
         );
