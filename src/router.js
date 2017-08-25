@@ -61,6 +61,7 @@ const RouterComponent = () => {
                             key='events'
                             component={EventsMain}
                             title='Events'
+                            titleStyle={styles.textStyle}
                             type='reset'
                             initial
                         />
@@ -70,6 +71,7 @@ const RouterComponent = () => {
                             key='gifts'
                             component={EventItems}
                             title='Gifts'
+                            titleStyle={styles.textStyle}
 
                         />
                         <Scene key='addItemScene' title='Add a gift' component={AddItemMain} />
@@ -87,6 +89,7 @@ const RouterComponent = () => {
                             key='tokens'
                             component={TokensMain}
                             title='Tokens'
+                            titleStyle={styles.textStyle}
                             initial
                         />
                     </Scene>
@@ -103,6 +106,13 @@ const RouterComponent = () => {
 
         </Router>
     );
+};
+
+const styles = {
+    textStyle: {
+        fontFamily: 'moreThanHuman',
+        fontSize: 27
+    }
 };
 
 export default RouterComponent;

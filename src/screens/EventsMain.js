@@ -261,7 +261,8 @@ const styles = {
         paddingTop: 60,
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: '#DCDDDE'
+        // backgroundColor: '#DCDDDE'
+        backgroundColor: '#c4683a'
     }
 };
 

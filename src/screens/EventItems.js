@@ -140,7 +140,8 @@ const styles = {
         paddingTop: 60,
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: '#D7FAEE'
+        // backgroundColor: '#D7FAEE'
+        backgroundColor: '#2dad66'
     }
 };
 export default EventItems;
