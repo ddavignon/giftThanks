@@ -90,7 +90,7 @@ class EventItems extends Component {
 
     handleItemPress(event, index) {
         console.log('I got touched', index);
-        Actions.sendItemScene({ event, eventId: this.props.eventId, sendKeyId: index });
+        Actions.sendItemScene({ event, eventName: this.props.eventName, eventId: this.props.eventId, sendKeyId: index });
     }
 
 
@@ -140,7 +140,8 @@ const styles = {
         paddingTop: 60,
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: '#D7FAEE'
+        // backgroundColor: '#D7FAEE'
+        backgroundColor: '#2dad66'
     }
 };
 export default EventItems;

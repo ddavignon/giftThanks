@@ -194,10 +194,10 @@ class EventsMain extends Component {
         });
     }
 
-    handleItemPress(index) {
+    handleItemPress(index, eventname) {
         console.log('I got touched', index);
         return (
-            Actions.gifts({ eventId: index })
+            Actions.gifts({ eventName: eventname, eventId: index })
         );
     }
 
@@ -214,7 +214,7 @@ class EventsMain extends Component {
                         //image="http://placehold.it/30"
                         onEditPress={() => this.handleEditPress(index, event.name)}
                         onDeletePress={() => this.handleDeletePress(index)}
-                        onItemPress={() => this.handleItemPress(index)}
+                        onItemPress={() => this.handleItemPress(index, event.name)}
                     />
                 );
             });
@@ -258,10 +258,11 @@ class EventsMain extends Component {
 
 const styles = {
     screenStyle: {
-        paddingTop: 50,
+        paddingTop: 60,
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: '#DCDDDE'
+        // backgroundColor: '#DCDDDE'
+        backgroundColor: '#c4683a'
     }
 };
 
