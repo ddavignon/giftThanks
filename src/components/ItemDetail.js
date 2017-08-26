@@ -41,7 +41,7 @@ class ItemDetail extends Component {
             thumbnailStyle,
             headerContentStyle,
             thumbnailContainerStyle,
-            headerTextStyle,
+            textStyle,
         } = styles;
 
         const { image, title, type } = this.props;
@@ -57,7 +57,7 @@ class ItemDetail extends Component {
                             {this.renderImageForType(type, image, thumbnailStyle)}
                         </View>
                         <View style={headerContentStyle}>
-                            <Text style={headerTextStyle}>{title}</Text>
+                            <Text style={textStyle}>{title}</Text>
                         </View>
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
                             {this.renderIconForType(type)}
@@ -83,21 +83,22 @@ const styles = {
         flexDirection: 'column',
         justifyContent: 'space-around',
     },
-    headerTextStyle: {
-        marginTop: 10,
-        marginBottom: 10,
+    textStyle: {
+        marginTop: 15,
+        marginBottom: 15,
+        marginLeft: 5,
         fontFamily: 'mostlyMono',
         fontSize: 28,
         fontWeight: 'bold'
     },
     thumbnailStyle: {
-        height: 50,
-        width: 50
+        height: 60,
+        width: 60
     },
     thumbnailContainerStyle: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginLeft: 10,
+        // marginLeft: 10,
         marginRight: 10
     }
 };
