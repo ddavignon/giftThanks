@@ -188,7 +188,7 @@ const styles = {
     alignItems: 'center'
   },
   clothingItem: {
-    borderRadius: 5,
+    // borderRadius: 5,
     width: 300,
     height: 300
   }
