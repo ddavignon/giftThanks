@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import {
-    TouchableOpacity,
     Image,
     View,
     Text,
     TextInput,
-    PixelRatio,
     Switch
 } from 'react-native';
 import ContactsWrapper from 'react-native-contacts-wrapper';
 import Mailer from 'react-native-mail';
 import RNFetchBlob from 'react-native-fetch-blob';
-import Communications from 'react-native-communications';
 import { Actions } from 'react-native-router-flux';
 import { CardSection, Button, Input } from './common';
 
@@ -52,17 +49,6 @@ class SendItemForm extends Component {
             console.log("ERROR MESSAGE: ", error.message);
         });
     }
-
-    // onSendButtonPressed() {
-    //     const emailSignature = '\n\n\nThanks for using Gift Thanks!';
-    //     const { eventId } = this.props;
-    //     Communications.email(
-    //         [this.state.emailContactText],
-    //         null, null, 'thank you !',
-    //         `  ${this.state.emailBodyText} ${emailSignature}`
-    //     );
-    //     Actions.gifts({ eventId, type: 'back' });
-    // }
 
     onSendButtonPressed() {
         // console.log('email image path: ', tmpImagePath);
@@ -123,7 +109,7 @@ class SendItemForm extends Component {
         const { clothingItem, clothingItemContainer, textArea, textStyle } = styles;
 
         return (
-            <View style={{ flex: 1, paddingTop: 70, }}>
+            <View style={{ flex: 1, paddingTop: 65, }}>
                 <CardSection>
                     <View style={[clothingItem, clothingItemContainer]}>
                         { this.state.avatarSource === null
@@ -146,7 +132,7 @@ class SendItemForm extends Component {
                 <CardSection>
                 <Switch
                     onValueChange={(value) => this.setState({ addPhotoSwitch: value })}
-                    style={{ marginBottom: 10, marginTop: 10 }}
+                    style={{ marginLeft: 10, marginBottom: 10, marginTop: 10 }}
                     value={this.state.addPhotoSwitch}
                 />
                 <Text style={textStyle}> Add photo to email</Text>
@@ -188,18 +174,16 @@ const styles = {
       },
       clothingItemContainer: {
         flex: 1,
-        borderColor: '#9B9B9B',
-        borderWidth: 1 / PixelRatio.get(),
         justifyContent: 'space-between',
         alignItems: 'center'
       },
       clothingItem: {
-        borderRadius: 5,
-        width: 80,
-        height: 80
+
+        width: 100,
+        height: 100
     },
     textArea: {
-        paddingLeft: 5,
+        marginLeft: 10,
         height: 140,
         fontSize: 18
     }

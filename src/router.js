@@ -56,7 +56,7 @@ const RouterComponent = () => {
                         iconName="view-list"
                     >
                         <Scene
-                            rightTitle='+'
+                            rightTitle='Add'
                             onRight={() => Actions.addEventModal()}
                             key='events'
                             component={EventsMain}
@@ -110,7 +110,7 @@ const RouterComponent = () => {
 
 const styles = {
     textStyle: {
-        fontFamily: 'moreThanHuman',
+        fontFamily: 'CatCafe',
         fontSize: 27
     }
 };

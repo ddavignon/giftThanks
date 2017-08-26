@@ -7,7 +7,7 @@ import { Card, CardSection } from './common';
 
 class ItemDetail extends Component {
     //This is a destructured props object using album instead of props
-    renderForType(type) {
+    renderIconForType(type) {
         console.log('type: ', this.props);
         if (type === 'items') {
             return (
@@ -19,6 +19,18 @@ class ItemDetail extends Component {
                         justifyContent: 'space-between',
                         marginLeft: 10,
                         marginRight: 20 }}
+                />
+            );
+        }
+    }
+
+    renderImageForType(type, image, thumbnailStyle) {
+        console.log('type: ', this.props);
+        if (type === 'items') {
+            return (
+                <Image
+                    style={thumbnailStyle}
+                    source={{ uri: image }}
                 />
             );
         }
@@ -42,16 +54,13 @@ class ItemDetail extends Component {
                 <Card>
                     <CardSection>
                         <View style={thumbnailContainerStyle}>
-                            <Image
-                                style={thumbnailStyle}
-                                source={{ uri: image }}
-                            />
+                            {this.renderImageForType(type, image, thumbnailStyle)}
                         </View>
                         <View style={headerContentStyle}>
                             <Text style={headerTextStyle}>{title}</Text>
                         </View>
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
-                            {this.renderForType(type)}
+                            {this.renderIconForType(type)}
                             <Icon
                                 onPress={this.props.onDeletePress}
                                 name='not-interested'
@@ -75,8 +84,11 @@ const styles = {
         justifyContent: 'space-around',
     },
     headerTextStyle: {
-        fontFamily: 'birthOfAHero',
-        fontSize: 35
+        marginTop: 10,
+        marginBottom: 10,
+        fontFamily: 'mostlyMono',
+        fontSize: 28,
+        fontWeight: 'bold'
     },
     thumbnailStyle: {
         height: 50,

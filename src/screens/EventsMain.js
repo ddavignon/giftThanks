@@ -43,32 +43,8 @@ class EventsMain extends Component {
         // }
         // this.setState({ eventName: '' });
     //}
-        console.log('dbData: ', Object.keys(this.state.dbData).length);
-        if (Object.keys(this.state.dbData).length === 0) {
-            firebase.auth().onAuthStateChanged(user => {
-                if (user) {
-                    const { currentUser } = firebase.auth();
-
-                    firebase
-                        .database()
-                        .ref(`users/${currentUser.uid}/events/`)
-                        .on('value', snapshot => {
-                            this.setState({ dbData: snapshot.val() });
-                        });
-                } else {
-                    console.log('no user signed in');
-                }
-            });
-        }
-    }
-
-    componentDidMount() {
-        // Actions.refresh({
-        //     rightTitle: 'Add',
-        //     onRight: () => this.setState({ showCreateModal: true })
-        // });
-        // console.log('eventsMain props: ', this.props);
-        // if (Object.keys(this.state.dbData).length >= 0) {
+        // console.log('dbData: ', Object.keys(this.state.dbData).length);
+        // if (Object.keys(this.state.dbData).length === 0) {
         //     firebase.auth().onAuthStateChanged(user => {
         //         if (user) {
         //             const { currentUser } = firebase.auth();
@@ -84,6 +60,30 @@ class EventsMain extends Component {
         //         }
         //     });
         // }
+    }
+
+    componentDidMount() {
+        // Actions.refresh({
+        //     rightTitle: 'Add',
+        //     onRight: () => this.setState({ showCreateModal: true })
+        // });
+        console.log('eventsMain props: ', this.props);
+        if (Object.keys(this.state.dbData).length >= 0) {
+            firebase.auth().onAuthStateChanged(user => {
+                if (user) {
+                    const { currentUser } = firebase.auth();
+
+                    firebase
+                        .database()
+                        .ref(`users/${currentUser.uid}/events/`)
+                        .on('value', snapshot => {
+                            this.setState({ dbData: snapshot.val() });
+                        });
+                } else {
+                    console.log('no user signed in');
+                }
+            });
+        }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -143,20 +143,6 @@ class EventsMain extends Component {
         Actions.pop();
     }
 
-    // Create event
-    onCreateAccept() {
-        //console.log('Passed props: ', this.state.eventName, 'EventText: ', eventText);
-
-        // if (this.props.eventName !== '') {
-        //     const { currentUser } = firebase.auth();
-        //
-        //     firebase.database().ref(`users/${currentUser.uid}/events/`)
-        //         .push({ name: this.props.eventName })
-        //         .then(() => this.props.eventTextCompleted());
-        //     //ActionConst.REFRESH();
-        // }
-    }
-
     onDeleteDecline() {
         this.setState({ showDeleteModal: false });
         Actions.pop();
@@ -170,11 +156,6 @@ class EventsMain extends Component {
             deleteKeyId: keyId
         });
     }
-
-    // handleUpdateCancelPress() {
-    //     alert('Cancel update!!!!');
-    // }
-
 
     handleUpdateAcceptPress() {
         console.log('update data');
@@ -211,7 +192,6 @@ class EventsMain extends Component {
                         type='events'
                         title={event.name}/*item.state we are sending to itemDetail*/
                         _id={index}
-                        //image="http://placehold.it/30"
                         onEditPress={() => this.handleEditPress(index, event.name)}
                         onDeletePress={() => this.handleDeletePress(index)}
                         onItemPress={() => this.handleItemPress(index, event.name)}
@@ -262,7 +242,7 @@ const styles = {
         flex: 1,
         flexDirection: 'column',
         // backgroundColor: '#DCDDDE'
-        backgroundColor: '#c4683a'
+        backgroundColor: '#49D9E3'
     }
 };
 
