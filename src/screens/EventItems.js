@@ -23,13 +23,6 @@ class EventItems extends Component {
             rightTitle: 'Add',
             onRight: () => Actions.addItemScene({ eventId: this.props.eventId })
         });
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (this.props === nextProps) {
-            console.log('nothing changed!');
-            return;
-        }
         console.log(this.props.eventId);
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
@@ -46,6 +39,29 @@ class EventItems extends Component {
                 console.log('no user signed in');
             }
         });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props === nextProps) {
+            console.log('nothing changed!');
+            return;
+        }
+        // console.log(this.props.eventId);
+        // firebase.auth().onAuthStateChanged(user => {
+        //     if (user) {
+        //         console.log('get data');
+        //         const { currentUser } = firebase.auth();
+        //
+        //         firebase
+        //             .database()
+        //             .ref(`users/${currentUser.uid}/events/${this.props.eventId}/items/`)
+        //             .on('value', snapshot => {
+        //                 this.setState({ dbData: snapshot.val() });
+        //             });
+        //     } else {
+        //         console.log('no user signed in');
+        //     }
+        // });
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -140,8 +156,7 @@ const styles = {
         paddingTop: 60,
         flex: 1,
         flexDirection: 'column',
-        // backgroundColor: '#D7FAEE'
-        backgroundColor: '#2dad66'
+        backgroundColor: '#82EDD2'
     }
 };
 export default EventItems;

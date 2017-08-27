@@ -91,6 +91,13 @@
       <string>janken.ttf</string>
       <string>MoreThanHuman.ttf</string>
       <string>moreThanHuman.ttf</string>
+      <string>mostlyMono.ttf</string>
+      <string>steinzeit.ttf</string>
+      <string>CabinSketch-Regular.ttf</string>
+      <string>CatCafe.ttf</string>
+      <string>natlog.ttf</string>
+      <string>Cabin Sketch.ttf</string>
+      <string>cabinSketch.ttf</string>
     </array>
     <key>UIRequiredDeviceCapabilities</key>
     <array>

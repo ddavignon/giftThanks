@@ -112,7 +112,8 @@ class EditItemForm extends Component {
                                 avatarSource: null,
                                 dbData: ''
                             });
-                            const deletePhotoRef = firebase.storage().refFromURL(this.props.eventItem.URL);
+                            const deletePhotoRef = firebase.storage()
+                                .refFromURL(this.props.eventItem.URL);
                             deletePhotoRef.delete().then(() => {
                                 Actions.gifts({ eventId, type: 'back' });
                             });
@@ -172,14 +173,6 @@ class EditItemForm extends Component {
                         onChangeText={isFromText => this.setState({ isFromText })}
                     />
                 </CardSection>
-                {/*<CardSection>
-                    <Input
-                        placeholder="Game"
-                        label="Description"
-                        value={this.state.description}
-                        onChangeText={description => this.setState({ description })}
-                    />
-                </CardSection>*/}
                 <CardSection>
                     <Button onPress={this.handleSendItemForm.bind(this)}>
                         Update Item
@@ -203,7 +196,7 @@ const styles = {
     alignItems: 'center'
   },
   clothingItem: {
-    borderRadius: 5,
+    // borderRadius: 5,
     width: 300,
     height: 300
   },

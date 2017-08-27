@@ -7,7 +7,7 @@ import { Card, CardSection } from './common';
 
 class ItemDetail extends Component {
     //This is a destructured props object using album instead of props
-    renderForType(type) {
+    renderIconForType(type) {
         console.log('type: ', this.props);
         if (type === 'items') {
             return (
@@ -24,12 +24,24 @@ class ItemDetail extends Component {
         }
     }
 
+    renderImageForType(type, image, thumbnailStyle) {
+        console.log('type: ', this.props);
+        if (type === 'items') {
+            return (
+                <Image
+                    style={thumbnailStyle}
+                    source={{ uri: image }}
+                />
+            );
+        }
+    }
+
     render() {
         const {
             thumbnailStyle,
             headerContentStyle,
             thumbnailContainerStyle,
-            headerTextStyle,
+            textStyle,
         } = styles;
 
         const { image, title, type } = this.props;
@@ -42,16 +54,13 @@ class ItemDetail extends Component {
                 <Card>
                     <CardSection>
                         <View style={thumbnailContainerStyle}>
-                            <Image
-                                style={thumbnailStyle}
-                                source={{ uri: image }}
-                            />
+                            {this.renderImageForType(type, image, thumbnailStyle)}
                         </View>
                         <View style={headerContentStyle}>
-                            <Text style={headerTextStyle}>{title}</Text>
+                            <Text style={textStyle}>{title}</Text>
                         </View>
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
-                            {this.renderForType(type)}
+                            {this.renderIconForType(type)}
                             <Icon
                                 onPress={this.props.onDeletePress}
                                 name='not-interested'
@@ -74,18 +83,22 @@ const styles = {
         flexDirection: 'column',
         justifyContent: 'space-around',
     },
-    headerTextStyle: {
-        fontFamily: 'birthOfAHero',
-        fontSize: 35
+    textStyle: {
+        marginTop: 15,
+        marginBottom: 15,
+        marginLeft: 5,
+        fontFamily: 'mostlyMono',
+        fontSize: 28,
+        fontWeight: 'bold'
     },
     thumbnailStyle: {
-        height: 50,
-        width: 50
+        height: 60,
+        width: 60
     },
     thumbnailContainerStyle: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginLeft: 10,
+        // marginLeft: 10,
         marginRight: 10
     }
 };

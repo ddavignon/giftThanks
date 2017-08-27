@@ -37,7 +37,7 @@ const navButton = ({ selected, title, iconName }) => {
 // };
 
 const RouterComponent = () => {
-
+    const { textStyle } = styles;
     return (
 
         <Router>
@@ -56,12 +56,12 @@ const RouterComponent = () => {
                         iconName="view-list"
                     >
                         <Scene
-                            rightTitle='+'
+                            rightTitle='Add'
                             onRight={() => Actions.addEventModal()}
                             key='events'
                             component={EventsMain}
                             title='Events'
-                            titleStyle={styles.textStyle}
+                            titleStyle={textStyle}
                             type='reset'
                             initial
                         />
@@ -71,12 +71,27 @@ const RouterComponent = () => {
                             key='gifts'
                             component={EventItems}
                             title='Gifts'
-                            titleStyle={styles.textStyle}
+                            titleStyle={textStyle}
 
                         />
-                        <Scene key='addItemScene' title='Add a gift' component={AddItemMain} />
-                        <Scene key='editItemScene' title='Edit Item' component={EditItemMain} />
-                        <Scene key='sendItemScene' title='Send Thanks!' component={SendItemMain} />
+                        <Scene
+                            key='addItemScene'
+                            title='Add a gift'
+                            titleStyle={textStyle}
+                            component={AddItemMain}
+                        />
+                        <Scene
+                            key='editItemScene'
+                            title='Edit Item'
+                            titleStyle={textStyle}
+                            component={EditItemMain}
+                        />
+                        <Scene
+                            key='sendItemScene'
+                            title='Send Thanks!'
+                            titleStyle={textStyle}
+                            component={SendItemMain}
+                        />
                     </Scene>
                 {/* Tab and it's scenes*/}
                     <Scene
@@ -89,7 +104,7 @@ const RouterComponent = () => {
                             key='tokens'
                             component={TokensMain}
                             title='Tokens'
-                            titleStyle={styles.textStyle}
+                            titleStyle={textStyle}
                             initial
                         />
                     </Scene>
@@ -110,7 +125,7 @@ const RouterComponent = () => {
 
 const styles = {
     textStyle: {
-        fontFamily: 'moreThanHuman',
+        fontFamily: 'CatCafe',
         fontSize: 27
     }
 };
