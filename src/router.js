@@ -28,14 +28,6 @@ const navButton = ({ selected, title, iconName }) => {
     );
 };
 
-// const reducerCreate = params=>{
-//     const defaultReducer = Reducer(params);
-//     return (state, action)=>{
-//         console.log("ACTION:", action);
-//         return defaultReducer(state, action);
-//     }
-// };
-
 const RouterComponent = () => {
     const { textStyle } = styles;
     return (
@@ -56,7 +48,7 @@ const RouterComponent = () => {
                         iconName="view-list"
                     >
                         <Scene
-                            rightTitle='Add'
+                            rightTitle='Add Event'
                             onRight={() => Actions.addEventModal()}
                             key='events'
                             component={EventsMain}
