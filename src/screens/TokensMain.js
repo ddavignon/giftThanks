@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View } from 'react-native';
-
+import { Image } from 'react-native';
 
 class TokensMain extends Component {
     render() {
         return (
-            <View style={{ paddingTop: 70, flex: 1, flexDirection: 'column' }}>
-                <ScrollView>
-                    <View style={{ marginBottom: 65 }}>
-                        <Text>
-                            Tokens Coming Soon!
-                            </Text>
-                    </View>
-                </ScrollView>
-            </View>
+          <Image
+            source={require('../../assets/images/gifThanks_tokenscreen.png')}
+            style={styles.imageContainer}
+          />
         );
     }
 }
+
+const styles = {
+  imageContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        width: null,
+        height: null,
+        backgroundColor: 'rgba(0,0,0,0)',
+  }
+};
 
 export default TokensMain;
