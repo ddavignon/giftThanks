@@ -126,6 +126,9 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-google-sign-in')
+    compile project(':react-native-firebase')
+    compile project(':react-native-facebook-login')
     compile project(':react-native-mail')
     compile project(':react-native-contacts-wrapper')
     compile project(':react-native-image-resizer')

@@ -3,6 +3,10 @@ package com.gifthanks;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactlibrary.googlesignin.RNGoogleSignInPackage;
+import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
+import com.magus.fblogin.FacebookLoginPackage;
 import com.chirag.RNMail.RNMail;
 import com.lynxit.contactswrapper.ContactsWrapperPackage;
 import fr.bamlab.rnimageresizer.ImageResizerPackage;
@@ -30,6 +34,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNGoogleSignInPackage(),
+            new RNFirebasePackage(),
+            new RNFirebaseAnalyticsPackage(),
+            new FacebookLoginPackage(),
             new RNMail(),
             new ContactsWrapperPackage(),
             new ImageResizerPackage(),

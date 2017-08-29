@@ -20,13 +20,13 @@ class App extends Component {
             messagingSenderId: '1097148081266'
         });
 
-        firebase.auth().onAuthStateChanged(user => {
-            if (!user) {
-                firebase.auth().signInAnonymously();
-            } else {
-                console.log('user', user);
-            }
-        });
+        // firebase.auth().onAuthStateChanged(user => {
+        //     if (!user) {
+        //         firebase.auth().signInAnonymously();
+        //     } else {
+        //         console.log('user', user);
+        //     }
+        // });
     }
 
     render() {
