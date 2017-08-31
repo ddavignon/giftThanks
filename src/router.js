@@ -2,8 +2,9 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { Scene, Router, Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import EventsMain from './screens/EventsMain';
 import AddEventModal from './components/AddEventModal';
+import LoginForm from './components/LoginForm';
+import EventsMain from './screens/EventsMain';
 import AddItemMain from './screens/AddItemMain';
 import SendItemMain from './screens/SendItemMain';
 import EventItems from './screens/EventItems';
@@ -35,6 +36,14 @@ const RouterComponent = () => {
         <Router>
             <Scene key="root" sceneStyle={{ paddingTop: 25 }}>
                 {/* Tab Container */}
+                <Scene key="auth" >
+                    <Scene
+                    key="login"
+                    component={LoginForm}
+                    title='Login'
+                    titleStyle={textStyle}
+                    />
+                </Scene>
                 <Scene
                   key="tabbar"
                   tabs
@@ -102,7 +111,6 @@ const RouterComponent = () => {
                     </Scene>
                 </Scene>
             </Scene>
-
             <Scene
                 key='addEventModal'
                 direction='vertical'
