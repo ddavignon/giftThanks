@@ -106,7 +106,12 @@ class EventItems extends Component {
 
     handleItemPress(event, index) {
         console.log('I got touched', index);
-        Actions.sendItemScene({ event, eventName: this.props.eventName, eventId: this.props.eventId, sendKeyId: index });
+        Actions.sendItemScene({
+            event,
+            eventName: this.props.eventName,
+            eventId: this.props.eventId,
+            sendKeyId: index
+        });
     }
 
 

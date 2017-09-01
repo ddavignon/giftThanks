@@ -6,7 +6,11 @@ class EditItemMain extends Component {
     render() {
         return (
             <ScrollView keyboardShouldPersistTaps="always">
-                <EditItemForm eventItem={this.props.event} eventId={this.props.eventId} editKeyId={this.props.editKeyId} />
+                <EditItemForm
+                    eventItem={this.props.event}
+                    eventId={this.props.eventId}
+                    editKeyId={this.props.editKeyId}
+                />
             </ScrollView>
         );
     }

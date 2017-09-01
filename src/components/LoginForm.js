@@ -10,8 +10,8 @@ import { Text,
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
-import { Card, CardSection, Input, Button, Spinner } from './common';
 import FireAuth from 'react-native-firebase';
+import { Card, CardSection, Input, Button, Spinner } from './common';
 
 
 class LoginForm extends Component {
