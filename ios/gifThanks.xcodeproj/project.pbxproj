@@ -39,7 +39,6 @@
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* gifThanksTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* gifThanksTests.m */; };
 		357DE4869E4A45D8B9989F1A /* libRCTImageResizer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32C39365086845DB9327F1DA /* libRCTImageResizer.a */; };
-		3AA4AF50A40E9DC5CB220747 /* libPods-gifThanks.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3D0B58D08B4D67E795EF919 /* libPods-gifThanks.a */; };
 		3B6C86FEADE24F56B74B4289 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3BB0618EB50F483EB94904DB /* MaterialCommunityIcons.ttf */; };
 		4EEC6D9106AD4C2884B0E776 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D685E85F823240408413B8B5 /* Octicons.ttf */; };
 		5C11E4E57AC44C1198E91A46 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51B8A4C0776D4CCEA6AE746A /* libRNVectorIcons.a */; };
@@ -362,21 +361,18 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		84CCFB0767F045C68B042E6A /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
-		883DA5520D9AFF49B2730B4C /* Pods-gifThanks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gifThanks.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gifThanks/Pods-gifThanks.debug.xcconfig"; sourceTree = "<group>"; };
 		A3F672D78482454F8F7EB173 /* ContactsWrapper.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ContactsWrapper.xcodeproj; path = "../node_modules/react-native-contacts-wrapper/ios/ContactsWrapper.xcodeproj"; sourceTree = "<group>"; };
 		A4B6F57958B142B3A28D08ED /* libRNMail.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNMail.a; sourceTree = "<group>"; };
 		A5DF7FC8C1F64032A8B5200C /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		A6C8385BE90E41D29B7922DA /* RCTFBLogin.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTFBLogin.xcodeproj; path = "../node_modules/react-native-facebook-login/RCTFBLogin.xcodeproj"; sourceTree = "<group>"; };
 		B2731F42DDD341F08CB0873B /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
 		B69A342524F04F9990184E16 /* CatCafe.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = CatCafe.ttf; path = ../assets/fonts/CatCafe.ttf; sourceTree = "<group>"; };
-		BFD63D91F3FB35C1EDDAC692 /* Pods-gifThanks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gifThanks.release.xcconfig"; path = "Pods/Target Support Files/Pods-gifThanks/Pods-gifThanks.release.xcconfig"; sourceTree = "<group>"; };
 		CBAC1B6AAA6E4F36A8EF6340 /* libRCTContactsWrapper.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTContactsWrapper.a; sourceTree = "<group>"; };
 		D13A8C51194C4EA0BDFF5165 /* RNMail.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNMail.xcodeproj; path = "../node_modules/react-native-mail/RNMail.xcodeproj"; sourceTree = "<group>"; };
 		D685E85F823240408413B8B5 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		D789F01826244C8883E72F92 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		DA64E2861F5615D800EC2ED8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F28AFF41AF944995B4D3DA94 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
-		F3D0B58D08B4D67E795EF919 /* libPods-gifThanks.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gifThanks.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F62731DB27BA4CE985CEC9EF /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -413,7 +409,6 @@
 				A5452B99EC2B4E32AA4D43B3 /* libRNMail.a in Frameworks */,
 				017FA5382B014B2A8EA2B9D3 /* libRCTFBLogin.a in Frameworks */,
 				A7A5E256AAB84882AD179622 /* libRNFirebase.a in Frameworks */,
-				3AA4AF50A40E9DC5CB220747 /* libPods-gifThanks.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,15 +552,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		650B33671C7FCC53BB582913 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				883DA5520D9AFF49B2730B4C /* Pods-gifThanks.debug.xcconfig */,
-				BFD63D91F3FB35C1EDDAC692 /* Pods-gifThanks.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		65A9CB18E00B47FD8D908780 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -638,7 +624,6 @@
 				00E356EF1AD99517003FC87E /* gifThanksTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				65A9CB18E00B47FD8D908780 /* Resources */,
-				650B33671C7FCC53BB582913 /* Pods */,
 				BB9CD39190DF4A822F804F67 /* Frameworks */,
 			);
 			indentWidth = 2;
@@ -659,7 +644,6 @@
 		BB9CD39190DF4A822F804F67 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F3D0B58D08B4D67E795EF919 /* libPods-gifThanks.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -830,7 +814,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = GW6WC4XYYL;
+						DevelopmentTeam = LGMMBQ8ZS4;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1465,13 +1449,13 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 883DA5520D9AFF49B2730B4C /* Pods-gifThanks.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = GW6WC4XYYL;
+				DEVELOPMENT_TEAM = LGMMBQ8ZS4;
+				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
@@ -1501,12 +1485,12 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BFD63D91F3FB35C1EDDAC692 /* Pods-gifThanks.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GW6WC4XYYL;
+				DEVELOPMENT_TEAM = LGMMBQ8ZS4;
+				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
