@@ -23,7 +23,7 @@ class LoginForm extends Component {
     }
     componentDidMount() {
       GoogleSignin.configure({
-        iosClientId: '1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs.apps.googleusercontent.com', // only for iOS
+        iosClientId: '1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs.apps.googleusercontent.com',
       });
     }
 
@@ -50,62 +50,50 @@ class LoginForm extends Component {
         console.log('USER: ', user);
         this.setState({ googleUser: user });
       }).done();
-      // GoogleSignin.getAccessToken()
-      // .then((token) => {
-      //   console.log(token);
-      // })
-      // .catch((err) => {
-      //   console.log(err);
-      // })
-      // .done();
+      
     }
 
     render() {
         return (
             <ScrollView style={styles.mainScrollView} >
                 <View style={{ paddingTop: 65 }}>
-                <Text style={styles.errorTextStyle} >
-                    {this.props.error}
-                </Text>
+                <Card>
+                    <CardSection>
+                        <Input
+                            label="Email"
+                            placeholder="email@email.com"
+                            onChangeText={email => this.setState({ email })}
+                            value={this.state.email}
+                        />
+                    </CardSection>
+                </Card>
+                <Card>
+                    <CardSection>
+                        <Input
+                            label="Password"
+                            placeholder="password"
+                            onChangeText={password => this.setState({ password })}
+                            value={this.state.password}
+                        />
+                    </CardSection>
+                </Card>
                 <Card>
                     <View>
+                      <Button onPress={this.onSignInPress.bind(this)}>
+                          Sign In
+                      </Button>
+                      <Button onPress={this.onSignUpPress.bind(this)}>
+                          Sign Up
+                      </Button>
+                    </View>
+                </Card>
+                <Card>
                         <GoogleSigninButton
-                          style={{ flex: 1,
-                            alignSelf: 'stretch',
-                            marginLeft: 10,
-                            marginRight: 10,
-                            height: 48 }}
-                          size={GoogleSigninButton.Size.Icon}
+                          style={styles.googleButtonStyle}
+                          size={GoogleSigninButton.Size.Standard}
                           color={GoogleSigninButton.Color.Dark}
                           onPress={this._signIn.bind(this)}
                         />
-                    </View>
-                </Card>
-                <CardSection>
-                    <Input
-                        label="Email"
-                        placeholder="email@email.com"
-                        onChangeText={email => this.setState({ email })}
-                        value={this.state.email}
-                    />
-                </CardSection>
-                <CardSection>
-                    <Input
-                        label="Password"
-                        placeholder="password"
-                        onChangeText={password => this.setState({ password })}
-                        value={this.state.password}
-                    />
-                </CardSection>
-                <Card>
-                    <View>
-                        <Button onPress={this.onSignInPress.bind(this)}>
-                            Sign In
-                        </Button>
-                        <Button onPress={this.onSignUpPress.bind(this)}>
-                            Sign Up
-                        </Button>
-                    </View>
                 </Card>
                 </View>
             </ScrollView>
@@ -147,6 +135,21 @@ const styles = {
         height: null,
         backgroundColor: 'rgba(0,0,0,0)',
     },
+    googleButtonStyle: {
+        // flex: 1,
+        // alignSelf: 'stretch',
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 10,
+        marginBottom: 10,
+        height: 48,
+        width: 180,
+        shadowColor: '#000000',
+        shadowOffset: {
+            width: 0,
+            height: 3
+        }
+    }
 };
 
 // const mapStateToProps = ({ auth }) => {
