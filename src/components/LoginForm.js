@@ -11,13 +11,20 @@ import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 import FireAuth from 'react-native-firebase';
+import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 
 
 class LoginForm extends Component {
     state = {
         email: '',
-        password: ''
+        password: '',
+        googleUser: {}
+    }
+    componentDidMount() {
+      GoogleSignin.configure({
+        iosClientId: '1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs.apps.googleusercontent.com', // only for iOS
+      });
     }
 
     onSignInPress() {
@@ -36,6 +43,23 @@ class LoginForm extends Component {
             .catch(err => alert(err));
     }
 
+    _signIn() {
+      GoogleSignin.currentUserAsync({
+        iosClientId: '1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs.apps.googleusercontent.com',
+      }).then((user) => {
+        console.log('USER: ', user);
+        this.setState({ googleUser: user });
+      }).done();
+      // GoogleSignin.getAccessToken()
+      // .then((token) => {
+      //   console.log(token);
+      // })
+      // .catch((err) => {
+      //   console.log(err);
+      // })
+      // .done();
+    }
+
     render() {
         return (
             <ScrollView style={styles.mainScrollView} >
@@ -45,9 +69,16 @@ class LoginForm extends Component {
                 </Text>
                 <Card>
                     <View>
-                        <Button onPress={() => {}}>
-                            Google
-                        </Button>
+                        <GoogleSigninButton
+                          style={{ flex: 1,
+                            alignSelf: 'stretch',
+                            marginLeft: 10,
+                            marginRight: 10,
+                            height: 48 }}
+                          size={GoogleSigninButton.Size.Icon}
+                          color={GoogleSigninButton.Color.Dark}
+                          onPress={this._signIn.bind(this)}
+                        />
                     </View>
                 </Card>
                 <CardSection>
