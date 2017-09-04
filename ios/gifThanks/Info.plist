@@ -25,16 +25,18 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.googleusercontent.apps.1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.893015399163-8ktpga7b0reckrt9l54elb26076j0qfs</string>
+				<string>com.googleusercontent.apps.1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSApplicationCategoryType</key>
-	<string/>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -53,9 +55,9 @@
 	<key>NSCameraUsageDescription</key>
 	<string>To use camera</string>
 	<key>NSHumanReadableCopyright</key>
-	<string/>
+	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>To use camera microphone</string>
 	<key>NSPhotoLibraryUsageDescription</key>

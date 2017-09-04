@@ -2,27 +2,39 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>893015399163-8ktpga7b0reckrt9l54elb26076j0qfs.apps.googleusercontent.com</string>
+	<string>1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.893015399163-8ktpga7b0reckrt9l54elb26076j0qfs</string>
+	<string>com.googleusercontent.apps.1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAPyJ11wGeK3otm6BNZ8qyCD50cqThfiok</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1097148081266</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.google.samples.quickstart.SignInExample</string>
+	<string>gifthanks</string>
 	<key>PROJECT_ID</key>
-	<string>giftthanks-178321</string>
+	<string>giftthanks-b57ab</string>
+	<key>STORAGE_BUCKET</key>
+	<string>giftthanks-b57ab.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
+	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
 	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
 	<false/>
 	<key>IS_GCM_ENABLED</key>
-	<false/>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:893015399163:ios:6fbd6c0efa1b97a8</string>
+	<string>1:1097148081266:ios:a494d1adba713cd2</string>
+	<key>DATABASE_URL</key>
+	<string>https://giftthanks-b57ab.firebaseio.com</string>
 </dict>
 </plist>
