@@ -26,6 +26,13 @@ class LoginForm extends Component {
       GoogleSignin.configure({
         iosClientId: '1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs.apps.googleusercontent.com',
       });
+      GoogleSignin.currentUserAsync({
+        iosClientId: '1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs.apps.googleusercontent.com',
+      }).then((user) => {
+        console.log('USER', user);
+        this.setState({ googleUser: user });
+        Actions.tabbar();
+      }).done();
     }
 
     onSignInPress() {
@@ -45,55 +52,38 @@ class LoginForm extends Component {
     }
 
     _signIn() {
-      GoogleSignin.currentUserAsync({
-          iosClientId: '1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs.apps.googleusercontent.com',
-      }).then((user) => {
-          console.log('USER: ', user);
-          this.setState({ googleUser: user });
-          console.log('ID token: ', user.idToken);
-          const credential = firebase.auth.GoogleAuthProvider.credential(user.idToken);
-          console.log('Credential: ', credential);
-          console.log(firebase.auth().signInWithCredential(credential));
-          firebase.auth().signInWithCredential(credential)
-          .then(() => Actions.tabbar())
-          .catch((error) => {
-          // Handle Errors here.
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          // The email of the user's account used.
-          const email = error.email;
-          // The firebase.auth.AuthCredential type that was used.
-          const errorCredential = error.credential;
-          if (errorCode === 'auth/account-exists-with-different-credential') {
-              alert('Email already associated with another account.');
-            // Handle account linking here, if using.
-          } else {
-              console.error(error);
-          }
-       });
-        // const credential = {
-        //   provider: 'google.com',
-        //   token: user.accessToken,
-        //   secret: user.idToken,
-        // };
-        // firebase.auth().signInWithCredential(credential)
-        //   .then((currentUser) => {
-        //     console.log('User successfully signed in', currentUser);
-        //   })
-        //   .catch((err) => {
-        //     console.error('User signin error', err);
-        //   });
-      }).done();
-      // provider.addScope('profile');
-      // provider.addScope('email');
-      // firebase.auth().signInWithPopup(provider).then((result) => {
-      //  // This gives you a Google Access Token.
-      //  const token = result.credential.accessToken;
-      //  // The signed-in user info.
-      //  const user = result.user;
-      //  console.log('firebase accesstoken: ', token);
-      //  console.log('firebase user info: ', user);
-      // });
+      GoogleSignin.signIn({
+        iosClientId: '1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs.apps.googleusercontent.com',
+      })
+      .then((user) => {
+        console.log(user);
+        this.setState({ googleUser: user });
+        console.log('ID token: ', this.state.googleUser.idToken);
+        const credential = firebase.auth.GoogleAuthProvider.credential(this.state.googleUser.idToken);
+        console.log('Credential: ', credential);
+        console.log(firebase.auth().signInWithCredential(credential));
+        firebase.auth().signInWithCredential(credential)
+        .then(() => Actions.tabbar())
+        .catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            const errorCredential = error.credential;
+            if (errorCode === 'auth/account-exists-with-different-credential') {
+                alert('Email already associated with another account.');
+              // Handle account linking here, if using.
+            } else {
+                console.error(error);
+            }
+         });
+      })
+      .catch((err) => {
+        console.log('WRONG SIGNIN', err);
+      })
+      .done();
     }
 
     render() {
