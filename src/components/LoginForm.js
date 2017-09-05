@@ -68,6 +68,7 @@ class LoginForm extends Component {
                 });
           } else {
             console.log('User already signed-in Firebase.');
+            Actions.tabbar();
           }
         });
       }
@@ -77,7 +78,7 @@ class LoginForm extends Component {
           const providerData = firebaseUser.providerData;
           for (let i = 0; i < providerData.length; i++) {
             if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
-                providerData[i].uid === googleUser.getBasicProfile().getId()) {
+                providerData[i].uid === googleUser.id) {
               // We don't need to reauth the Firebase connection.
               return true;
             }
