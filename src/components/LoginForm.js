@@ -31,7 +31,7 @@ class LoginForm extends Component {
         const { email, password } = this.state;
 
         firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(user => Actions.tabbar())
+            .then(user => Actions.tabbar({ type: 'replace' }))
             .catch(err => alert(err));
     }
 
@@ -39,7 +39,7 @@ class LoginForm extends Component {
         const { email, password } = this.state;
 
         firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then(user => Actions.tabbar())
+            .then(user => Actions.tabbar({ type: 'replace' }))
             .catch(err => alert(err));
     }
 
@@ -55,7 +55,7 @@ class LoginForm extends Component {
                 googleUser.idToken);
             // Sign in with credential from the Google user.
             firebase.auth().signInWithCredential(credential)
-                .then(user => Actions.tabbar())
+                .then(user => Actions.tabbar({ type: 'replace' }))
                 .catch(error => {
                     // Handle Errors here.
                     const errorCode = error.code;
@@ -68,7 +68,7 @@ class LoginForm extends Component {
                 });
           } else {
             console.log('User already signed-in Firebase.');
-            Actions.tabbar();
+            Actions.tabbar({ type: 'replace' });
           }
         });
       }

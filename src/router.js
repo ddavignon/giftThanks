@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { Scene, Router, Actions } from 'react-native-router-flux';
+import firebase from 'firebase';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import AddEventModal from './components/AddEventModal';
 import LoginForm from './components/LoginForm';
@@ -28,6 +29,12 @@ const navButton = ({ selected, title, iconName }) => {
 
     );
 };
+
+function signOut() {
+    console.log('pressed the sign out button');   
+    firebase.auth().signOut();
+    Actions.auth({ type: 'reset' });
+}
 
 const RouterComponent = () => {
     const { textStyle } = styles;
@@ -59,6 +66,8 @@ const RouterComponent = () => {
                         <Scene
                             rightTitle='Add Event'
                             onRight={() => Actions.addEventModal()}
+                            leftTitle='Sign Out'
+                            onLeft={() => signOut()}
                             key='events'
                             component={EventsMain}
                             title='Events'
