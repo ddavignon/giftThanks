@@ -22,17 +22,25 @@ class LoginForm extends Component {
         password: '',
         googleUser: {}
     }
+
+    // componentWillMount() {
+    //     if (this.state.googleUser) {
+    //         Actions.tabbar({ type: 'replace' });
+    //     }
+    // }
+
     componentDidMount() {
-    //   GoogleSignin.configure({
-    //     iosClientId: '1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs.apps.googleusercontent.com',
-    //   });
-      GoogleSignin.currentUserAsync({
-        iosClientId: '1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs.apps.googleusercontent.com',
-      }).then((user) => {
-        console.log('USER', user);
-        this.setState({ googleUser: user });
-        Actions.tabbar();
-      }).done();
+        GoogleSignin.configure({
+            iosClientId: '1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs.apps.googleusercontent.com',
+        }).then(() => {
+            GoogleSignin.currentUserAsync({
+              iosClientId: '1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs.apps.googleusercontent.com',
+            }).then((user) => {
+              console.log('compdidmnt USER:', user);
+              this.setState({ googleUser: user });
+              Actions.tabbar({ type: 'replace' });
+            }).done();
+        });
     }
 
     onSignInPress() {
@@ -52,6 +60,7 @@ class LoginForm extends Component {
     }
 
     _signIn() {
+        console.log('googleUser value: ', this.state.googleUser);
       GoogleSignin.signIn({
         iosClientId: '1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs.apps.googleusercontent.com',
       })
@@ -95,7 +104,7 @@ class LoginForm extends Component {
                       source={require('../../assets/images/gifThanks_login.png')}
                       style={styles.imageContainer}
                     />
-                    <CardSection>
+
                         <Input
                             label="Email"
                             placeholder="email@email.com"
@@ -103,10 +112,6 @@ class LoginForm extends Component {
                             value={this.state.email}
                             style={styles.inputStyle}
                         />
-                    </CardSection>
-                </Card>
-                <Card>
-                    <CardSection>
                         <Input
                             label="Password"
                             placeholder="password"
@@ -114,9 +119,6 @@ class LoginForm extends Component {
                             value={this.state.password}
                             style={styles.inputStyle}
                         />
-                    </CardSection>
-                </Card>
-                <Card>
                     <View>
                       <Button onPress={this.onSignInPress.bind(this)}>
                           Sign In
@@ -152,8 +154,8 @@ const styles = {
     inputStyle: {
         flex: 1,
         backgroundColor: 'rgba(255,255,255, 0.2)',
-        paddingRight: 70,
-        paddingLeft: 30,
+        paddingTop: 20,
+        paddingBottom: 20,
     },
 
     blankTextStyle: {
@@ -181,7 +183,7 @@ const styles = {
         marginLeft: 10,
         marginRight: 10,
         marginTop: 10,
-        marginBottom: 60,
+        marginBottom: 80,
         height: 48,
         width: 180,
         shadowColor: '#000000',
