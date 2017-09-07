@@ -6,6 +6,7 @@ import { Text,
     Picker,
     Alert,
     Image,
+    AsyncStorage
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
@@ -32,14 +33,6 @@ class LoginForm extends Component {
     componentDidMount() {
         GoogleSignin.configure({
             iosClientId: '1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs.apps.googleusercontent.com',
-        }).then(() => {
-            GoogleSignin.currentUserAsync({
-              iosClientId: '1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs.apps.googleusercontent.com',
-            }).then((user) => {
-              console.log('compdidmnt USER:', user);
-              this.setState({ googleUser: user });
-              Actions.tabbar({ type: 'replace' });
-            }).done();
         });
     }
 
@@ -72,7 +65,12 @@ class LoginForm extends Component {
         console.log('Credential: ', credential);
         console.log(firebase.auth().signInWithCredential(credential));
         firebase.auth().signInWithCredential(credential)
-        .then(() => Actions.tabbar())
+        .then((firebaseUser) => {
+          this.saveToken(firebaseUser.refreshToken);
+          console.log('storage Token: ', firebaseUser.refreshToken);
+          Actions.tabbar();
+          console.log('firebase userdata:', firebaseUser);
+        })
         .catch((error) => {
             // Handle Errors here.
             const errorCode = error.code;
@@ -93,6 +91,16 @@ class LoginForm extends Component {
         console.log('WRONG SIGNIN', err);
       })
       .done();
+    }
+
+    async saveToken(token) {
+      try {
+        console.log('saveToken data: ', token);
+        console.log(AsyncStorage);
+        await AsyncStorage.setItem('@token:key', 'firebase_key');
+      } catch (error) {
+        console.log('Error saving firebasetoken to storage.', error);
+      }
     }
 
     render() {
