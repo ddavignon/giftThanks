@@ -23,9 +23,9 @@ class LoginForm extends Component {
         googleUser: {}
     }
     componentDidMount() {
-      GoogleSignin.configure({
-        iosClientId: '1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs.apps.googleusercontent.com',
-      });
+    //   GoogleSignin.configure({
+    //     iosClientId: '1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs.apps.googleusercontent.com',
+    //   });
       GoogleSignin.currentUserAsync({
         iosClientId: '1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs.apps.googleusercontent.com',
       }).then((user) => {
@@ -89,14 +89,19 @@ class LoginForm extends Component {
     render() {
         return (
             <ScrollView style={styles.mainScrollView} >
-                <View style={{ paddingTop: 65 }}>
+                <View style={{ paddingTop: 45, backgroundColor: '#D17F36'}}>
                 <Card>
+                    <Image
+                      source={require('../../assets/images/gifThanks_login.png')}
+                      style={styles.imageContainer}
+                    />
                     <CardSection>
                         <Input
                             label="Email"
                             placeholder="email@email.com"
                             onChangeText={email => this.setState({ email })}
                             value={this.state.email}
+                            style={styles.inputStyle}
                         />
                     </CardSection>
                 </Card>
@@ -107,6 +112,7 @@ class LoginForm extends Component {
                             placeholder="password"
                             onChangeText={password => this.setState({ password })}
                             value={this.state.password}
+                            style={styles.inputStyle}
                         />
                     </CardSection>
                 </Card>
@@ -119,8 +125,7 @@ class LoginForm extends Component {
                           Sign Up
                       </Button>
                     </View>
-                </Card>
-                <Card>
+
                         <GoogleSigninButton
                           style={styles.googleButtonStyle}
                           size={GoogleSigninButton.Size.Standard}
@@ -144,9 +149,11 @@ const styles = {
         borderRadius: 5,
         marginBottom: 5,
     },
-    pickerTextStyle: {
-        fontSize: 18,
+    inputStyle: {
+        flex: 1,
+        backgroundColor: 'rgba(255,255,255, 0.2)',
         paddingRight: 70,
+        paddingLeft: 30,
     },
 
     blankTextStyle: {
@@ -162,10 +169,10 @@ const styles = {
         backgroundColor: 'rgba(0,0,0,0)',
     },
     imageContainer: {
-        flex: 1,
+        alignSelf: 'center',
         justifyContent: 'center',
-        width: null,
-        height: null,
+        width: 300,
+        height: 300,
         backgroundColor: 'rgba(0,0,0,0)',
     },
     googleButtonStyle: {
@@ -174,7 +181,7 @@ const styles = {
         marginLeft: 10,
         marginRight: 10,
         marginTop: 10,
-        marginBottom: 10,
+        marginBottom: 60,
         height: 48,
         width: 180,
         shadowColor: '#000000',
@@ -182,7 +189,7 @@ const styles = {
             width: 0,
             height: 3
         }
-    }
+    },
 };
 
 // const mapStateToProps = ({ auth }) => {
