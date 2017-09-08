@@ -40,7 +40,7 @@ class LoginForm extends Component {
         const { email, password } = this.state;
 
         firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(user => Actions.tabbar())
+            .then(user => Actions.tabbar({ type: 'replace' }))
             .catch(err => alert(err));
     }
 
@@ -48,7 +48,7 @@ class LoginForm extends Component {
         const { email, password } = this.state;
 
         firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then(user => Actions.tabbar())
+            .then(user => Actions.tabbar({ type: 'replace' }))
             .catch(err => alert(err));
     }
 
@@ -68,7 +68,7 @@ class LoginForm extends Component {
         .then((firebaseUser) => {
           this.saveToken(firebaseUser.refreshToken);
           console.log('storage Token: ', firebaseUser.refreshToken);
-          Actions.tabbar();
+          Actions.tabbar({ type: 'replace' });
           console.log('firebase userdata:', firebaseUser);
         })
         .catch((error) => {
@@ -96,8 +96,8 @@ class LoginForm extends Component {
     async saveToken(token) {
       try {
         console.log('saveToken data: ', token);
-        console.log(AsyncStorage);
-        await AsyncStorage.setItem('@token:key', 'firebase_key');
+        console.log('AsyncStorage: ', AsyncStorage);
+        await AsyncStorage.setItem('token', token);
       } catch (error) {
         console.log('Error saving firebasetoken to storage.', error);
       }
@@ -106,7 +106,7 @@ class LoginForm extends Component {
     render() {
         return (
             <ScrollView style={styles.mainScrollView} >
-                <View style={{ paddingTop: 45, backgroundColor: '#D17F36'}}>
+                <View style={{ paddingTop: 45, backgroundColor: '#D17F36' }}>
                 <Card>
                     <Image
                       source={require('../../assets/images/gifThanks_login.png')}
