@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import firebase from 'firebase';
+import { GoogleSignin } from 'react-native-google-signin';
 import Router from './router';
 import reducers from './reducers';
 
@@ -30,6 +31,17 @@ class App extends Component {
         //         console.log('user', user);
         //     }
         // });
+    }
+
+    componentDidMount() {
+        GoogleSignin.currentUserAsync().then((user) => {
+            console.log('USER', user);
+            if (user) {
+                Actions.tabbar({ type: 'replace' });
+            } else {
+                Actions.auth({ type: 'reset' });
+            }
+          }).done();
     }
 
     // async getToken() {
