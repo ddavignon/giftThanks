@@ -69,7 +69,7 @@ class LoginForm extends Component {
     firebase.auth().signInWithCredential(credential)
     .then((data) => {
       Actions.tabbar({ type: 'replace' });
-      this.saveToken(data.refreshToken);
+      // this.saveToken(data.refreshToken);
     })
     .catch((error)=> console.log('ERROR', error));
 
