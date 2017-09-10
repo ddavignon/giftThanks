@@ -69,9 +69,10 @@ const RouterComponent = () => {
                                   console.log('User signed out successfully', user);
                                   GoogleSignin.signOut()
                                   .then(() => {
-                                    AsyncStorage.clear();
-                                    Actions.auth({ type: 'reset' });
+                                      console.log('google out');
                                   });
+                                  AsyncStorage.clear();
+                                  Actions.auth({ type: 'reset' });
                                 })
                                 .catch();
                             }}
