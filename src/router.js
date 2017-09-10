@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, AsyncStorage } from 'react-native';
 import firebase from 'firebase';
 import { Scene, Router, Actions } from 'react-native-router-flux';
+import { GoogleSignin } from 'react-native-google-signin';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import AddEventModal from './components/AddEventModal';
 import LoginForm from './components/LoginForm';
@@ -66,8 +67,11 @@ const RouterComponent = () => {
                               firebase.auth().signOut()
                                 .then((user) => {
                                   console.log('User signed out successfully', user);
-                                  // AsyncStorage.clear();
-                                  Actions.auth({ type: 'reset' });
+                                  GoogleSignin.signOut()
+                                  .then(() => {
+                                    AsyncStorage.clear();
+                                    Actions.auth({ type: 'reset' });
+                                  });
                                 })
                                 .catch();
                             }}
