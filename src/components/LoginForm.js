@@ -27,6 +27,7 @@ class LoginForm extends Component {
   componentDidMount() {
     GoogleSignin.configure({
       iosClientId: '1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs.apps.googleusercontent.com',
+      //iosClientId: '893015399163-b6to88eeam06v48p4n8d7rdek64eq228.apps.googleusercontent.com'
     });
   }
 
