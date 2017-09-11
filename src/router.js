@@ -1,6 +1,8 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, AsyncStorage } from 'react-native';
+import firebase from 'firebase';
 import { Scene, Router, Actions } from 'react-native-router-flux';
+import { GoogleSignin } from 'react-native-google-signin';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import AddEventModal from './components/AddEventModal';
 import LoginForm from './components/LoginForm';
@@ -31,6 +33,7 @@ const navButton = ({ selected, title, iconName }) => {
 
 const RouterComponent = () => {
     const { textStyle } = styles;
+
     return (
 
         <Router>
@@ -59,11 +62,24 @@ const RouterComponent = () => {
                         <Scene
                             rightTitle='Add Event'
                             onRight={() => Actions.addEventModal()}
+                            leftTitle='Log Out'
+                            onLeft={() => {
+                              firebase.auth().signOut()
+                                .then((user) => {
+                                  console.log('User signed out successfully', user);
+                                  GoogleSignin.signOut()
+                                  .then(() => {
+                                      console.log('google out');
+                                  });
+                                  AsyncStorage.clear();
+                                  Actions.auth({ type: 'reset' });
+                                })
+                                .catch();
+                            }}
                             key='events'
                             component={EventsMain}
                             title='Events'
                             titleStyle={textStyle}
-                            type='reset'
                             initial
                         />
                         <Scene
