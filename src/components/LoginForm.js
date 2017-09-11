@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import { Text,
+import {
+  Text,
   ScrollView,
   View,
   Picker,
@@ -11,28 +12,17 @@ import { Text,
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
-<<<<<<< HEAD
-import FireAuth from 'react-native-firebase';
-=======
 // import firebase from 'react-native-firebase';
-import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
->>>>>>> dustin_google_login
+import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 
 
 class LoginForm extends Component {
-<<<<<<< HEAD
-    state = {
-        email: '',
-        password: ''
-    }
-=======
   state = {
     email: '',
     password: '',
     googleUser: {}
   }
->>>>>>> dustin_google_login
 
   componentDidMount() {
     GoogleSignin.configure({
@@ -50,52 +40,6 @@ class LoginForm extends Component {
 
   onSignUpPress() {
     const { email, password } = this.state;
-
-<<<<<<< HEAD
-    render() {
-        return (
-            <ScrollView style={styles.mainScrollView} >
-                <View style={{ paddingTop: 65 }}>
-                <Text style={styles.errorTextStyle} >
-                    {this.props.error}
-                </Text>
-                <Card>
-                    <View>
-                        <Button onPress={() => {}}>
-                            Google
-                        </Button>
-                    </View>
-                </Card>
-                <CardSection>
-                    <Input
-                        label="Email"
-                        placeholder="email@email.com"
-                        onChangeText={email => this.setState({ email })}
-                        value={this.state.email}
-                    />
-                </CardSection>
-                <CardSection>
-                    <Input
-                        label="Password"
-                        placeholder="password"
-                        onChangeText={password => this.setState({ password })}
-                        value={this.state.password}
-                    />
-                </CardSection>
-                <Card>
-                    <View>
-                        <Button onPress={this.onSignInPress.bind(this)}>
-                            Sign In
-                        </Button>
-                        <Button onPress={this.onSignUpPress.bind(this)}>
-                            Sign Up
-                        </Button>
-                    </View>
-                </Card>
-                </View>
-            </ScrollView>
-        );
-=======
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(user => Actions.tabbar({ type: 'replace' }))
     .catch(err => alert(err));
@@ -108,7 +52,6 @@ class LoginForm extends Component {
       await AsyncStorage.setItem('token', token);
     } catch (error) {
       console.log('Error saving firebasetoken to storage.', error);
->>>>>>> dustin_google_login
     }
   }
   _signIn() {
@@ -119,7 +62,6 @@ class LoginForm extends Component {
   }
 
   onGoogleLoginSuccess(user) {
-
     const token = user.idToken;
     const provider = firebase.auth.GoogleAuthProvider;
     const credential = provider.credential(token);
@@ -128,7 +70,7 @@ class LoginForm extends Component {
       Actions.tabbar({ type: 'replace' });
       // this.saveToken(data.refreshToken);
     })
-    .catch((error)=> console.log('ERROR', error));
+    .catch((error) => console.log('ERROR', error));
 
   }
 
@@ -140,7 +82,7 @@ class LoginForm extends Component {
             <Image
               source={require('../../assets/images/gifThanks_login.png')}
               style={styles.imageContainer}
-              />
+            />
 
             <Input
               label="Email"
@@ -148,14 +90,14 @@ class LoginForm extends Component {
               onChangeText={email => this.setState({ email })}
               value={this.state.email}
               style={styles.inputStyle}
-              />
+            />
             <Input
               label="Password"
               placeholder="password"
               onChangeText={password => this.setState({ password })}
               value={this.state.password}
               style={styles.inputStyle}
-              />
+            />
             <View>
               <Button onPress={this.onSignInPress.bind(this)}>
                 Sign In
@@ -170,7 +112,7 @@ class LoginForm extends Component {
               size={GoogleSigninButton.Size.Standard}
               color={GoogleSigninButton.Color.Dark}
               onPress={this._signIn.bind(this)}
-              />
+            />
           </Card>
         </View>
       </ScrollView>
@@ -179,41 +121,6 @@ class LoginForm extends Component {
 }
 
 const styles = {
-<<<<<<< HEAD
-    errorTextStyle: {
-        fontSize: 20,
-        alignSelf: 'center',
-        color: 'red'
-    },
-    wrapper: {
-        borderRadius: 5,
-        marginBottom: 5,
-    },
-    pickerTextStyle: {
-        fontSize: 18,
-        paddingRight: 70,
-    },
-
-    blankTextStyle: {
-        fontSize: 180,
-        alignSelf: 'center',
-        paddingTop: 15,
-
-    },
-    imageTextStyle: {
-        color: 'black',
-    },
-    mainScrollView: {
-        backgroundColor: 'rgba(0,0,0,0)',
-    },
-    imageContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        width: null,
-        height: null,
-        backgroundColor: 'rgba(0,0,0,0)',
-    },
-=======
   errorTextStyle: {
     fontSize: 20,
     alignSelf: 'center',
@@ -264,7 +171,6 @@ const styles = {
       height: 3
     }
   },
->>>>>>> dustin_google_login
 };
 
 // const mapStateToProps = ({ auth }) => {
