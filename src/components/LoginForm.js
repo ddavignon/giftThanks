@@ -21,7 +21,8 @@ class LoginForm extends Component {
   state = {
     email: '',
     password: '',
-    googleUser: {}
+    googleUser: {},
+    showLogin: true
   }
 
   componentDidMount() {
@@ -56,9 +57,10 @@ class LoginForm extends Component {
     }
   }
   _signIn() {
+    this.setState({ showLogin: false });
     GoogleSignin.signIn()
     .then(this.onGoogleLoginSuccess)
-    .catch(error => {})
+    .catch(error => { this.setState({ showLogin: true }); })
     .done();
   }
 
@@ -69,54 +71,80 @@ class LoginForm extends Component {
     firebase.auth().signInWithCredential(credential)
     .then((data) => {
       Actions.tabbar({ type: 'replace' });
+      this.setState({ showLogin: true });
       // this.saveToken(data.refreshToken);
     })
-    .catch((error) => console.log('ERROR', error));
+    .catch((error) => {
+      console.log('ERROR', error);
+    });
+  }
 
+  renderScreen() {
+    if (this.state.showLogin) {
+      return (
+        <ScrollView style={styles.mainScrollView} >
+          <View style={{ paddingTop: 45, backgroundColor: 'rgb(245,245,245)' }}>
+              <Image
+                source={require('../../assets/images/gifThanks_login.png')}
+                style={styles.imageContainer}
+              />
+              <View style={styles.inputMargin}>
+                <Input
+                  label="Email"
+                  placeholder="email@email.com"
+                  onChangeText={email => this.setState({ email })}
+                  value={this.state.email}
+                  style={styles.inputStyle}
+                />
+              </View>
+              <View style={styles.inputMargin}>
+                <Input
+                  label="Password"
+                  placeholder="password"
+                  onChangeText={password => this.setState({ password })}
+                  secureTextEntry
+                  value={this.state.password}
+                  style={styles.inputStyle}
+                />
+              </View>
+              <View>
+                <Button onPress={this.onSignInPress.bind(this)}>
+                  Sign In
+                </Button>
+                <Button onPress={this.onSignUpPress.bind(this)}>
+                  Sign Up
+                </Button>
+              </View>
+
+              <GoogleSigninButton
+                style={styles.googleButtonStyle}
+                size={GoogleSigninButton.Size.Standard}
+                color={GoogleSigninButton.Color.Dark}
+                onPress={this._signIn.bind(this)}
+              />
+          </View>
+        </ScrollView>
+      );
+    }
+
+    return (
+      <ScrollView style={styles.mainScrollView} >
+        <View 
+          style={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            flex: 1,
+            paddingTop: 125 }}
+        >
+          <Spinner />
+        </View>
+      </ScrollView>
+    );
   }
 
   render() {
     return (
-      <ScrollView style={styles.mainScrollView} >
-        <View style={{ paddingTop: 45, backgroundColor: '#D17F36' }}>
-          <Card>
-            <Image
-              source={require('../../assets/images/gifThanks_login.png')}
-              style={styles.imageContainer}
-            />
-
-            <Input
-              label="Email"
-              placeholder="email@email.com"
-              onChangeText={email => this.setState({ email })}
-              value={this.state.email}
-              style={styles.inputStyle}
-            />
-            <Input
-              label="Password"
-              placeholder="password"
-              onChangeText={password => this.setState({ password })}
-              value={this.state.password}
-              style={styles.inputStyle}
-            />
-            <View>
-              <Button onPress={this.onSignInPress.bind(this)}>
-                Sign In
-              </Button>
-              <Button onPress={this.onSignUpPress.bind(this)}>
-                Sign Up
-              </Button>
-            </View>
-
-            <GoogleSigninButton
-              style={styles.googleButtonStyle}
-              size={GoogleSigninButton.Size.Standard}
-              color={GoogleSigninButton.Color.Dark}
-              onPress={this._signIn.bind(this)}
-            />
-          </Card>
-        </View>
-      </ScrollView>
+      this.renderScreen()
     );
   }
 }
@@ -133,7 +161,6 @@ const styles = {
   },
   inputStyle: {
     flex: 1,
-    backgroundColor: 'rgba(255,255,255, 0.2)',
     paddingTop: 20,
     paddingBottom: 20,
   },
@@ -172,6 +199,9 @@ const styles = {
       height: 3
     }
   },
+  inputMargin: {
+    paddingLeft: 15,
+  }
 };
 
 // const mapStateToProps = ({ auth }) => {

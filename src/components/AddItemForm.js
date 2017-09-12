@@ -13,7 +13,7 @@ import RNFetchBlob from 'react-native-fetch-blob';
 import ImageResizer from 'react-native-image-resizer';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
-import { CardSection, Button, Input } from './common';
+import { Card, CardSection, Button, Input, Spinner } from './common';
 
 // const Permissions = require('react-native-permissions');
 
@@ -28,7 +28,8 @@ class AddItemForm extends Component {
         androidPhotoPermission: 'undetermined',
         androidStoragePermission: 'undetermined',
         cameraPermission: 'undetermined',
-        photoPermission: 'undetermined'
+        photoPermission: 'undetermined',
+        sendPhoto: false
     }
 
     componentWillMount() {
@@ -68,8 +69,8 @@ class AddItemForm extends Component {
                 //     const iosResponsePath = response.uri.replace('file://', '');
                 //     this.setState({ responsePath: iosResponsePath });
                 // }
-                console.log('response', response);
-                console.log('Rpth', this.state.responsePath);
+                // console.log('response', response);
+                // console.log('Rpth', this.state.responsePath);
                 this.setState({
                     avatarSource,
                     responsePath: response.uri
@@ -79,6 +80,7 @@ class AddItemForm extends Component {
     }
 
     handleSendItemForm() {
+        this.setState({ sendPhoto: true });
         const { responsePath, isFromText } = this.state;
         const { eventId } = this.props;
 
@@ -156,19 +158,20 @@ class AddItemForm extends Component {
                         onChangeText={isFromText => this.setState({ isFromText })}
                     />
                 </CardSection>
-                {/*<CardSection>
-                    <Input
-                        placeholder="Game"
-                        label="Description"
-                        value={this.state.description}
-                        onChangeText={description => this.setState({ description })}
-                    />
-                </CardSection>*/}
-                <CardSection>
-                    <Button onPress={this.handleSendItemForm.bind(this)}>
-                        Add Item
-                    </Button>
-                </CardSection>
+                {this.state.sendPhoto
+                    ?
+                    <Card>
+                        <CardSection>
+                                <Spinner size="large" />
+                        </CardSection>
+                    </Card>
+                    :
+                    <CardSection>
+                        <Button onPress={this.handleSendItemForm.bind(this)}>
+                            Add Item
+                        </Button>
+                    </CardSection>
+                }
             </View>
         );
     }
