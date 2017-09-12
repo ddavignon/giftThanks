@@ -69,8 +69,8 @@ class AddItemForm extends Component {
                 //     const iosResponsePath = response.uri.replace('file://', '');
                 //     this.setState({ responsePath: iosResponsePath });
                 // }
-                console.log('response', response);
-                console.log('Rpth', this.state.responsePath);
+                // console.log('response', response);
+                // console.log('Rpth', this.state.responsePath);
                 this.setState({
                     avatarSource,
                     responsePath: response.uri

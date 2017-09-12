@@ -127,7 +127,19 @@ class LoginForm extends Component {
       );
     }
 
-    return <View />;
+    return (
+      <ScrollView style={styles.mainScrollView} >
+        <View 
+          style={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            flex: 1,
+            paddingTop: 125 }}
+        >
+          <Spinner />
+        </View>
+      </ScrollView>
+    );
   }
 
   render() {
