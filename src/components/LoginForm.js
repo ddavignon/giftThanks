@@ -78,27 +78,30 @@ class LoginForm extends Component {
   render() {
     return (
       <ScrollView style={styles.mainScrollView} >
-        <View style={{ paddingTop: 45 }}>
-          <Card>
+        <View style={{ paddingTop: 45, backgroundColor: 'rgb(245,245,245)' }}>
             <Image
               source={require('../../assets/images/gifThanks_login.png')}
               style={styles.imageContainer}
             />
-            <Input
-              label="Email"
-              placeholder="email@email.com"
-              onChangeText={email => this.setState({ email })}
-              value={this.state.email}
-              style={styles.inputStyle}
-            />
-            <Input
-              label="Password"
-              placeholder="password"
-              onChangeText={password => this.setState({ password })}
-              secureTextEntry
-              value={this.state.password}
-              style={styles.inputStyle}
-            />
+            <View style={styles.inputMargin}>
+              <Input
+                label="Email"
+                placeholder="email@email.com"
+                onChangeText={email => this.setState({ email })}
+                value={this.state.email}
+                style={styles.inputStyle}
+              />
+            </View>
+            <View style={styles.inputMargin}>
+              <Input
+                label="Password"
+                placeholder="password"
+                onChangeText={password => this.setState({ password })}
+                secureTextEntry
+                value={this.state.password}
+                style={styles.inputStyle}
+              />
+            </View>
             <View>
               <Button onPress={this.onSignInPress.bind(this)}>
                 Sign In
@@ -114,7 +117,6 @@ class LoginForm extends Component {
               color={GoogleSigninButton.Color.Dark}
               onPress={this._signIn.bind(this)}
             />
-          </Card>
         </View>
       </ScrollView>
     );
@@ -133,7 +135,6 @@ const styles = {
   },
   inputStyle: {
     flex: 1,
-    backgroundColor: 'rgba(255,255,255, 0.2)',
     paddingTop: 20,
     paddingBottom: 20,
   },
@@ -172,6 +173,9 @@ const styles = {
       height: 3
     }
   },
+  inputMargin: {
+    paddingLeft: 15,
+  }
 };
 
 // const mapStateToProps = ({ auth }) => {
