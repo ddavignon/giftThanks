@@ -78,13 +78,12 @@ class LoginForm extends Component {
   render() {
     return (
       <ScrollView style={styles.mainScrollView} >
-        <View style={{ paddingTop: 45, backgroundColor: '#D17F36' }}>
+        <View style={{ paddingTop: 45 }}>
           <Card>
             <Image
               source={require('../../assets/images/gifThanks_login.png')}
               style={styles.imageContainer}
             />
-
             <Input
               label="Email"
               placeholder="email@email.com"
@@ -96,6 +95,7 @@ class LoginForm extends Component {
               label="Password"
               placeholder="password"
               onChangeText={password => this.setState({ password })}
+              secureTextEntry
               value={this.state.password}
               style={styles.inputStyle}
             />
