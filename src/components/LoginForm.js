@@ -9,6 +9,8 @@ import {
   Image,
   AsyncStorage
 } from 'react-native';
+import FBSDK, { LoginManager } from 'react-native-fbsdk';
+import { SocialIcon } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
@@ -79,6 +81,22 @@ class LoginForm extends Component {
     });
   }
 
+  _fbAuth() {
+    LoginManager.logInWithReadPermissions(['public_profile']).then(
+      function(result) {
+        if (result.isCancelled) {
+          alert('Login cancelled');
+        } else {
+          alert('Login success with permissions: '
+            +result.grantedPermissions.toString());
+        }
+      },
+      function(error) {
+        alert('Login fail with error: ' + error);
+      }
+    );
+  }
+
   renderScreen() {
     if (this.state.showLogin) {
       return (
@@ -115,13 +133,21 @@ class LoginForm extends Component {
                   Sign Up
                 </Button>
               </View>
+              <View style={styles.socialLoginContainerStyle}>
 
-              <GoogleSigninButton
-                style={styles.googleButtonStyle}
-                size={GoogleSigninButton.Size.Standard}
-                color={GoogleSigninButton.Color.Dark}
-                onPress={this._signIn.bind(this)}
-              />
+                <SocialIcon
+                  raised
+                  type='google-plus-official'
+                  onPress={this._signIn.bind(this)}
+                />
+              <Text>or sigin with</Text>
+                <SocialIcon
+                  raised
+                  type='facebook'
+                  onPress={this._fbAuth.bind(this)}
+                />
+              </View>
+
           </View>
         </ScrollView>
       );
@@ -129,7 +155,7 @@ class LoginForm extends Component {
 
     return (
       <ScrollView style={styles.mainScrollView} >
-        <View 
+        <View
           style={{
             alignItems: 'center',
             justifyContent: 'center',
@@ -184,20 +210,21 @@ const styles = {
     height: 300,
     backgroundColor: 'rgba(0,0,0,0)',
   },
-  googleButtonStyle: {
-    // flex: 1,
-    // alignSelf: 'stretch',
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 10,
+  socialLoginContainerStyle: {
+    flex: 1,
+    marginLeft: 40,
+    marginRight: 40,
+    marginTop: 20,
     marginBottom: 80,
-    height: 48,
-    width: 180,
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    }
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+    // height: 48,
+    // width: 180,
+    // shadowColor: '#000000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 3
+    // }
   },
   inputMargin: {
     paddingLeft: 15,
