@@ -9,7 +9,7 @@ import {
   Image,
   AsyncStorage
 } from 'react-native';
-import FBSDK, { LoginManager } from 'react-native-fbsdk';
+import FBSDK, { LoginManager, AccessToken } from 'react-native-fbsdk';
 import { SocialIcon } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
@@ -82,19 +82,32 @@ class LoginForm extends Component {
   }
 
   _fbAuth() {
-    LoginManager.logInWithReadPermissions(['public_profile']).then(
-      function(result) {
+    LoginManager.logInWithReadPermissions(['public_profile', 'email'])
+    .then((result) => {
         if (result.isCancelled) {
-          alert('Login cancelled');
+          console.log('Login cancelled');
         } else {
-          alert('Login success with permissions: '
-            +result.grantedPermissions.toString());
+          console.log('Login success with permissions: ',
+            result);
+            AccessToken.getCurrentAccessToken()
+            .then((accessTokenData) => {
+              const credential = firebase.auth.FacebookAuthProvider.credential(accessTokenData.accessToken);
+              firebase.auth().signInWithCredential(credential)
+              .then((data) => {
+                //success
+                Actions.tabbar({ type: 'replace' });
+                this.setState({ showLogin: true });
+              }, (error) => {
+                console.log('firebaselogin using FB error: ', error);
+              });
+            }, (error) => {
+              console.log('FB accessToken error: ', error);
+            });
         }
-      },
-      function(error) {
-        alert('Login fail with error: ' + error);
-      }
-    );
+      })
+      .catch((error) => {
+        console.log('FB login fail with error: ', error);
+      });
   }
 
   renderScreen() {
