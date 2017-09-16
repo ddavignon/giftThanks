@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -63,6 +64,11 @@
 		E516805C2F27424692EB7EAB /* CatCafe.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B69A342524F04F9990184E16 /* CatCafe.ttf */; };
 		E69BC3AA7B72083C79CDC736 /* libPods-gifThanks-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4DA9270589E9F434865112A /* libPods-gifThanks-tvOSTests.a */; };
 		ED51AD500065A49D88BB9394 /* libPods-gifThanks.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD875BBBD937A7B4D5B4B96 /* libPods-gifThanks.a */; };
+		F418AD921F6CD1EF006EFC8C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F418AD8E1F6CD1EF006EFC8C /* Bolts.framework */; };
+		F418AD931F6CD1EF006EFC8C /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F418AD8F1F6CD1EF006EFC8C /* FBSDKCoreKit.framework */; };
+		F418AD941F6CD1EF006EFC8C /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F418AD901F6CD1EF006EFC8C /* FBSDKLoginKit.framework */; };
+		F418AD951F6CD1EF006EFC8C /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F418AD911F6CD1EF006EFC8C /* FBSDKShareKit.framework */; };
+		F418ADA21F6CD479006EFC8C /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F418ADA11F6CD464006EFC8C /* libRCTFBSDK.a */; };
 		FF7AFF5FE3744F61AF0CF4AA /* mostlyMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 555277E4205B4369978BEBF7 /* mostlyMono.ttf */; };
 /* End PBXBuildFile section */
 
@@ -277,19 +283,19 @@
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
 		};
-		DA64E2191F5612CC00EC2ED8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A6C8385BE90E41D29B7922DA /* RCTFBLogin.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4F3A6B5B1ACFBCC500CA65F7;
-			remoteInfo = RCTFBLogin;
-		};
 		DA64E2351F5612CC00EC2ED8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F28AFF41AF944995B4D3DA94 /* RNFirebase.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNFirebase;
+		};
+		F418ADA01F6CD464006EFC8C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F418AD9C1F6CD464006EFC8C /* RCTFBSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9350E0F11CE3B0920041D815;
+			remoteInfo = RCTFBSDK;
 		};
 		F418BB061F30007800E85317 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -386,7 +392,6 @@
 		A4B6F57958B142B3A28D08ED /* libRNMail.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNMail.a; sourceTree = "<group>"; };
 		A4DA9270589E9F434865112A /* libPods-gifThanks-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gifThanks-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5DF7FC8C1F64032A8B5200C /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
-		A6C8385BE90E41D29B7922DA /* RCTFBLogin.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTFBLogin.xcodeproj; path = "../node_modules/react-native-facebook-login/RCTFBLogin.xcodeproj"; sourceTree = "<group>"; };
 		AAD875BBBD937A7B4D5B4B96 /* libPods-gifThanks.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gifThanks.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACD35411768E68E639DA79A9 /* Pods-gifThanks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gifThanks.release.xcconfig"; path = "Pods/Target Support Files/Pods-gifThanks/Pods-gifThanks.release.xcconfig"; sourceTree = "<group>"; };
 		B2731F42DDD341F08CB0873B /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
@@ -403,6 +408,11 @@
 		DA64E2861F5615D800EC2ED8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E6BF504CEBD4419A9C667B7C /* AddressBook.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		F28AFF41AF944995B4D3DA94 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
+		F418AD8E1F6CD1EF006EFC8C /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		F418AD8F1F6CD1EF006EFC8C /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		F418AD901F6CD1EF006EFC8C /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		F418AD911F6CD1EF006EFC8C /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		F418AD9C1F6CD464006EFC8C /* RCTFBSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDK.xcodeproj; path = "../node_modules/react-native-fbsdk/ios/RCTFBSDK.xcodeproj"; sourceTree = "<group>"; };
 		F5AA2E7AC8C2933A5C2BC03D /* Pods-gifThanks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gifThanks.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gifThanks/Pods-gifThanks.debug.xcconfig"; sourceTree = "<group>"; };
 		F62731DB27BA4CE985CEC9EF /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -421,6 +431,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F418ADA21F6CD479006EFC8C /* libRCTFBSDK.a in Frameworks */,
 				DA0E63931EB1D2E50037067F /* libRNImagePicker.a in Frameworks */,
 				DA0E63921EB1D2DF0037067F /* libRNFetchBlob.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -428,15 +439,19 @@
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
+				F418AD921F6CD1EF006EFC8C /* Bolts.framework in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				F418AD951F6CD1EF006EFC8C /* FBSDKShareKit.framework in Frameworks */,
 				5C11E4E57AC44C1198E91A46 /* libRNVectorIcons.a in Frameworks */,
 				ABA38081DE4B4B638513A09F /* libReactNativePermissions.a in Frameworks */,
+				F418AD931F6CD1EF006EFC8C /* FBSDKCoreKit.framework in Frameworks */,
 				357DE4869E4A45D8B9989F1A /* libRCTImageResizer.a in Frameworks */,
+				F418AD941F6CD1EF006EFC8C /* FBSDKLoginKit.framework in Frameworks */,
 				C3220DE5EDA64F799107ECDC /* libRCTContactsWrapper.a in Frameworks */,
 				A5452B99EC2B4E32AA4D43B3 /* libRNMail.a in Frameworks */,
 				A7A5E256AAB84882AD179622 /* libRNFirebase.a in Frameworks */,
@@ -622,6 +637,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				F418AD9C1F6CD464006EFC8C /* RCTFBSDK.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -640,7 +656,6 @@
 				2C7C10E41BBF40639F5A6153 /* RCTImageResizer.xcodeproj */,
 				A3F672D78482454F8F7EB173 /* ContactsWrapper.xcodeproj */,
 				D13A8C51194C4EA0BDFF5165 /* RNMail.xcodeproj */,
-				A6C8385BE90E41D29B7922DA /* RCTFBLogin.xcodeproj */,
 				F28AFF41AF944995B4D3DA94 /* RNFirebase.xcodeproj */,
 				BE06DFE59690464199C3FEF0 /* RNGoogleSignin.xcodeproj */,
 			);
@@ -700,6 +715,10 @@
 		D762CE7963D3344FDBD9ADB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F418AD8E1F6CD1EF006EFC8C /* Bolts.framework */,
+				F418AD8F1F6CD1EF006EFC8C /* FBSDKCoreKit.framework */,
+				F418AD901F6CD1EF006EFC8C /* FBSDKLoginKit.framework */,
+				F418AD911F6CD1EF006EFC8C /* FBSDKShareKit.framework */,
 				AAD875BBBD937A7B4D5B4B96 /* libPods-gifThanks.a */,
 				6EB8F0EF762C47DB8B3FEFEC /* libPods-gifThanks-tvOS.a */,
 				A4DA9270589E9F434865112A /* libPods-gifThanks-tvOSTests.a */,
@@ -744,10 +763,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DA64E2121F5612CC00EC2ED8 /* Products */ = {
+		F418AD9D1F6CD464006EFC8C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DA64E21A1F5612CC00EC2ED8 /* libRCTFBLogin.a */,
+				F418ADA11F6CD464006EFC8C /* libRCTFBSDK.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -936,8 +955,8 @@
 					ProjectRef = 5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */;
 				},
 				{
-					ProductGroup = DA64E2121F5612CC00EC2ED8 /* Products */;
-					ProjectRef = A6C8385BE90E41D29B7922DA /* RCTFBLogin.xcodeproj */;
+					ProductGroup = F418AD9D1F6CD464006EFC8C /* Products */;
+					ProjectRef = F418AD9C1F6CD464006EFC8C /* RCTFBSDK.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302B61ABCB90400DB3ED1 /* Products */;
@@ -1215,18 +1234,18 @@
 			remoteRef = DA4D944F1EFAEF5700B4B96F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		DA64E21A1F5612CC00EC2ED8 /* libRCTFBLogin.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRCTFBLogin.a;
-			remoteRef = DA64E2191F5612CC00EC2ED8 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		DA64E2361F5612CC00EC2ED8 /* libRNFirebase.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFirebase.a;
 			remoteRef = DA64E2351F5612CC00EC2ED8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F418ADA11F6CD464006EFC8C /* libRCTFBSDK.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTFBSDK.a;
+			remoteRef = F418ADA01F6CD464006EFC8C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F418BB071F30007800E85317 /* libReactNativePermissions.a */ = {
@@ -1701,6 +1720,16 @@
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = LGMMBQ8ZS4;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
+					"\"${PODS_ROOT}/Google/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleSignIn/Frameworks\"",
+					"\"$(PROJECT_DIR)/Frameworks/\"",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
@@ -1735,6 +1764,16 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = LGMMBQ8ZS4;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
+					"\"${PODS_ROOT}/Google/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleSignIn/Frameworks\"",
+					"\"$(PROJECT_DIR)/Frameworks/\"",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
