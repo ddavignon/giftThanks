@@ -85,7 +85,7 @@ class SendItemForm extends Component {
                 }
             });
         }
-        Actions.gifts({ eventId, type: 'back' });
+        Actions.gifts({ eventId, sentThanks: true, type: 'replace' });
     }
 
     handleGetImage() {

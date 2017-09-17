@@ -119,6 +119,7 @@ class LoginForm extends Component {
                 source={require('../../assets/images/gifThanks_login.png')}
                 style={styles.imageContainer}
               />
+            <View style={{ marginRight: 20, marginLeft: 20 }}>
               <View style={styles.inputMargin}>
                 <Input
                   label="Email"
@@ -146,6 +147,7 @@ class LoginForm extends Component {
                   Sign Up
                 </Button>
               </View>
+            </View>
               <View style={styles.socialLoginContainerStyle}>
 
                 <SocialIcon
@@ -153,7 +155,7 @@ class LoginForm extends Component {
                   type='google-plus-official'
                   onPress={this._signIn.bind(this)}
                 />
-              <Text>or sigin with</Text>
+              <Text style={{ paddingTop: 20 }} >or sigin with</Text>
                 <SocialIcon
                   raised
                   type='facebook'
@@ -225,8 +227,8 @@ const styles = {
   },
   socialLoginContainerStyle: {
     flex: 1,
-    marginLeft: 40,
-    marginRight: 40,
+    marginLeft: 50,
+    marginRight: 50,
     marginTop: 20,
     marginBottom: 80,
     flexDirection: 'row',

@@ -36,6 +36,22 @@ class ItemDetail extends Component {
         }
     }
 
+    renderCompleted(type) {
+        console.log('type: ', this.props);
+        if (type === 'items' && this.props.sentThanks) {
+            return (
+                <Icon
+                    name='done'
+                    color='#42f45f'
+                    iconStyle={{
+                        justifyContent: 'space-between',
+                        marginLeft: 7
+                    }}
+                />
+            );
+        }
+    }
+
     render() {
         const {
             thumbnailStyle,
@@ -45,7 +61,7 @@ class ItemDetail extends Component {
         } = styles;
 
         const { image, title, type } = this.props;
-        //console.log('props: ', this.props);
+        console.log('itemDetail props: ', this.props);
 
         return (
             <TouchableOpacity
@@ -53,6 +69,9 @@ class ItemDetail extends Component {
             >
                 <Card>
                     <CardSection>
+                        <View style={thumbnailContainerStyle}>
+                            {this.renderCompleted(type)}
+                        </View>
                         <View style={thumbnailContainerStyle}>
                             {this.renderImageForType(type, image, thumbnailStyle)}
                         </View>
