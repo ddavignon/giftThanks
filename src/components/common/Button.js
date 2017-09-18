@@ -35,8 +35,8 @@ const styles = {
             width: 0,
             height: 3
         },
-        shadowRadius: 4,
-        shadowOpacity: 0.3,
+        shadowRadius: 3,
+        shadowOpacity: 0.1,
         marginTop: 15,
         marginBottom: 15
     }

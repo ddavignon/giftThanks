@@ -9,6 +9,8 @@ import {
   Image,
   AsyncStorage
 } from 'react-native';
+import FBSDK, { LoginManager, AccessToken } from 'react-native-fbsdk';
+import { SocialIcon } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
@@ -79,6 +81,35 @@ class LoginForm extends Component {
     });
   }
 
+  _fbAuth() {
+    LoginManager.logInWithReadPermissions(['public_profile', 'email'])
+    .then((result) => {
+        if (result.isCancelled) {
+          console.log('Login cancelled');
+        } else {
+          console.log('Login success with permissions: ',
+            result);
+            AccessToken.getCurrentAccessToken()
+            .then((accessTokenData) => {
+              const credential = firebase.auth.FacebookAuthProvider.credential(accessTokenData.accessToken);
+              firebase.auth().signInWithCredential(credential)
+              .then((data) => {
+                //success
+                Actions.tabbar({ type: 'replace' });
+                this.setState({ showLogin: true });
+              }, (error) => {
+                console.log('firebaselogin using FB error: ', error);
+              });
+            }, (error) => {
+              console.log('FB accessToken error: ', error);
+            });
+        }
+      })
+      .catch((error) => {
+        console.log('FB login fail with error: ', error);
+      });
+  }
+
   renderScreen() {
     if (this.state.showLogin) {
       return (
@@ -88,6 +119,7 @@ class LoginForm extends Component {
                 source={require('../../assets/images/gifThanks_login.png')}
                 style={styles.imageContainer}
               />
+            <View style={{ marginRight: 20, marginLeft: 20 }}>
               <View style={styles.inputMargin}>
                 <Input
                   label="Email"
@@ -115,13 +147,22 @@ class LoginForm extends Component {
                   Sign Up
                 </Button>
               </View>
+            </View>
+              <View style={styles.socialLoginContainerStyle}>
 
-              <GoogleSigninButton
-                style={styles.googleButtonStyle}
-                size={GoogleSigninButton.Size.Standard}
-                color={GoogleSigninButton.Color.Dark}
-                onPress={this._signIn.bind(this)}
-              />
+                <SocialIcon
+                  raised
+                  type='google-plus-official'
+                  onPress={this._signIn.bind(this)}
+                />
+              <Text style={{ paddingTop: 20 }} >or sigin with</Text>
+                <SocialIcon
+                  raised
+                  type='facebook'
+                  onPress={this._fbAuth.bind(this)}
+                />
+              </View>
+
           </View>
         </ScrollView>
       );
@@ -129,7 +170,7 @@ class LoginForm extends Component {
 
     return (
       <ScrollView style={styles.mainScrollView} >
-        <View 
+        <View
           style={{
             alignItems: 'center',
             justifyContent: 'center',
@@ -184,20 +225,21 @@ const styles = {
     height: 300,
     backgroundColor: 'rgba(0,0,0,0)',
   },
-  googleButtonStyle: {
-    // flex: 1,
-    // alignSelf: 'stretch',
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 10,
+  socialLoginContainerStyle: {
+    flex: 1,
+    marginLeft: 50,
+    marginRight: 50,
+    marginTop: 20,
     marginBottom: 80,
-    height: 48,
-    width: 180,
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    }
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+    // height: 48,
+    // width: 180,
+    // shadowColor: '#000000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 3
+    // }
   },
   inputMargin: {
     paddingLeft: 15,

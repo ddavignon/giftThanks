@@ -8,7 +8,7 @@ import { Card, CardSection } from './common';
 class ItemDetail extends Component {
     //This is a destructured props object using album instead of props
     renderIconForType(type) {
-        console.log('type: ', this.props);
+        //console.log('type: ', this.props);
         if (type === 'items') {
             return (
                 <Icon
@@ -25,12 +25,29 @@ class ItemDetail extends Component {
     }
 
     renderImageForType(type, image, thumbnailStyle) {
-        console.log('type: ', this.props);
+        console.log('type: ', this.props.type);
         if (type === 'items') {
             return (
                 <Image
                     style={thumbnailStyle}
                     source={{ uri: image }}
+                />
+            );
+        }
+    }
+
+    renderCompleted(type) {
+        //console.log('type: ', this.props);
+        if (type === 'items' && this.props.sentThanks) {
+            return (
+                <Icon
+                    name='done'
+                    color='#42f45f'
+                    iconStyle={{
+                        justifyContent: 'space-between',
+                        marginLeft: 7,
+                        marginRight: 10
+                    }}
                 />
             );
         }
@@ -45,7 +62,7 @@ class ItemDetail extends Component {
         } = styles;
 
         const { image, title, type } = this.props;
-        //console.log('props: ', this.props);
+        console.log('itemDetail props: ', this.props);
 
         return (
             <TouchableOpacity
@@ -53,11 +70,20 @@ class ItemDetail extends Component {
             >
                 <Card>
                     <CardSection>
+                        <View>
+                            {this.renderCompleted(type)}
+                        </View>
                         <View style={thumbnailContainerStyle}>
                             {this.renderImageForType(type, image, thumbnailStyle)}
                         </View>
-                        <View style={headerContentStyle}>
-                            <Text style={textStyle}>{title}</Text>
+                        <View>
+                            <Text
+                              style={textStyle}
+                              numberOfLines={1}
+                              ellipsizeMode='tail'
+                            >
+                              {title}
+                            </Text>
                         </View>
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
                             {this.renderIconForType(type)}
@@ -84,12 +110,15 @@ const styles = {
         justifyContent: 'space-around',
     },
     textStyle: {
+        flex: 1,
         marginTop: 15,
         marginBottom: 15,
         marginLeft: 5,
         fontFamily: 'mostlyMono',
         fontSize: 28,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        maxWidth: 200,
+        overflow: 'hidden'
     },
     thumbnailStyle: {
         height: 60,

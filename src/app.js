@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
+import { AccessToken } from 'react-native-fbsdk';
 import { Actions } from 'react-native-router-flux';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -35,11 +36,18 @@ class App extends Component {
 
     componentDidMount() {
         GoogleSignin.currentUserAsync().then((user) => {
-            console.log('USER', user);
+            console.log('GOOGLE USER: ', user);
             if (user) {
                 Actions.tabbar({ type: 'replace' });
             } else {
-                Actions.auth({ type: 'reset' });
+              AccessToken.getCurrentAccessToken().then((data) => {
+                console.log('FB USER: ', data); //Refresh it every time
+                if (data) {
+                  Actions.tabbar({ type: 'replace' });
+                } else {
+                  Actions.auth({ type: 'reset' });
+                }
+              });
             }
           }).done();
     }

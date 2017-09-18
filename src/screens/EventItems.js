@@ -23,7 +23,8 @@ class EventItems extends Component {
             rightTitle: 'Add',
             onRight: () => Actions.addItemScene({ eventId: this.props.eventId })
         });
-        console.log(this.props.eventId);
+        //console.log(this.props.eventId);
+        console.log('eventItems props: ', this.props);
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 console.log('get data');

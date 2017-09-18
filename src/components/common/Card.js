@@ -3,8 +3,11 @@ import { View } from 'react-native';
 
 const Card = (props) => {
     return (
+      <View>
         <View style={styles.containerStyle}>
             {props.children}
+        </View>
+        <View stlye={{ flex: 0.1 }} />
         </View>
     );
 };
@@ -14,6 +17,8 @@ const styles = {
         // borderWidth: 1,
         // borderRadius: 2,
         // borderColor: '#ddd',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
         borderBottomWidth: 0,
         shadowColor: '#000000',
         shadowOffset: { width: 1, height: 2 },
