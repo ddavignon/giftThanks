@@ -221,8 +221,9 @@ const styles = {
   imageContainer: {
     alignSelf: 'center',
     justifyContent: 'center',
-    width: 300,
-    height: 300,
+    width: 250,
+    height: 250,
+    marginVertical: 35,
     backgroundColor: 'rgba(0,0,0,0)',
   },
   socialLoginContainerStyle: {
