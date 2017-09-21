@@ -126,6 +126,7 @@ class EventItems extends Component {
                         type='items'
                         title={event.name}/*item.state we are sending to itemDetail*/
                         _id={index}
+                        hasBeenSent={event.sent}
                         image={event.URL}
                         onEditPress={() => this.handleEditPress(event, index)}
                         onDeletePress={() => this.handleDeletePress(index, event.URL)}

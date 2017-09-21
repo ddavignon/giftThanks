@@ -22,6 +22,7 @@ class AddItemForm extends Component {
     state = {
         isFromText: '',
         description: '',
+        hasBeenSent: false,
         responsePath: '',
         avatarSource: null,
         dbData: '',
@@ -81,7 +82,7 @@ class AddItemForm extends Component {
 
     handleSendItemForm() {
         this.setState({ sendPhoto: true });
-        const { responsePath, isFromText } = this.state;
+        const { responsePath, isFromText, hasBeenSent } = this.state;
         const { eventId } = this.props;
 
         const testImageName = `image-from-react-native-${new Date()}.jpg`;
@@ -109,7 +110,7 @@ class AddItemForm extends Component {
                         console.log('snap', snapshot.downloadURL);
                         const itemURL = snapshot.downloadURL;
                         firebase.database().ref(path)
-                            .push({ name: isFromText, URL: itemURL })
+                            .push({ name: isFromText, URL: itemURL, sent: hasBeenSent })
                             .then(() => {
                                 this.setState({
                                     isFromText: '',

@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import ContactsWrapper from 'react-native-contacts-wrapper';
 import Mailer from 'react-native-mail';
+import firebase from 'firebase';
 import RNFetchBlob from 'react-native-fetch-blob';
 import { Actions } from 'react-native-router-flux';
 import { CardSection, Button, Input } from './common';
@@ -16,6 +17,7 @@ class SendItemForm extends Component {
 
     state = {
         isFromText: '',
+        itemURL: '',
         avatarSource: null,
         emailContactText: '',
         emailBodyText: '',
@@ -26,8 +28,9 @@ class SendItemForm extends Component {
     }
 
     componentDidMount() {
-        console.log('event name: ', this.props.eventName);
-        console.log('event item: ', this.props.eventItem);
+        console.log('sendItemForm event name: ', this.props.eventName);
+        console.log('sendItemForm event item: ', this.props.eventItem);
+        console.log('sendItemForm eventItem URL: ', this.props.eventItem.URL);
         const { URL, name } = this.props.eventItem;
         this.setState({
             avatarSource: { uri: URL },
@@ -85,7 +88,8 @@ class SendItemForm extends Component {
                 }
             });
         }
-        Actions.gifts({ eventId, sentThanks: true, type: 'replace' });
+        this.handleSetSent();
+        //Actions.gifts({ eventId, type: 'replace' });
     }
 
     handleGetImage() {
@@ -98,6 +102,26 @@ class SendItemForm extends Component {
             // console.log('The file saved to ', res.path());
             this.setState({ emailImagePath: res.path() });
         });
+    }
+
+    handleSetSent() {
+      const { currentUser } = firebase.auth();
+      const { eventId, sendKeyId } = this.props;
+      const path = `users/${currentUser.uid}/events/${eventId}/items/${sendKeyId}`;
+      console.log('sendItemForm image props: ', this.props.image);
+      console.log('sendItemForm path: ', path);
+      firebase.database().ref(path)
+          .set({ name: this.state.isFromText, URL: this.props.eventItem.URL, sent: true })
+          .then(() => {
+              this.setState({
+                  isFromText: '',
+                  description: '',
+                  responsePath: '',
+                  avatarSource: null,
+                  dbData: ''
+              });
+              Actions.gifts({ eventId, type: 'back' });
+          });
     }
 
     validateEmail(email) {

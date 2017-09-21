@@ -15,7 +15,7 @@ const styles = {
         // padding: 5,
         //flex: 1,
         flexDirection: 'row',
-        flexWrap: 'wrap',
+        //flexWrap: 'wrap',
         backgroundColor: '#fff',
         justifyContent: 'flex-start',
         borderColor: '#ddd',

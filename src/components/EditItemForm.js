@@ -20,6 +20,7 @@ class EditItemForm extends Component {
     state = {
         isFromText: '',
         description: '',
+        hasBeenSent: '',
         responsePath: '',
         avatarSource: null,
         dbData: '',
@@ -30,11 +31,12 @@ class EditItemForm extends Component {
     }
 
     componentDidMount() {
-        console.log('event item: ', this.props.eventItem);
-        const { URL, name } = this.props.eventItem;
+        console.log('editItemForm props: ', this.props);
+        const { URL, name, sent } = this.props.eventItem;
         this.setState({
             avatarSource: { uri: URL },
-            isFromText: name
+            isFromText: name,
+            hasBeenSent: sent
         });
     }
 
@@ -75,7 +77,7 @@ class EditItemForm extends Component {
     }
 
     handleSendItemForm() {
-        const { responsePath, isFromText } = this.state;
+        const { responsePath, isFromText, hasBeenSent } = this.state;
         const { eventId, editKeyId } = this.props;
         //console.log('event id: ', this.props.eventItem);
         const testImageName = `image-from-react-native-${new Date()}.jpg`;
@@ -102,7 +104,7 @@ class EditItemForm extends Component {
                     console.log('snap', snapshot.downloadURL);
                     const itemURL = snapshot.downloadURL;
                     firebase.database().ref(path)
-                        .set({ name: isFromText, URL: itemURL })
+                        .set({ name: isFromText, URL: itemURL, sent: hasBeenSent })
                         .then(() => {
                             this.setState({
                                 isFromText: '',
@@ -121,7 +123,7 @@ class EditItemForm extends Component {
         } else {
             console.log('same URL');
             firebase.database().ref(path)
-                .set({ name: isFromText, URL: this.props.eventItem.URL })
+                .set({ name: isFromText, URL: this.props.eventItem.URL, sent: hasBeenSent })
                 .then(() => {
                     this.setState({
                         isFromText: '',
