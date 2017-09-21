@@ -130,29 +130,34 @@ class SendItemForm extends Component {
     }
 
     render() {
-        const { clothingItem, clothingItemContainer, textArea, textStyle } = styles;
+        const { imageItem, imageContainer, textArea, textStyle } = styles;
 
         return (
-            <View style={{ flex: 1, paddingTop: 65, }}>
+            <View style={{ flex: 1, paddingTop: 70 }}>
                 <CardSection>
-                    <View style={[clothingItem, clothingItemContainer]}>
+                    <View style={[imageItem, imageContainer]}>
                         { this.state.avatarSource === null
                             ? <Text>Select a Photo</Text>
                             : <Image
-                                style={styles.clothingItem}
+                                style={styles.imageItem}
                                 source={this.state.avatarSource}
                             />
                         }
                     </View>
                 </CardSection>
+                <View style={{ marginHorizontal: 10 }}>
+                <View style={{ marginLeft: 10, marginTop: 14 }}>
                 <CardSection>
+
                     <Input
                         placeholder="Mom@mail.com"
                         label="Email"
                         value={this.state.emailContactText}
                         onChangeText={emailContactText => this.setState({ emailContactText })}
                     />
+
                 </CardSection>
+                </View>
                 <CardSection>
                 <Switch
                     onValueChange={(value) => this.setState({ addPhotoSwitch: value })}
@@ -185,6 +190,7 @@ class SendItemForm extends Component {
                     }
 
                 </CardSection>
+              </View>
             </View>
         );
     }
@@ -196,15 +202,14 @@ const styles = {
         marginTop: 12,
         marginLeft: 20
       },
-      clothingItemContainer: {
+      imageContainer: {
         flex: 1,
         justifyContent: 'space-between',
         alignItems: 'center'
       },
-      clothingItem: {
-
-        width: 100,
-        height: 100
+      imageItem: {
+        width: 150,
+        height: 150
     },
     textArea: {
         marginLeft: 10,

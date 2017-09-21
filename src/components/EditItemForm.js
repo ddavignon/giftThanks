@@ -138,21 +138,21 @@ class EditItemForm extends Component {
     }
 
     render() {
-        const { container, clothingItem, clothingItemContainer, paragraph } = styles;
+        const { container, imageItem, imageItemContainer, paragraph } = styles;
 
         return (
-            <View style={{ flex: 1, paddingTop: 70, }}>
+            <View style={{ flex: 1, paddingTop: 75, }}>
                 <CardSection>
                     <View style={{ flex: 1 }} >
                         <TouchableOpacity
                             style={container}
                             onPress={this.handleAddImageButton.bind(this)}
                         >
-                            <View style={[container, clothingItem, clothingItemContainer]}>
+                            <View style={[container, imageItem, imageItemContainer]}>
                                 { this.state.avatarSource === null
                                     ? <Text>Select a Photo</Text>
                                     : <Image
-                                        style={styles.clothingItem}
+                                        style={styles.imageItem}
                                         source={this.state.avatarSource}
                                     >
                                     <Text
@@ -166,19 +166,23 @@ class EditItemForm extends Component {
                         </TouchableOpacity>
                     </View>
                 </CardSection>
-                <CardSection>
-                    <Input
-                        placeholder="Bob"
-                        label="From"
-                        value={this.state.isFromText}
-                        onChangeText={isFromText => this.setState({ isFromText })}
-                    />
-                </CardSection>
-                <CardSection>
-                    <Button onPress={this.handleSendItemForm.bind(this)}>
-                        Update Item
-                    </Button>
-                </CardSection>
+                <View style={{ marginHorizontal: 10 }}>
+                  <View style={{ marginLeft: 14, marginTop: 14 }}>
+                    <CardSection>
+                        <Input
+                            placeholder="Bob"
+                            label="From"
+                            value={this.state.isFromText}
+                            onChangeText={isFromText => this.setState({ isFromText })}
+                        />
+                    </CardSection>
+                  </View>
+                  <CardSection>
+                      <Button onPress={this.handleSendItemForm.bind(this)}>
+                          Update Item
+                      </Button>
+                  </CardSection>
+                </View>
             </View>
         );
     }
@@ -190,13 +194,13 @@ const styles = {
     alignItems: 'center',
     backgroundColor: '#F5FCFF'
   },
-  clothingItemContainer: {
+  imageItemContainer: {
     borderColor: '#9B9B9B',
     borderWidth: 1 / PixelRatio.get(),
     justifyContent: 'center',
     alignItems: 'center'
   },
-  clothingItem: {
+  imageItem: {
     // borderRadius: 5,
     width: 300,
     height: 300
