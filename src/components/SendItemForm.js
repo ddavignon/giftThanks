@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import ContactsWrapper from 'react-native-contacts-wrapper';
 import Mailer from 'react-native-mail';
+import firebase from 'firebase';
 import RNFetchBlob from 'react-native-fetch-blob';
 import { Actions } from 'react-native-router-flux';
 import { CardSection, Button, Input } from './common';
@@ -16,6 +17,7 @@ class SendItemForm extends Component {
 
     state = {
         isFromText: '',
+        itemURL: '',
         avatarSource: null,
         emailContactText: '',
         emailBodyText: '',
@@ -26,8 +28,9 @@ class SendItemForm extends Component {
     }
 
     componentDidMount() {
-        console.log('event name: ', this.props.eventName);
-        console.log('event item: ', this.props.eventItem);
+        console.log('sendItemForm event name: ', this.props.eventName);
+        console.log('sendItemForm event item: ', this.props.eventItem);
+        console.log('sendItemForm eventItem URL: ', this.props.eventItem.URL);
         const { URL, name } = this.props.eventItem;
         this.setState({
             avatarSource: { uri: URL },
@@ -85,7 +88,8 @@ class SendItemForm extends Component {
                 }
             });
         }
-        Actions.gifts({ eventId, sentThanks: true, type: 'replace' });
+        this.handleSetSent();
+        //Actions.gifts({ eventId, type: 'replace' });
     }
 
     handleGetImage() {
@@ -100,35 +104,60 @@ class SendItemForm extends Component {
         });
     }
 
+    handleSetSent() {
+      const { currentUser } = firebase.auth();
+      const { eventId, sendKeyId } = this.props;
+      const path = `users/${currentUser.uid}/events/${eventId}/items/${sendKeyId}`;
+      console.log('sendItemForm image props: ', this.props.image);
+      console.log('sendItemForm path: ', path);
+      firebase.database().ref(path)
+          .set({ name: this.state.isFromText, URL: this.props.eventItem.URL, sent: true })
+          .then(() => {
+              this.setState({
+                  isFromText: '',
+                  description: '',
+                  responsePath: '',
+                  avatarSource: null,
+                  dbData: ''
+              });
+              Actions.gifts({ eventId, type: 'back' });
+          });
+    }
+
     validateEmail(email) {
       const emailRe = /([\w.\-_]+)?\w+@[\w-_]+(\.\w+){1,}/igm;
       return emailRe.test(email);
     }
 
     render() {
-        const { clothingItem, clothingItemContainer, textArea, textStyle } = styles;
+        const { imageItem, imageContainer, textArea, textStyle } = styles;
 
         return (
-            <View style={{ flex: 1, paddingTop: 65, }}>
+            <View style={{ flex: 1, paddingTop: 70 }}>
                 <CardSection>
-                    <View style={[clothingItem, clothingItemContainer]}>
+                    <View style={[imageItem, imageContainer]}>
                         { this.state.avatarSource === null
                             ? <Text>Select a Photo</Text>
                             : <Image
-                                style={styles.clothingItem}
+                                style={styles.imageItem}
                                 source={this.state.avatarSource}
                             />
                         }
                     </View>
                 </CardSection>
+                <View style={{ marginHorizontal: 10 }}>
+                <View style={{ marginLeft: 10, marginTop: 14 }}>
                 <CardSection>
+
                     <Input
                         placeholder="Mom@mail.com"
                         label="Email"
                         value={this.state.emailContactText}
                         onChangeText={emailContactText => this.setState({ emailContactText })}
                     />
+
                 </CardSection>
+                </View>
                 <CardSection>
                 <Switch
                     onValueChange={(value) => this.setState({ addPhotoSwitch: value })}
@@ -161,6 +190,7 @@ class SendItemForm extends Component {
                     }
 
                 </CardSection>
+              </View>
             </View>
         );
     }
@@ -172,15 +202,14 @@ const styles = {
         marginTop: 12,
         marginLeft: 20
       },
-      clothingItemContainer: {
+      imageContainer: {
         flex: 1,
         justifyContent: 'space-between',
         alignItems: 'center'
       },
-      clothingItem: {
-
-        width: 100,
-        height: 100
+      imageItem: {
+        width: 150,
+        height: 150
     },
     textArea: {
         marginLeft: 10,

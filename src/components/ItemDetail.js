@@ -38,13 +38,14 @@ class ItemDetail extends Component {
 
     renderCompleted(type) {
         //console.log('type: ', this.props);
-        if (type === 'items' && this.props.sentThanks) {
+        if (type === 'items' && this.props.hasBeenSent) {
             return (
                 <Icon
                     name='done'
                     color='#42f45f'
                     iconStyle={{
-                        justifyContent: 'space-between',
+                        justifyContent: 'center',
+                        alignItems: 'center',
                         marginLeft: 7,
                         marginRight: 10
                     }}
@@ -70,13 +71,13 @@ class ItemDetail extends Component {
             >
                 <Card>
                     <CardSection>
-                        <View>
+                        <View style={{ justifyContent: 'center', alignItems: 'center' }} >
                             {this.renderCompleted(type)}
                         </View>
                         <View style={thumbnailContainerStyle}>
                             {this.renderImageForType(type, image, thumbnailStyle)}
                         </View>
-                        <View>
+                        <View style={headerContentStyle}>
                             <Text
                               style={textStyle}
                               numberOfLines={1}
@@ -110,7 +111,7 @@ const styles = {
         justifyContent: 'space-around',
     },
     textStyle: {
-        flex: 1,
+        //flex: 1,
         marginTop: 15,
         marginBottom: 15,
         marginLeft: 5,
@@ -118,7 +119,7 @@ const styles = {
         fontSize: 28,
         fontWeight: 'bold',
         maxWidth: 200,
-        overflow: 'hidden'
+        //overflow: 'hidden'
     },
     thumbnailStyle: {
         height: 60,

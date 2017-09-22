@@ -22,6 +22,7 @@ class AddItemForm extends Component {
     state = {
         isFromText: '',
         description: '',
+        hasBeenSent: false,
         responsePath: '',
         avatarSource: null,
         dbData: '',
@@ -81,7 +82,7 @@ class AddItemForm extends Component {
 
     handleSendItemForm() {
         this.setState({ sendPhoto: true });
-        const { responsePath, isFromText } = this.state;
+        const { responsePath, isFromText, hasBeenSent } = this.state;
         const { eventId } = this.props;
 
         const testImageName = `image-from-react-native-${new Date()}.jpg`;
@@ -109,7 +110,7 @@ class AddItemForm extends Component {
                         console.log('snap', snapshot.downloadURL);
                         const itemURL = snapshot.downloadURL;
                         firebase.database().ref(path)
-                            .push({ name: isFromText, URL: itemURL })
+                            .push({ name: isFromText, URL: itemURL, sent: hasBeenSent })
                             .then(() => {
                                 this.setState({
                                     isFromText: '',
@@ -128,21 +129,21 @@ class AddItemForm extends Component {
     }
 
     render() {
-        const { container, clothingItem, clothingItemContainer } = styles;
+        const { container, imageItem, imageItemContainer } = styles;
 
         return (
-            <View style={{ flex: 1, paddingTop: 70 }}>
+            <View style={{ flex: 1, paddingTop: 75 }}>
                 <CardSection>
                     <View style={{ flex: 1 }} >
                         <TouchableOpacity
                             style={container}
                             onPress={this.handleAddImageButton.bind(this)}
                         >
-                            <View style={[container, clothingItem, clothingItemContainer]}>
+                            <View style={[container, imageItem, imageItemContainer]}>
                                 { this.state.avatarSource === null
                                     ? <Text>Select a Photo</Text>
                                     : <Image
-                                        style={styles.clothingItem}
+                                        style={styles.imageItem}
                                         source={this.state.avatarSource}
                                     />
                                 }
@@ -150,28 +151,32 @@ class AddItemForm extends Component {
                         </TouchableOpacity>
                     </View>
                 </CardSection>
-                <CardSection>
-                    <Input
-                        placeholder="Bob"
-                        label="From"
-                        value={this.state.isFromText}
-                        onChangeText={isFromText => this.setState({ isFromText })}
-                    />
-                </CardSection>
-                {this.state.sendPhoto
-                    ?
-                    <Card>
-                        <CardSection>
-                                <Spinner size="large" />
-                        </CardSection>
-                    </Card>
-                    :
+                <View style={{ marginHorizontal: 10 }}>
+                  <View style={{ marginLeft: 14, marginTop: 14 }}>
                     <CardSection>
-                        <Button onPress={this.handleSendItemForm.bind(this)}>
-                            Add Item
-                        </Button>
+                        <Input
+                            placeholder="Bob"
+                            label="From"
+                            value={this.state.isFromText}
+                            onChangeText={isFromText => this.setState({ isFromText })}
+                        />
                     </CardSection>
-                }
+                  </View>
+                  {this.state.sendPhoto
+                      ?
+                      <Card>
+                          <CardSection>
+                                  <Spinner size="large" />
+                          </CardSection>
+                      </Card>
+                      :
+                      <CardSection>
+                          <Button onPress={this.handleSendItemForm.bind(this)}>
+                              Add Item
+                          </Button>
+                      </CardSection>
+                  }
+                </View>
             </View>
         );
     }
@@ -184,13 +189,13 @@ const styles = {
     alignItems: 'center',
     backgroundColor: '#F5FCFF'
   },
-  clothingItemContainer: {
+  imageItemContainer: {
     borderColor: '#9B9B9B',
     borderWidth: 1 / PixelRatio.get(),
     justifyContent: 'center',
     alignItems: 'center'
   },
-  clothingItem: {
+  imageItem: {
     // borderRadius: 5,
     width: 300,
     height: 300
