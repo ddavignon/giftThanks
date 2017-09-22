@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, Modal } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { Input, Button, CardSection } from './common';
+import { Input, Button, SquareCardSection } from './common';
 import { eventTextChanged, eventTextCompleted } from '../actions';
 
 
@@ -47,22 +47,23 @@ class AddEventModal extends Component {
                 visible={visible}
             >
                 <View style={containerStyle}>
-                    <CardSection style={cardSectionStyle}>
+                  <View style={{ marginHorizontal: 15, borderRadius: 12 }}>
+                    <SquareCardSection style={cardSectionStyle}>
                         <Text style={textStyle}>
                             Add Event
                         </Text>
-                    </CardSection>
+                    </SquareCardSection>
 
-                    <CardSection>
+                    <SquareCardSection>
                         <Input
-                            label='Event Name:'
+                            label='   Event Name:'
                             placeholder='Birthday!'
                             value={this.state.eventName}
                             onChangeText={eventName => this.setState({ eventName })}
                         />
-                    </CardSection>
+                    </SquareCardSection>
 
-                    <CardSection style={cardSectionStyle}>
+                    <SquareCardSection style={cardSectionStyle}>
                         <Button onPress={() => this.getEventName(this.state.eventName)} >
                             Create
                         </Button>
@@ -70,7 +71,8 @@ class AddEventModal extends Component {
                         <Button onPress={() => Actions.pop()}>
                             Cancel
                         </Button>
-                    </CardSection>
+                    </SquareCardSection>
+                  </View>
                 </View>
             </Modal>
         );
@@ -79,7 +81,7 @@ class AddEventModal extends Component {
 
 const styles = {
     cardSectionStyle: {
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     textStyle: {
         flex: 1,

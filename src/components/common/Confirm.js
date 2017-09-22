@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, Modal } from 'react-native';
-import { CardSection } from './CardSection';
+import { SquareCardSection } from './SquareCardSection';
 import { Button } from './Button';
 
 
@@ -15,21 +15,23 @@ const { containerStyle, textStyle, cardSectionStyle } = styles;
             visible={visible}
         >
             <View style={containerStyle}>
-                <CardSection style={cardSectionStyle}>
+              <View style={{ marginHorizontal: 15, borderRadius: 12 }} >
+                <SquareCardSection style={cardSectionStyle}>
                     <Text style={textStyle}>
                         {children}
                     </Text>
-                </CardSection>
+                </SquareCardSection>
 
-                <CardSection>
+                <SquareCardSection>
                 <Button onPress={onAccept}>
                     Yes
                 </Button>
-                
+
                 <Button onPress={onDecline}>
                     No
                 </Button>
-                </CardSection>
+                </SquareCardSection>
+              </View>
             </View>
         </Modal>
     );
