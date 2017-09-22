@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, Image } from 'react-native';
 import firebase from 'firebase';
 import ItemDetail from '../components/ItemDetail';
 import { Confirm } from '../components/common';
@@ -139,6 +139,10 @@ class EventItems extends Component {
 
     render() {
         return (
+          <Image
+            source={require('../../assets/images/gifts.png')}
+            style={styles.imageContainer}
+          >
             <View style={styles.screenStyle}>
             <ScrollView>
                 <View style={{ marginBottom: 65 }}>
@@ -153,17 +157,25 @@ class EventItems extends Component {
                     Are you sure you want to delete this?
                 </Confirm>
             </View>
-
+          </Image>
         );
     }
 }
 
 const styles = {
+    imageContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      width: null,
+      height: null,
+      backgroundColor: 'rgba(0,0,0,0)',
+      paddingBottom: 30
+    },
     screenStyle: {
         paddingTop: 60,
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: '#82EDD2'
+        // backgroundColor: '#82EDD2'
     }
 };
 export default EventItems;

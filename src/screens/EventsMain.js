@@ -5,6 +5,7 @@ import {
     ScrollView,
     View,
     Platform,
+    Image
 } from 'react-native';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
@@ -217,6 +218,10 @@ class EventsMain extends Component {
         }
 
         return (
+          <Image
+            source={require('../../assets/images/gifts.png')}
+            style={styles.imageContainer}
+          >
             <View style={styles.screenStyle}>
 
                 <ScrollView>
@@ -232,17 +237,26 @@ class EventsMain extends Component {
                     Are you sure you want to delete this?
                 </Confirm>
             </View>
+          </Image>
         );
     }
 }
 
 const styles = {
+    imageContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      width: null,
+      height: null,
+      backgroundColor: 'rgba(0,0,0,0)',
+      paddingBottom: 30
+    },
     screenStyle: {
         paddingTop: 60,
         flex: 1,
         flexDirection: 'column',
         // backgroundColor: '#DCDDDE'
-        backgroundColor: '#49D9E3'
+        // backgroundColor: '#49D9E3'
     }
 };
 
