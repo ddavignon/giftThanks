@@ -5,10 +5,7 @@ import {
     View,
     Text,
     PixelRatio,
-    Alert,
     CameraRoll,
-    Platform,
-    PermissionsAndroid
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import RNFetchBlob from 'react-native-fetch-blob';
@@ -92,8 +89,8 @@ class AddItemForm extends Component {
         console.log('add item pressed');
 
         ImageResizer.createResizedImage(responsePath, 600, 600, 'JPEG', 80)
-            .then((resizedImageUri) => {
-                Blob.build(RNFetchBlob.wrap(resizedImageUri), { type: 'image/jpeg' })
+            .then(({ uri }) => {
+                Blob.build(RNFetchBlob.wrap(uri), { type: 'image/jpeg' })
                     .then((blob) => firebase.storage()
                             .ref(path)
                             .child(testImageName)
