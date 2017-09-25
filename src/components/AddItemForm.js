@@ -5,6 +5,8 @@ import {
     View,
     Text,
     PixelRatio,
+    Alert,
+    CameraRoll,
     Platform,
     PermissionsAndroid
 } from 'react-native';
@@ -53,7 +55,7 @@ class AddItemForm extends Component {
 
 
         ImagePicker.showImagePicker(options, (response) => {
-            //console.log('Response = ', response.uri);
+            console.log('Image Picker Response: ', response);
 
             if (response.didCancel) {
                 console.log('User cancelled image picker');
@@ -63,15 +65,7 @@ class AddItemForm extends Component {
                 console.log('User tapped custom button: ', response.customButton);
             } else {
                 const avatarSource = { uri: response.uri };
-                // //const responsePath = '';
-                // if (Platform.OS === 'android') {
-                //     this.setState({ responsePath: response.path });
-                // } else {
-                //     const iosResponsePath = response.uri.replace('file://', '');
-                //     this.setState({ responsePath: iosResponsePath });
-                // }
-                // console.log('response', response);
-                // console.log('Rpth', this.state.responsePath);
+
                 this.setState({
                     avatarSource,
                     responsePath: response.uri
@@ -112,6 +106,9 @@ class AddItemForm extends Component {
                         firebase.database().ref(path)
                             .push({ name: isFromText, URL: itemURL, sent: hasBeenSent })
                             .then(() => {
+                                CameraRoll.saveToCameraRoll(this.state.responsePath)
+                                  .then(console.log('Success', 'Photo added to camera roll!'))
+                                  .catch(err => console.log('err:', err));
                                 this.setState({
                                     isFromText: '',
                                     description: '',
