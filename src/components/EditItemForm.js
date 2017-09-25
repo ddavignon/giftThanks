@@ -6,12 +6,14 @@ import {
     Text,
     PixelRatio,
     Platform,
+    CameraRoll
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
+import ImageResizer from 'react-native-image-resizer';
 import RNFetchBlob from 'react-native-fetch-blob';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
-import { CardSection, Button, Input } from './common';
+import { SquareCardSection, Button, Input } from './common';
 
 // const Permissions = require('react-native-permissions');
 
@@ -61,21 +63,81 @@ class EditItemForm extends Component {
                 console.log('User tapped custom button: ', response.customButton);
             } else {
                 const avatarSource = { uri: response.uri };
-                //const responsePath = '';
-                if (Platform.OS === 'android') {
-                    this.setState({ responsePath: response.path });
-                }
-                const iosResponsePath = response.uri.replace('file://', '');
-                this.setState({ responsePath: iosResponsePath });
-                //console.log('response', response);
-                console.log('Rpth', this.state.responsePath);
+                // const responsePath = '';
+                // if (Platform.OS === 'android') {
+                //     this.setState({ responsePath: response.path });
+                // }
+                // const iosResponsePath = response.uri.replace('file://', '');
+                // this.setState({ responsePath: iosResponsePath });
+                // //console.log('response', response);
+                // console.log('Rpth', this.state.responsePath);
                 this.setState({
-                    avatarSource
+                    avatarSource,
+                    responsePath: response.uri
                 });
             }
         });
     }
-
+    // handleSendItemForm() {
+    //     const { responsePath, isFromText, hasBeenSent } = this.state;
+    //     const { eventId, editKeyId } = this.props;
+    //     //console.log('event id: ', this.props.eventItem);
+    //     const testImageName = `image-from-react-native-${new Date()}.jpg`;
+    //     const { currentUser } = firebase.auth();
+    //     const path = `users/${currentUser.uid}/events/${eventId}/items/${editKeyId}`;
+    //     const storagePath = `users/${currentUser.uid}/events/${eventId}/items/`;
+    //
+    //     //console.log(responsePath);
+    //
+    //     const Blob = RNFetchBlob.polyfill.Blob;
+    //
+    //     window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
+    //     window.Blob = Blob;
+    //     console.log('edit item pressed');
+    //     if (responsePath) {
+    //         Blob.build(RNFetchBlob.wrap(responsePath), { type: 'image/jpeg' })
+    //             .then((blob) => firebase.storage()
+    //                     .ref(storagePath)
+    //                     .child(testImageName)
+    //                     .put(blob, { contentType: 'image/png' })
+    //             )
+    //             .catch(console.log('Build blob failed!'))
+    //             .then((snapshot) => {
+    //                 console.log('snap', snapshot.downloadURL);
+    //                 const itemURL = snapshot.downloadURL;
+    //                 firebase.database().ref(path)
+    //                     .set({ name: isFromText, URL: itemURL, sent: hasBeenSent })
+    //                     .then(() => {
+    //                         this.setState({
+    //                             isFromText: '',
+    //                             description: '',
+    //                             responsePath: '',
+    //                             avatarSource: null,
+    //                             dbData: ''
+    //                         });
+    //                         const deletePhotoRef = firebase.storage()
+    //                             .refFromURL(this.props.eventItem.URL);
+    //                         deletePhotoRef.delete().then(() => {
+    //                             Actions.gifts({ eventId, type: 'back' });
+    //                         });
+    //                     });
+    //             });
+    //     } else {
+    //         console.log('same URL');
+    //         firebase.database().ref(path)
+    //             .set({ name: isFromText, URL: this.props.eventItem.URL, sent: hasBeenSent })
+    //             .then(() => {
+    //                 this.setState({
+    //                     isFromText: '',
+    //                     description: '',
+    //                     responsePath: '',
+    //                     avatarSource: null,
+    //                     dbData: ''
+    //                 });
+    //                 Actions.gifts({ eventId, type: 'back' });
+    //             });
+    //     }
+    // }
     handleSendItemForm() {
         const { responsePath, isFromText, hasBeenSent } = this.state;
         const { eventId, editKeyId } = this.props;
@@ -93,33 +155,38 @@ class EditItemForm extends Component {
         window.Blob = Blob;
         console.log('edit item pressed');
         if (responsePath) {
-            Blob.build(RNFetchBlob.wrap(responsePath), { type: 'image/jpeg' })
-                .then((blob) => firebase.storage()
-                        .ref(storagePath)
-                        .child(testImageName)
-                        .put(blob, { contentType: 'image/png' })
-                )
-                .catch(console.log('Build blob failed!'))
-                .then((snapshot) => {
-                    console.log('snap', snapshot.downloadURL);
-                    const itemURL = snapshot.downloadURL;
-                    firebase.database().ref(path)
-                        .set({ name: isFromText, URL: itemURL, sent: hasBeenSent })
-                        .then(() => {
-                            this.setState({
-                                isFromText: '',
-                                description: '',
-                                responsePath: '',
-                                avatarSource: null,
-                                dbData: ''
-                            });
-                            const deletePhotoRef = firebase.storage()
-                                .refFromURL(this.props.eventItem.URL);
-                            deletePhotoRef.delete().then(() => {
-                                Actions.gifts({ eventId, type: 'back' });
-                            });
-                        });
-                });
+          ImageResizer.createResizedImage(responsePath, 600, 600, 'JPEG', 80)
+              .then((resizedImageUri) => {
+                  Blob.build(RNFetchBlob.wrap(resizedImageUri), { type: 'image/jpeg' })
+                      .then((blob) => firebase.storage()
+                              .ref(storagePath)
+                              .child(testImageName)
+                              .put(blob, { contentType: 'image/png' })
+                      )
+                      .catch(console.log('Build blog failed!'))
+                      .then((snapshot) => {
+                          console.log('snap', snapshot.downloadURL);
+                          const itemURL = snapshot.downloadURL;
+                          firebase.database().ref(path)
+                              .set({ name: isFromText, URL: itemURL, sent: hasBeenSent })
+                              .then(() => {
+                                  CameraRoll.saveToCameraRoll(this.state.responsePath)
+                                    .then(console.log('Success, Photo added to camera roll!', snapshot.downloadURL))
+                                    .catch(err => console.log('err:', err));
+                                  this.setState({
+                                      isFromText: '',
+                                      description: '',
+                                      responsePath: '',
+                                      avatarSource: null,
+                                      dbData: ''
+                                  });
+                                  Actions.gifts({ eventId, type: 'back' });
+                              });
+                      });
+              }).catch((err) => {
+                  console.log('error for resize', err);
+                  return alert('Unable to resize the photo Check the console for full the error message');
+              });
         } else {
             console.log('same URL');
             firebase.database().ref(path)
@@ -142,7 +209,6 @@ class EditItemForm extends Component {
 
         return (
             <View style={{ flex: 1, paddingTop: 75, }}>
-                <CardSection>
                     <View style={{ flex: 1 }} >
                         <TouchableOpacity
                             style={container}
@@ -165,23 +231,23 @@ class EditItemForm extends Component {
                             </View>
                         </TouchableOpacity>
                     </View>
-                </CardSection>
+
                 <View style={{ marginHorizontal: 10 }}>
-                  <View style={{ marginLeft: 14, marginTop: 14 }}>
-                    <CardSection>
+                  <View style={{ marginTop: 14 }}>
+                    <SquareCardSection>
                         <Input
                             placeholder="Bob"
                             label="From"
                             value={this.state.isFromText}
                             onChangeText={isFromText => this.setState({ isFromText })}
                         />
-                    </CardSection>
+                    </SquareCardSection>
                   </View>
-                  <CardSection>
+                  <SquareCardSection>
                       <Button onPress={this.handleSendItemForm.bind(this)}>
                           Update Item
                       </Button>
-                  </CardSection>
+                  </SquareCardSection>
                 </View>
             </View>
         );
@@ -191,8 +257,7 @@ class EditItemForm extends Component {
 const styles = {
   container: {
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    alignItems: 'center'
   },
   imageItemContainer: {
     borderColor: '#9B9B9B',
@@ -206,9 +271,10 @@ const styles = {
     height: 300
   },
   paragraph: {
+    paddingTop: 130,
     textAlign: 'center',
-    color: 'white',
-    backgroundColor: 'rgba(0,0,0,0)',
+    color: '#D3D3D3',
+    backgroundColor: 'transparent',
     fontSize: 25
   },
 };

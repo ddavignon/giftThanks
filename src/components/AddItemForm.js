@@ -5,15 +5,14 @@ import {
     View,
     Text,
     PixelRatio,
-    Platform,
-    PermissionsAndroid
+    CameraRoll,
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import RNFetchBlob from 'react-native-fetch-blob';
 import ImageResizer from 'react-native-image-resizer';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
-import { Card, CardSection, Button, Input, Spinner } from './common';
+import { Card, SquareCardSection, Button, Input, Spinner } from './common';
 
 // const Permissions = require('react-native-permissions');
 
@@ -53,7 +52,7 @@ class AddItemForm extends Component {
 
 
         ImagePicker.showImagePicker(options, (response) => {
-            //console.log('Response = ', response.uri);
+            console.log('Image Picker Response: ', response);
 
             if (response.didCancel) {
                 console.log('User cancelled image picker');
@@ -63,15 +62,7 @@ class AddItemForm extends Component {
                 console.log('User tapped custom button: ', response.customButton);
             } else {
                 const avatarSource = { uri: response.uri };
-                // //const responsePath = '';
-                // if (Platform.OS === 'android') {
-                //     this.setState({ responsePath: response.path });
-                // } else {
-                //     const iosResponsePath = response.uri.replace('file://', '');
-                //     this.setState({ responsePath: iosResponsePath });
-                // }
-                // console.log('response', response);
-                // console.log('Rpth', this.state.responsePath);
+
                 this.setState({
                     avatarSource,
                     responsePath: response.uri
@@ -112,6 +103,9 @@ class AddItemForm extends Component {
                         firebase.database().ref(path)
                             .push({ name: isFromText, URL: itemURL, sent: hasBeenSent })
                             .then(() => {
+                                CameraRoll.saveToCameraRoll(this.state.responsePath)
+                                  .then(console.log('Success, Photo added to camera roll!', snapshot.downloadURL))
+                                  .catch(err => console.log('err:', err));
                                 this.setState({
                                     isFromText: '',
                                     description: '',
@@ -133,7 +127,7 @@ class AddItemForm extends Component {
 
         return (
             <View style={{ flex: 1, paddingTop: 75 }}>
-                <CardSection>
+
                     <View style={{ flex: 1 }} >
                         <TouchableOpacity
                             style={container}
@@ -141,7 +135,7 @@ class AddItemForm extends Component {
                         >
                             <View style={[container, imageItem, imageItemContainer]}>
                                 { this.state.avatarSource === null
-                                    ? <Text>Select a Photo</Text>
+                                    ? <Text style={{ fontSize: 18 }}>Select a Photo</Text>
                                     : <Image
                                         style={styles.imageItem}
                                         source={this.state.avatarSource}
@@ -150,31 +144,31 @@ class AddItemForm extends Component {
                             </View>
                         </TouchableOpacity>
                     </View>
-                </CardSection>
+
                 <View style={{ marginHorizontal: 10 }}>
-                  <View style={{ marginLeft: 14, marginTop: 14 }}>
-                    <CardSection>
+                  <View style={{ marginTop: 14 }}>
+                    <SquareCardSection>
                         <Input
                             placeholder="Bob"
                             label="From"
                             value={this.state.isFromText}
                             onChangeText={isFromText => this.setState({ isFromText })}
                         />
-                    </CardSection>
+                    </SquareCardSection>
                   </View>
                   {this.state.sendPhoto
                       ?
                       <Card>
-                          <CardSection>
+                          <SquareCardSection>
                                   <Spinner size="large" />
-                          </CardSection>
+                          </SquareCardSection>
                       </Card>
                       :
-                      <CardSection>
+                      <SquareCardSection>
                           <Button onPress={this.handleSendItemForm.bind(this)}>
                               Add Item
                           </Button>
-                      </CardSection>
+                      </SquareCardSection>
                   }
                 </View>
             </View>
@@ -187,11 +181,12 @@ const styles = {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    //backgroundColor: '#F5FCFF'
+    backgroundColor: 'transparent'
   },
   imageItemContainer: {
     borderColor: '#9B9B9B',
-    borderWidth: 1 / PixelRatio.get(),
+    borderWidth: 2 / PixelRatio.get(),
     justifyContent: 'center',
     alignItems: 'center'
   },
