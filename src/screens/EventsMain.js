@@ -248,15 +248,12 @@ const styles = {
       justifyContent: 'center',
       width: null,
       height: null,
-      backgroundColor: 'rgba(0,0,0,0)',
       paddingBottom: 30
     },
     screenStyle: {
         paddingTop: 60,
         flex: 1,
-        flexDirection: 'column',
-        // backgroundColor: '#DCDDDE'
-        // backgroundColor: '#49D9E3'
+        flexDirection: 'column'
     }
 };
 

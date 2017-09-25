@@ -11,7 +11,7 @@ import ImagePicker from 'react-native-image-picker';
 import RNFetchBlob from 'react-native-fetch-blob';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
-import { CardSection, Button, Input } from './common';
+import { SquareCardSection, Button, Input } from './common';
 
 // const Permissions = require('react-native-permissions');
 
@@ -142,7 +142,6 @@ class EditItemForm extends Component {
 
         return (
             <View style={{ flex: 1, paddingTop: 75, }}>
-                <CardSection>
                     <View style={{ flex: 1 }} >
                         <TouchableOpacity
                             style={container}
@@ -165,23 +164,23 @@ class EditItemForm extends Component {
                             </View>
                         </TouchableOpacity>
                     </View>
-                </CardSection>
+
                 <View style={{ marginHorizontal: 10 }}>
-                  <View style={{ marginLeft: 14, marginTop: 14 }}>
-                    <CardSection>
+                  <View style={{ marginTop: 14 }}>
+                    <SquareCardSection>
                         <Input
                             placeholder="Bob"
                             label="From"
                             value={this.state.isFromText}
                             onChangeText={isFromText => this.setState({ isFromText })}
                         />
-                    </CardSection>
+                    </SquareCardSection>
                   </View>
-                  <CardSection>
+                  <SquareCardSection>
                       <Button onPress={this.handleSendItemForm.bind(this)}>
                           Update Item
                       </Button>
-                  </CardSection>
+                  </SquareCardSection>
                 </View>
             </View>
         );
@@ -191,8 +190,7 @@ class EditItemForm extends Component {
 const styles = {
   container: {
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    alignItems: 'center'
   },
   imageItemContainer: {
     borderColor: '#9B9B9B',
@@ -206,8 +204,9 @@ const styles = {
     height: 300
   },
   paragraph: {
+    paddingTop: 130,
     textAlign: 'center',
-    color: 'white',
+    color: '#D3D3D3',
     backgroundColor: 'rgba(0,0,0,0)',
     fontSize: 25
   },

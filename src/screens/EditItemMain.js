@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Image } from 'react-native';
 import EditItemForm from '../components/EditItemForm';
 
 class EditItemMain extends Component {
     render() {
         return (
+          <Image
+            source={require('../../assets/images/plain.png')}
+            style={styles.imageContainer}
+          >
             <ScrollView keyboardShouldPersistTaps="always">
                 <EditItemForm
                     eventItem={this.props.event}
@@ -12,8 +16,20 @@ class EditItemMain extends Component {
                     editKeyId={this.props.editKeyId}
                 />
             </ScrollView>
+          </Image>
         );
     }
 }
+
+const styles = {
+  imageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    width: null,
+    height: null,
+    backgroundColor: 'rgba(0,0,0,0)',
+    paddingBottom: 30
+  }
+};
 
 export default EditItemMain;

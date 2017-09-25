@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-const Card = (props) => {
+const RadiusCard = (props) => {
     return (
       <View>
         <View style={styles.containerStyle}>
@@ -14,6 +14,8 @@ const Card = (props) => {
 
 const styles = {
     containerStyle: {
+        borderTopRightRadius: 50,
+        borderBottomRightRadius: 50,
         flexWrap: 'wrap',
         justifyContent: 'space-between',
         borderBottomWidth: 0,
@@ -28,4 +30,4 @@ const styles = {
     }
 };
 
-export { Card };
+export { RadiusCard };

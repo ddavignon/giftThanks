@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
-import { Card, CardSection } from './common';
+import { RadiusCard, CardSection } from './common';
 
 
 class ItemDetail extends Component {
@@ -69,7 +69,7 @@ class ItemDetail extends Component {
             <TouchableOpacity
                 onPress={this.props.onItemPress}
             >
-                <Card>
+                <RadiusCard>
                     <CardSection>
                         <View style={{ justifyContent: 'center', alignItems: 'center' }} >
                             {this.renderCompleted(type)}
@@ -99,7 +99,7 @@ class ItemDetail extends Component {
                             />
                         </View>
                     </CardSection>
-                </Card>
+                </RadiusCard>
             </TouchableOpacity>
         );
     }

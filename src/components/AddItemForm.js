@@ -13,7 +13,7 @@ import RNFetchBlob from 'react-native-fetch-blob';
 import ImageResizer from 'react-native-image-resizer';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
-import { Card, CardSection, Button, Input, Spinner } from './common';
+import { Card, SquareCardSection, Button, Input, Spinner } from './common';
 
 // const Permissions = require('react-native-permissions');
 
@@ -133,7 +133,7 @@ class AddItemForm extends Component {
 
         return (
             <View style={{ flex: 1, paddingTop: 75 }}>
-                <CardSection>
+
                     <View style={{ flex: 1 }} >
                         <TouchableOpacity
                             style={container}
@@ -141,7 +141,7 @@ class AddItemForm extends Component {
                         >
                             <View style={[container, imageItem, imageItemContainer]}>
                                 { this.state.avatarSource === null
-                                    ? <Text>Select a Photo</Text>
+                                    ? <Text style={{ fontSize: 18 }}>Select a Photo</Text>
                                     : <Image
                                         style={styles.imageItem}
                                         source={this.state.avatarSource}
@@ -150,31 +150,31 @@ class AddItemForm extends Component {
                             </View>
                         </TouchableOpacity>
                     </View>
-                </CardSection>
+
                 <View style={{ marginHorizontal: 10 }}>
-                  <View style={{ marginLeft: 14, marginTop: 14 }}>
-                    <CardSection>
+                  <View style={{ marginTop: 14 }}>
+                    <SquareCardSection>
                         <Input
                             placeholder="Bob"
                             label="From"
                             value={this.state.isFromText}
                             onChangeText={isFromText => this.setState({ isFromText })}
                         />
-                    </CardSection>
+                    </SquareCardSection>
                   </View>
                   {this.state.sendPhoto
                       ?
                       <Card>
-                          <CardSection>
+                          <SquareCardSection>
                                   <Spinner size="large" />
-                          </CardSection>
+                          </SquareCardSection>
                       </Card>
                       :
-                      <CardSection>
+                      <SquareCardSection>
                           <Button onPress={this.handleSendItemForm.bind(this)}>
                               Add Item
                           </Button>
-                      </CardSection>
+                      </SquareCardSection>
                   }
                 </View>
             </View>
@@ -187,11 +187,12 @@ const styles = {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    //backgroundColor: '#F5FCFF'
+    backgroundColor: 'rgba(0,0,0,0)'
   },
   imageItemContainer: {
     borderColor: '#9B9B9B',
-    borderWidth: 1 / PixelRatio.get(),
+    borderWidth: 2 / PixelRatio.get(),
     justifyContent: 'center',
     alignItems: 'center'
   },

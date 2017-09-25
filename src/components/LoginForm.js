@@ -16,7 +16,7 @@ import firebase from 'firebase';
 import { connect } from 'react-redux';
 // import firebase from 'react-native-firebase';
 import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
-import { Card, CardSection, Input, Button, Spinner } from './common';
+import { Card, SquareCardSection, Input, Button, Spinner } from './common';
 
 
 class LoginForm extends Component {
@@ -113,14 +113,12 @@ class LoginForm extends Component {
   renderScreen() {
     if (this.state.showLogin) {
       return (
-        <ScrollView style={styles.mainScrollView} >
-          <View style={{ paddingTop: 45, backgroundColor: 'rgb(245,245,245)' }}>
+          <View style={{ flex: 1, paddingTop: 45, backgroundColor: 'rgb(245,245,245)' }}>
               <Image
                 source={require('../../assets/images/gifThanks_login.png')}
                 style={styles.imageContainer}
               />
-            <View style={{ marginRight: 20, marginLeft: 20 }}>
-              <View style={styles.inputMargin}>
+            <View style={{ height: 70, marginHorizontal: 30 }}>
                 <Input
                   label="Email"
                   placeholder="email@email.com"
@@ -128,8 +126,6 @@ class LoginForm extends Component {
                   value={this.state.email}
                   style={styles.inputStyle}
                 />
-              </View>
-              <View style={styles.inputMargin}>
                 <Input
                   label="Password"
                   placeholder="password"
@@ -139,7 +135,7 @@ class LoginForm extends Component {
                   style={styles.inputStyle}
                 />
               </View>
-              <View>
+              <View style={{ height: 180, marginHorizontal: 20 }}>
                 <Button onPress={this.onSignInPress.bind(this)}>
                   Sign In
                 </Button>
@@ -147,7 +143,6 @@ class LoginForm extends Component {
                   Sign Up
                 </Button>
               </View>
-            </View>
               <View style={styles.socialLoginContainerStyle}>
 
                 <SocialIcon
@@ -164,14 +159,13 @@ class LoginForm extends Component {
               </View>
 
           </View>
-        </ScrollView>
       );
     }
 
     return (
-      <ScrollView style={styles.mainScrollView} >
         <View
           style={{
+            backgroundColor: 'rgba(0,0,0,0)',
             alignItems: 'center',
             justifyContent: 'center',
             flex: 1,
@@ -179,7 +173,6 @@ class LoginForm extends Component {
         >
           <Spinner />
         </View>
-      </ScrollView>
     );
   }
 
@@ -202,15 +195,7 @@ const styles = {
   },
   inputStyle: {
     flex: 1,
-    paddingTop: 20,
-    paddingBottom: 20,
-  },
-
-  blankTextStyle: {
-    fontSize: 180,
-    alignSelf: 'center',
-    paddingTop: 15,
-
+    paddingVertical: 30,
   },
   imageTextStyle: {
     color: 'black',
@@ -224,6 +209,7 @@ const styles = {
     width: 250,
     height: 250,
     marginVertical: 35,
+    paddingTop: 20,
     backgroundColor: 'rgba(0,0,0,0)',
   },
   socialLoginContainerStyle: {

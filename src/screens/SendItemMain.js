@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Image } from 'react-native';
 import SendItemForm from '../components/SendItemForm';
 
 class SendItemMain extends Component {
     render() {
         return (
+          <Image
+            source={require('../../assets/images/plain.png')}
+            style={styles.imageContainer}
+          >
             <ScrollView>
                 <SendItemForm
                     eventItem={this.props.event}
@@ -13,8 +17,20 @@ class SendItemMain extends Component {
                     eventName={this.props.eventName}
                 />
             </ScrollView>
+          </Image>
         );
     }
 }
+
+const styles = {
+  imageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    width: null,
+    height: null,
+    backgroundColor: 'rgba(0,0,0,0)',
+    paddingBottom: 30
+  }
+};
 
 export default SendItemMain;

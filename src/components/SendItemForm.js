@@ -11,7 +11,7 @@ import Mailer from 'react-native-mail';
 import firebase from 'firebase';
 import RNFetchBlob from 'react-native-fetch-blob';
 import { Actions } from 'react-native-router-flux';
-import { CardSection, Button, Input } from './common';
+import { SquareCardSection, Button, Input } from './common';
 
 class SendItemForm extends Component {
 
@@ -134,7 +134,7 @@ class SendItemForm extends Component {
 
         return (
             <View style={{ flex: 1, paddingTop: 70 }}>
-                <CardSection>
+                  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
                     <View style={[imageItem, imageContainer]}>
                         { this.state.avatarSource === null
                             ? <Text>Select a Photo</Text>
@@ -144,41 +144,42 @@ class SendItemForm extends Component {
                             />
                         }
                     </View>
-                </CardSection>
+                  </View>
                 <View style={{ marginHorizontal: 10 }}>
-                <View style={{ marginLeft: 10, marginTop: 14 }}>
-                <CardSection>
+                <View style={{ marginTop: 14 }}>
+                  <SquareCardSection>
+                      <Input
+                          placeholder="Mom@mail.com"
+                          label="Email"
+                          value={this.state.emailContactText}
+                          onChangeText={emailContactText => this.setState({ emailContactText })}
+                      />
 
-                    <Input
-                        placeholder="Mom@mail.com"
-                        label="Email"
-                        value={this.state.emailContactText}
-                        onChangeText={emailContactText => this.setState({ emailContactText })}
-                    />
-
-                </CardSection>
+                  </SquareCardSection>
                 </View>
-                <CardSection>
-                <Switch
-                    onValueChange={(value) => this.setState({ addPhotoSwitch: value })}
-                    style={{ marginLeft: 10, marginBottom: 10, marginTop: 10 }}
-                    value={this.state.addPhotoSwitch}
-                />
-                <Text style={textStyle}> Add photo to email</Text>
-                </CardSection>
-                <View>
-                    <TextInput
-                        style={textArea}
-                        multiline={true}
-                        placeholder={'Mom@mail.com'}
-                        editable={true}
-                        maxLength={200}
-                        numberOfLines={10}
-                        onChangeText={(emailBodyText) => this.setState({ emailBodyText })}
-                        value={this.state.emailBodyText}
-                    />
-                </View>
-                <CardSection>
+                <SquareCardSection>
+                  <Switch
+                      onValueChange={(value) => this.setState({ addPhotoSwitch: value })}
+                      style={{ marginLeft: 10, marginBottom: 10, marginTop: 10 }}
+                      value={this.state.addPhotoSwitch}
+                  />
+                  <Text style={textStyle}> Add photo to email</Text>
+                </SquareCardSection>
+                <SquareCardSection>
+                  <View>
+                      <TextInput
+                          style={textArea}
+                          multiline={true}
+                          placeholder={'Mom@mail.com'}
+                          editable={true}
+                          maxLength={200}
+                          numberOfLines={10}
+                          onChangeText={(emailBodyText) => this.setState({ emailBodyText })}
+                          value={this.state.emailBodyText}
+                      />
+                  </View>
+                </SquareCardSection>
+                <SquareCardSection>
                     {
                         this.validateEmail(this.state.emailContactText) ?
                         <Button onPress={this.onSendButtonPressed.bind(this)}>
@@ -188,8 +189,7 @@ class SendItemForm extends Component {
                             Get email from contacts
                         </Button>
                     }
-
-                </CardSection>
+                </SquareCardSection>
               </View>
             </View>
         );
@@ -204,7 +204,7 @@ const styles = {
       },
       imageContainer: {
         flex: 1,
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center'
       },
       imageItem: {

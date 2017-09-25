@@ -22,11 +22,14 @@ const styles = {
     inputStyle: {
         color: '#000',
         paddingRight: 5,
+        paddingTop: 15,
         fontSize: 18,
         lineHeight: 23,
         flex: 2
     },
     labelStyle: {
+        paddingLeft: 14,
+        paddingTop: 15,
         fontSize: 18,
         flex: 1
     },
