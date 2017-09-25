@@ -156,10 +156,10 @@ class EditItemForm extends Component {
         console.log('edit item pressed');
         if (responsePath) {
           ImageResizer.createResizedImage(responsePath, 600, 600, 'JPEG', 80)
-              .then(({ uri }) => {
-                  Blob.build(RNFetchBlob.wrap(uri), { type: 'image/jpeg' })
+              .then((resizedImageUri) => {
+                  Blob.build(RNFetchBlob.wrap(resizedImageUri), { type: 'image/jpeg' })
                       .then((blob) => firebase.storage()
-                              .ref(path)
+                              .ref(storagePath)
                               .child(testImageName)
                               .put(blob, { contentType: 'image/png' })
                       )
@@ -168,10 +168,10 @@ class EditItemForm extends Component {
                           console.log('snap', snapshot.downloadURL);
                           const itemURL = snapshot.downloadURL;
                           firebase.database().ref(path)
-                              .push({ name: isFromText, URL: itemURL, sent: hasBeenSent })
+                              .set({ name: isFromText, URL: itemURL, sent: hasBeenSent })
                               .then(() => {
                                   CameraRoll.saveToCameraRoll(this.state.responsePath)
-                                    .then(console.log('Success', 'Photo added to camera roll!'))
+                                    .then(console.log('Success, Photo added to camera roll!', snapshot.downloadURL))
                                     .catch(err => console.log('err:', err));
                                   this.setState({
                                       isFromText: '',
@@ -274,7 +274,7 @@ const styles = {
     paddingTop: 130,
     textAlign: 'center',
     color: '#D3D3D3',
-    backgroundColor: 'rgba(0,0,0,0)',
+    backgroundColor: 'transparent',
     fontSize: 25
   },
 };

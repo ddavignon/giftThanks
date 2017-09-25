@@ -201,7 +201,7 @@ const styles = {
     color: 'black',
   },
   mainScrollView: {
-    backgroundColor: 'rgba(0,0,0,0)',
+    backgroundColor: 'transparent',
   },
   imageContainer: {
     alignSelf: 'center',
@@ -210,7 +210,7 @@ const styles = {
     height: 250,
     marginVertical: 35,
     paddingTop: 20,
-    backgroundColor: 'rgba(0,0,0,0)',
+    backgroundColor: 'transparent',
   },
   socialLoginContainerStyle: {
     flex: 1,

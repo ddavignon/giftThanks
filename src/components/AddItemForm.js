@@ -89,8 +89,8 @@ class AddItemForm extends Component {
         console.log('add item pressed');
 
         ImageResizer.createResizedImage(responsePath, 600, 600, 'JPEG', 80)
-            .then(({ uri }) => {
-                Blob.build(RNFetchBlob.wrap(uri), { type: 'image/jpeg' })
+            .then((resizedImageUri) => {
+                Blob.build(RNFetchBlob.wrap(resizedImageUri), { type: 'image/jpeg' })
                     .then((blob) => firebase.storage()
                             .ref(path)
                             .child(testImageName)
@@ -104,7 +104,7 @@ class AddItemForm extends Component {
                             .push({ name: isFromText, URL: itemURL, sent: hasBeenSent })
                             .then(() => {
                                 CameraRoll.saveToCameraRoll(this.state.responsePath)
-                                  .then(console.log('Success', 'Photo added to camera roll!'))
+                                  .then(console.log('Success, Photo added to camera roll!', snapshot.downloadURL))
                                   .catch(err => console.log('err:', err));
                                 this.setState({
                                     isFromText: '',
@@ -182,7 +182,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     //backgroundColor: '#F5FCFF'
-    backgroundColor: 'rgba(0,0,0,0)'
+    backgroundColor: 'transparent'
   },
   imageItemContainer: {
     borderColor: '#9B9B9B',

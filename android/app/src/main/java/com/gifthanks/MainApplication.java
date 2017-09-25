@@ -3,6 +3,7 @@ package com.gifthanks;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import fr.bamlab.rnimageresizer.ImageResizerPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.reactlibrary.googlesignin.RNGoogleSignInPackage;
@@ -11,7 +12,6 @@ import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
 import com.magus.fblogin.FacebookLoginPackage;
 import com.chirag.RNMail.RNMail;
 import com.lynxit.contactswrapper.ContactsWrapperPackage;
-import fr.bamlab.rnimageresizer.ImageResizerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.imagepicker.ImagePickerPackage;
@@ -36,6 +36,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ImageResizerPackage(),
             new FBSDKPackage(),
             new RNGoogleSigninPackage(),
             new RNGoogleSignInPackage(),
@@ -44,7 +45,6 @@ public class MainApplication extends Application implements ReactApplication {
             new FacebookLoginPackage(),
             new RNMail(),
             new ContactsWrapperPackage(),
-            new ImageResizerPackage(),
             new ReactNativePermissionsPackage(),
             new VectorIconsPackage(),
             new RNFetchBlobPackage(),

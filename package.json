@@ -21,7 +21,7 @@
     "react-native-firebase-auth": "^1.0.0",
     "react-native-google-signin": "^0.12.0",
     "react-native-image-picker": "^0.26.3",
-    "react-native-image-resizer": "^0.1.1",
+    "react-native-image-resizer": "0.1.1",
     "react-native-mail": "^3.0.4",
     "react-native-permissions": "^0.2.7",
     "react-native-router-flux": "3.38.0",

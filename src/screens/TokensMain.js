@@ -18,7 +18,7 @@ const styles = {
         justifyContent: 'center',
         width: null,
         height: null,
-        backgroundColor: 'rgba(0,0,0,0)',
+        backgroundColor: 'transparent',
   }
 };
 
