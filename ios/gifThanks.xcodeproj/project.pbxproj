@@ -48,7 +48,6 @@
 		7607D491272D43CABF06FDB7 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D789F01826244C8883E72F92 /* Zocial.ttf */; };
 		7E42D0A774E14E849D9309E7 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1A387DFF61114FA4BFB2ACE8 /* EvilIcons.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		938B530044CE447AAB489462 /* libRCTImageResizer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41AE093EA192435EA97F4489 /* libRCTImageResizer.a */; };
 		A5452B99EC2B4E32AA4D43B3 /* libRNMail.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B6F57958B142B3A28D08ED /* libRNMail.a */; };
 		A5751AF964E24BA394D176F9 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17B11430CA2E477EB275B0E5 /* Entypo.ttf */; };
 		A7A5E256AAB84882AD179622 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2731F42DDD341F08CB0873B /* libRNFirebase.a */; };
@@ -67,6 +66,7 @@
 		F418AD941F6CD1EF006EFC8C /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F418AD901F6CD1EF006EFC8C /* FBSDKLoginKit.framework */; };
 		F418AD951F6CD1EF006EFC8C /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F418AD911F6CD1EF006EFC8C /* FBSDKShareKit.framework */; };
 		F418ADA21F6CD479006EFC8C /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F418ADA11F6CD464006EFC8C /* libRCTFBSDK.a */; };
+		F42176171F7AFFBF00F8D3D7 /* libRCTImageResizer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F443982F1F79ADA000B4AF88 /* libRCTImageResizer.a */; };
 		F436D1C01F78B65300B332F4 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F436D19F1F78B62000B332F4 /* libRCTCameraRoll.a */; };
 		F4F50B831F74B6EC000B9F98 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4F50B821F74B6EC000B9F98 /* Images.xcassets */; };
 		FF7AFF5FE3744F61AF0CF4AA /* mostlyMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 555277E4205B4369978BEBF7 /* mostlyMono.ttf */; };
@@ -377,7 +377,6 @@
 		3AB48BD2D5514F289E1F2E2B /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		3B3DC88B8D0C475A91B14214 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		3BB0618EB50F483EB94904DB /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
-		41AE093EA192435EA97F4489 /* libRCTImageResizer.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTImageResizer.a; sourceTree = "<group>"; };
 		42BB54ED247C4CC8B8472096 /* libRNGoogleSignin.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGoogleSignin.a; sourceTree = "<group>"; };
 		4926DD0C61BC4277BAF4802C /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		499890387FCCC6FB77CD0693 /* Pods-gifThanks-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gifThanks-tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-gifThanks-tvOS/Pods-gifThanks-tvOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -439,6 +438,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F42176171F7AFFBF00F8D3D7 /* libRCTImageResizer.a in Frameworks */,
 				F436D1C01F78B65300B332F4 /* libRCTCameraRoll.a in Frameworks */,
 				F418ADA21F6CD479006EFC8C /* libRCTFBSDK.a in Frameworks */,
 				DA0E63931EB1D2E50037067F /* libRNImagePicker.a in Frameworks */,
@@ -469,7 +469,6 @@
 				31212DEAB7BE48B8A433387C /* SafariServices.framework in Frameworks */,
 				DB604D56477F4A81A5B0B672 /* SystemConfiguration.framework in Frameworks */,
 				30A16932DDF34ACEBFD0309D /* AddressBook.framework in Frameworks */,
-				938B530044CE447AAB489462 /* libRCTImageResizer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

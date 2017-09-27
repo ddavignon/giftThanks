@@ -104,7 +104,7 @@ class AddItemForm extends Component {
                             .push({ name: isFromText, URL: itemURL, sent: hasBeenSent })
                             .then(() => {
                                 CameraRoll.saveToCameraRoll(this.state.responsePath)
-                                  .then(console.log('Success, Photo added to camera roll!', snapshot.downloadURL))
+                                  // .then(console.log('Success, Photo added to camera roll!', snapshot.downloadURL))
                                   .catch(err => console.log('err:', err));
                                 this.setState({
                                     isFromText: '',

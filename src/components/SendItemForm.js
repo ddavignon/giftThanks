@@ -21,6 +21,7 @@ class SendItemForm extends Component {
         avatarSource: null,
         emailContactText: '',
         emailBodyText: '',
+        emailTextToSend: '',
         emailSubjectText: '',
         eventId: '',
         addPhotoSwitch: false,
@@ -35,7 +36,7 @@ class SendItemForm extends Component {
         this.setState({
             avatarSource: { uri: URL },
             isFromText: name,
-            emailBodyText: `${name},\n\n`
+            emailBodyText: `${name},\n`
         });
         this.handleGetImage();
     }
@@ -56,14 +57,16 @@ class SendItemForm extends Component {
     onSendButtonPressed() {
         // console.log('email image path: ', tmpImagePath);
         // console.log('photo uri: ', this.props.eventItem.URL);
-        const emailSignature = '\n\n\nThanks for using Gift Thanks!';
+        const mailBody = this.state.emailBodyText.replace(`${this.state.isFromText},`, ' ');
+        const emailSignature = '<p>Thanks for using Gift Thanks!</p>';
+        const { name } = this.props.eventItem;
         const { eventId } = this.props;
         if (this.state.addPhotoSwitch) {
             Mailer.mail({
                 subject: `Thanks from ${this.props.eventName} !`,
                 recipients: [this.state.emailContactText],
-                body: `  ${this.state.emailBodyText} ${emailSignature}`,
-                isHTML: true,
+                body: `  <p>${name},</p><p>${mailBody}</p> ${emailSignature}`,
+                isHTML: false,
                 attachment: {
                     path: this.state.emailImagePath,  // The absolute path of the file.
                     type: 'jpg',   // Mime Type: jpg, png, doc, ppt, html, pdf
@@ -80,8 +83,8 @@ class SendItemForm extends Component {
                 recipients: [this.state.emailContactText],
                 ccRecipients: [''],
                 bccRecipients: [''],
-                body: `  ${this.state.emailBodyText} ${emailSignature}`,
-                isHTML: true,
+                body: `  <p>${name},</p><p>${mailBody}</p> ${emailSignature}`,
+                isHTML: false,
             }, (error, event) => {
                 if (error) {
                   alert('Error', 'Could not send mail.');
@@ -165,8 +168,7 @@ class SendItemForm extends Component {
                   />
                   <Text style={textStyle}> Add photo to email</Text>
                 </SquareCardSection>
-                <SquareCardSection>
-                  <View>
+                  <View style={{ backgroundColor: '#fff' }}>
                       <TextInput
                           style={textArea}
                           multiline={true}
@@ -178,7 +180,6 @@ class SendItemForm extends Component {
                           value={this.state.emailBodyText}
                       />
                   </View>
-                </SquareCardSection>
                 <SquareCardSection>
                     {
                         this.validateEmail(this.state.emailContactText) ?
