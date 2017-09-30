@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, Modal } from 'react-native';
-import { CardSection } from './CardSection';
+import { SquareCardSection } from './SquareCardSection';
 import { Button } from './Button';
 import { Input } from './Input';
 
@@ -16,17 +16,17 @@ const { containerStyle, textStyle, cardSectionStyle } = styles;
             visible={visible}
         >
             <View style={containerStyle}>
-                <CardSection style={cardSectionStyle}>
+                <SquareCardSection style={cardSectionStyle}>
                     <Text style={textStyle}>
                         {children}
                     </Text>
-                </CardSection>
+                </SquareCardSection>
 
-                <CardSection>
-                    <Input>
-                </CardSection>
+                <SquareCardSection>
+                    <Input />
+                </SquareCardSection>
 
-                <CardSection>
+                <SquareCardSection>
                 <Button onPress={onAccept}>//By not passing onAccept() says don't call imediately
                     Create
                 </Button>
@@ -34,7 +34,7 @@ const { containerStyle, textStyle, cardSectionStyle } = styles;
                 <Button onPress={onDecline}>
                     Cancel
                 </Button>
-                </CardSection>
+                </SquareCardSection>
             </View>
         </Modal>
     );

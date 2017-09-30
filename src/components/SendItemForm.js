@@ -13,6 +13,7 @@ import RNFetchBlob from 'react-native-fetch-blob';
 import { Actions } from 'react-native-router-flux';
 import { SquareCardSection, Button, Input } from './common';
 
+
 class SendItemForm extends Component {
 
     state = {
@@ -23,10 +24,12 @@ class SendItemForm extends Component {
         emailBodyText: '',
         emailTextToSend: '',
         emailSubjectText: '',
+        emailFooterBase64: '',
         eventId: '',
         addPhotoSwitch: false,
         emailImagePath: ''
     }
+
 
     componentDidMount() {
         console.log('sendItemForm event name: ', this.props.eventName);
@@ -39,6 +42,7 @@ class SendItemForm extends Component {
             emailBodyText: `${name},\n`
         });
         this.handleGetImage();
+        this.convertImageBase64();
     }
 
     onGetEmailButtonPressed() {
@@ -58,7 +62,7 @@ class SendItemForm extends Component {
         // console.log('email image path: ', tmpImagePath);
         // console.log('photo uri: ', this.props.eventItem.URL);
         const mailBody = this.state.emailBodyText.replace(`${this.state.isFromText},`, ' ');
-        const emailSignature = '<p>Thanks for using Gift Thanks!</p>';
+        const emailSignature = `<p><img src="data:image/png;base64,${this.state.emailFooterBase64}" style="border: none; width: 100%;" alt="Thanks for using giftThanks!" /></p>`;
         const { name } = this.props.eventItem;
         const { eventId } = this.props;
         if (this.state.addPhotoSwitch) {
@@ -95,6 +99,19 @@ class SendItemForm extends Component {
         //Actions.gifts({ eventId, type: 'replace' });
     }
 
+    convertImageBase64() {
+      RNFetchBlob.fetch('GET', 'https://firebasestorage.googleapis.com/v0/b/giftthanks-b57ab.appspot.com/o/emailAssets%2FemailFooter.png?alt=media&token=9104d04c-cf59-4a9f-b0bf-e40eb3a1c04c', {
+      })
+      .then((res) => {
+          //console.log('Convert image base64 res: ', res);
+          this.setState({ emailFooterBase64: res.base64() });
+          console.log('Image base64 string: ', this.state.emailFooterBase64);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
+
     handleGetImage() {
         RNFetchBlob.config({
             fileCache: true,
@@ -103,6 +120,7 @@ class SendItemForm extends Component {
         })
         .then((res) => {
             // console.log('The file saved to ', res.path());
+            //console.log('Fetch-Blob response obj: ', res.base64());
             this.setState({ emailImagePath: res.path() });
         });
     }
