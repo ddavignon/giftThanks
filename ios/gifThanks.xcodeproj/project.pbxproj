@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -690,6 +689,7 @@
 				65A9CB18E00B47FD8D908780 /* Resources */,
 				947A9ECBD980B97495B7EB18 /* Pods */,
 				D762CE7963D3344FDBD9ADB0 /* Frameworks */,
+				F458FC581F83F8BB00B8D42C /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -802,6 +802,19 @@
 				F436D19F1F78B62000B332F4 /* libRCTCameraRoll.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F458FC581F83F8BB00B8D42C /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				51B8A4C0776D4CCEA6AE746A /* libRNVectorIcons.a */,
+				5B89C895940941DBA63940BC /* libReactNativePermissions.a */,
+				CBAC1B6AAA6E4F36A8EF6340 /* libRCTContactsWrapper.a */,
+				A4B6F57958B142B3A28D08ED /* libRNMail.a */,
+				B2731F42DDD341F08CB0873B /* libRNFirebase.a */,
+				42BB54ED247C4CC8B8472096 /* libRNGoogleSignin.a */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		F47108781F661755003073D6 /* Products */ = {

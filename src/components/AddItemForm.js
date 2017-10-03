@@ -100,6 +100,7 @@ class AddItemForm extends Component {
                     .then((snapshot) => {
                         console.log('snap', snapshot.downloadURL);
                         const itemURL = snapshot.downloadURL;
+                        console.log('database info: ', isFromText, ', sent value: ', hasBeenSent);
                         firebase.database().ref(path)
                             .push({ name: isFromText, URL: itemURL, sent: hasBeenSent })
                             .then(() => {
@@ -126,7 +127,7 @@ class AddItemForm extends Component {
         const { container, imageItem, imageItemContainer } = styles;
 
         return (
-            <View style={{ flex: 1, paddingTop: 75 }}>
+            <View style={{ flex: 1, paddingTop: 70 }}>
 
                     <View style={{ flex: 1 }} >
                         <TouchableOpacity
