@@ -30,7 +30,6 @@ class LoginForm extends Component {
   componentDidMount() {
     GoogleSignin.configure({
       iosClientId: '1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs.apps.googleusercontent.com',
-      //iosClientId: '893015399163-b6to88eeam06v48p4n8d7rdek64eq228.apps.googleusercontent.com'
     });
   }
 
@@ -74,7 +73,6 @@ class LoginForm extends Component {
     .then((data) => {
       Actions.tabbar({ type: 'replace' });
       this.setState({ showLogin: true });
-      // this.saveToken(data.refreshToken);
     })
     .catch((error) => {
       console.log('ERROR', error);
@@ -215,8 +213,7 @@ const styles = {
     width: 250,
     height: 255,
     marginVertical: 35,
-    //paddingTop: 20,
-    backgroundColor: 'transparent',
+    backgroundColor: 'transparent'
   },
   socialLoginContainerStyle: {
     flex: 1,
@@ -228,7 +225,7 @@ const styles = {
     justifyContent: 'space-between'
   },
   inputMargin: {
-    paddingLeft: 15,
+    paddingLeft: 15
   }
 };
 

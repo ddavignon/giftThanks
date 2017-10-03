@@ -159,11 +159,11 @@ class AddItemForm extends Component {
                   </View>
                   {this.state.sendPhoto
                       ?
-                      <Card>
                           <SquareCardSection>
-                                  <Spinner size="large" />
+                            <View style={{ flex: 1, marginVertical: 25, justifyContent: 'center', alignItems: 'center' }} >
+                              <Spinner size="large" />
+                            </View>
                           </SquareCardSection>
-                      </Card>
                       :
                       <SquareCardSection>
                           <Button onPress={this.handleSendItemForm.bind(this)}>

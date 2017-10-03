@@ -13,13 +13,6 @@ import EventItems from './screens/EventItems';
 import TokensMain from './screens/TokensMain';
 import EditItemMain from './screens/EditItemMain';
 
-
-const TabIcon = ({ selected, title }) => {
-  return (
-    <Text style={{ color: selected ? 'red' : 'black' }}>{title}</Text>
-  );
-};
-
 const navButton = ({ selected, title, iconName }) => {
     return (
         <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} >
