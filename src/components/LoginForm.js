@@ -113,52 +113,58 @@ class LoginForm extends Component {
   renderScreen() {
     if (this.state.showLogin) {
       return (
-          <View style={{ flex: 1, paddingTop: 45, backgroundColor: 'rgb(245,245,245)' }}>
-              <Image
-                source={require('../../assets/images/gifThanks_login.png')}
-                style={styles.imageContainer}
+        <ScrollView style={styles.mainScrollView} >
+        <View style={{ paddingTop: 45, backgroundColor: 'rgb(245,245,245)' }}>
+            <Image
+              source={require('../../assets/images/gifThanks_login.png')}
+              style={styles.imageContainer}
+            />
+          <View style={{ marginRight: 20, marginLeft: 20 }}>
+            <View style={styles.inputMargin}>
+              <Input
+                label="Email"
+                placeholder="email@email.com"
+                onChangeText={email => this.setState({ email })}
+                value={this.state.email}
+                style={styles.inputStyle}
               />
-            <View style={{ height: 70, marginHorizontal: 30 }}>
-                <Input
-                  label="Email"
-                  placeholder="email@email.com"
-                  onChangeText={email => this.setState({ email })}
-                  value={this.state.email}
-                  style={styles.inputStyle}
-                />
-                <Input
-                  label="Password"
-                  placeholder="password"
-                  onChangeText={password => this.setState({ password })}
-                  secureTextEntry
-                  value={this.state.password}
-                  style={styles.inputStyle}
-                />
-              </View>
-              <View style={{ height: 180, marginHorizontal: 20 }}>
-                <Button onPress={this.onSignInPress.bind(this)}>
-                  Sign In
-                </Button>
-                <Button onPress={this.onSignUpPress.bind(this)}>
-                  Sign Up
-                </Button>
-              </View>
-              <View style={styles.socialLoginContainerStyle}>
-
-                <SocialIcon
-                  raised
-                  type='google-plus-official'
-                  onPress={this._signIn.bind(this)}
-                />
-              <Text style={{ paddingTop: 20 }} >or sigin with</Text>
-                <SocialIcon
-                  raised
-                  type='facebook'
-                  onPress={this._fbAuth.bind(this)}
-                />
-              </View>
-
+            </View>
+            <View style={styles.inputMargin}>
+              <Input
+                label="Password"
+                placeholder="password"
+                onChangeText={password => this.setState({ password })}
+                secureTextEntry
+                value={this.state.password}
+                style={styles.inputStyle}
+              />
+            </View>
+            <View>
+              <Button onPress={this.onSignInPress.bind(this)}>
+                Sign In
+              </Button>
+              <Button onPress={this.onSignUpPress.bind(this)}>
+                Sign Up
+              </Button>
+            </View>
           </View>
+            <View style={styles.socialLoginContainerStyle}>
+
+              <SocialIcon
+                raised
+                type='google-plus-official'
+                onPress={this._signIn.bind(this)}
+              />
+            <Text style={{ paddingTop: 20 }} >or sigin with</Text>
+              <SocialIcon
+                raised
+                type='facebook'
+                onPress={this._fbAuth.bind(this)}
+              />
+            </View>
+
+        </View>
+      </ScrollView>
       );
     }
 
@@ -207,9 +213,9 @@ const styles = {
     alignSelf: 'center',
     justifyContent: 'center',
     width: 250,
-    height: 250,
+    height: 255,
     marginVertical: 35,
-    paddingTop: 20,
+    //paddingTop: 20,
     backgroundColor: 'transparent',
   },
   socialLoginContainerStyle: {
@@ -220,22 +226,10 @@ const styles = {
     marginBottom: 80,
     flexDirection: 'row',
     justifyContent: 'space-between'
-    // height: 48,
-    // width: 180,
-    // shadowColor: '#000000',
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 3
-    // }
   },
   inputMargin: {
     paddingLeft: 15,
   }
 };
 
-// const mapStateToProps = ({ auth }) => {
-//     const { email, password, phone_number, carrier, error, loading, token } = auth;
-//     return { email, password, phone_number, carrier, error, loading, token };
-// };
-
-export default connect(null, null)(LoginForm);
+export default LoginForm;

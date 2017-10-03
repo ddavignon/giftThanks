@@ -12,7 +12,6 @@ import SendItemMain from './screens/SendItemMain';
 import EventItems from './screens/EventItems';
 import TokensMain from './screens/TokensMain';
 import EditItemMain from './screens/EditItemMain';
-import ContactsMain from './screens/ContactsMain';
 
 
 const TabIcon = ({ selected, title }) => {
