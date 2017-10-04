@@ -11,6 +11,7 @@ const SquareCardSection = (props) => {
 
 const styles = {
     containerStyle: {
+        //flex: 1,
         flexDirection: 'row',
         backgroundColor: '#fff',
         justifyContent: 'flex-start',

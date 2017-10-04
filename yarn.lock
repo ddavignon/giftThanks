@@ -3794,10 +3794,6 @@ react-native-fetch-blob@^0.10.4:
     base-64 "0.1.0"
     glob "7.0.6"
 
-react-native-firebase-auth@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/react-native-firebase-auth/-/react-native-firebase-auth-1.0.1.tgz#d1b22469bd7fc9b283ac84ce8a7023974d7a2760"
-
 react-native-firebase@^2.1.3:
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/react-native-firebase/-/react-native-firebase-2.1.4.tgz#46e3f43b2b97f1b09e30e02c5e6274a5d59ee73a"

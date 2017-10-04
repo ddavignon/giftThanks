@@ -100,11 +100,12 @@ class AddItemForm extends Component {
                     .then((snapshot) => {
                         console.log('snap', snapshot.downloadURL);
                         const itemURL = snapshot.downloadURL;
+                        console.log('database info: ', isFromText, ', sent value: ', hasBeenSent);
                         firebase.database().ref(path)
                             .push({ name: isFromText, URL: itemURL, sent: hasBeenSent })
                             .then(() => {
                                 CameraRoll.saveToCameraRoll(this.state.responsePath)
-                                  .then(console.log('Success, Photo added to camera roll!', snapshot.downloadURL))
+                                  // .then(console.log('Success, Photo added to camera roll!', snapshot.downloadURL))
                                   .catch(err => console.log('err:', err));
                                 this.setState({
                                     isFromText: '',
@@ -126,7 +127,7 @@ class AddItemForm extends Component {
         const { container, imageItem, imageItemContainer } = styles;
 
         return (
-            <View style={{ flex: 1, paddingTop: 75 }}>
+            <View style={{ flex: 1, paddingTop: 70 }}>
 
                     <View style={{ flex: 1 }} >
                         <TouchableOpacity
@@ -158,11 +159,11 @@ class AddItemForm extends Component {
                   </View>
                   {this.state.sendPhoto
                       ?
-                      <Card>
                           <SquareCardSection>
-                                  <Spinner size="large" />
+                            <View style={{ flex: 1, marginVertical: 25, justifyContent: 'center', alignItems: 'center' }} >
+                              <Spinner size="large" />
+                            </View>
                           </SquareCardSection>
-                      </Card>
                       :
                       <SquareCardSection>
                           <Button onPress={this.handleSendItemForm.bind(this)}>

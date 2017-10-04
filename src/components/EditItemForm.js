@@ -13,7 +13,7 @@ import ImageResizer from 'react-native-image-resizer';
 import RNFetchBlob from 'react-native-fetch-blob';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
-import { SquareCardSection, Button, Input } from './common';
+import { SquareCardSection, Button, Input, Spinner } from './common';
 
 // const Permissions = require('react-native-permissions');
 
@@ -29,7 +29,8 @@ class EditItemForm extends Component {
         androidPhotoPermission: 'undetermined',
         androidStoragePermission: 'undetermined',
         cameraPermission: 'undetermined',
-        photoPermission: 'undetermined'
+        photoPermission: 'undetermined',
+        sendPhoto: false
     }
 
     componentDidMount() {
@@ -78,66 +79,7 @@ class EditItemForm extends Component {
             }
         });
     }
-    // handleSendItemForm() {
-    //     const { responsePath, isFromText, hasBeenSent } = this.state;
-    //     const { eventId, editKeyId } = this.props;
-    //     //console.log('event id: ', this.props.eventItem);
-    //     const testImageName = `image-from-react-native-${new Date()}.jpg`;
-    //     const { currentUser } = firebase.auth();
-    //     const path = `users/${currentUser.uid}/events/${eventId}/items/${editKeyId}`;
-    //     const storagePath = `users/${currentUser.uid}/events/${eventId}/items/`;
-    //
-    //     //console.log(responsePath);
-    //
-    //     const Blob = RNFetchBlob.polyfill.Blob;
-    //
-    //     window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
-    //     window.Blob = Blob;
-    //     console.log('edit item pressed');
-    //     if (responsePath) {
-    //         Blob.build(RNFetchBlob.wrap(responsePath), { type: 'image/jpeg' })
-    //             .then((blob) => firebase.storage()
-    //                     .ref(storagePath)
-    //                     .child(testImageName)
-    //                     .put(blob, { contentType: 'image/png' })
-    //             )
-    //             .catch(console.log('Build blob failed!'))
-    //             .then((snapshot) => {
-    //                 console.log('snap', snapshot.downloadURL);
-    //                 const itemURL = snapshot.downloadURL;
-    //                 firebase.database().ref(path)
-    //                     .set({ name: isFromText, URL: itemURL, sent: hasBeenSent })
-    //                     .then(() => {
-    //                         this.setState({
-    //                             isFromText: '',
-    //                             description: '',
-    //                             responsePath: '',
-    //                             avatarSource: null,
-    //                             dbData: ''
-    //                         });
-    //                         const deletePhotoRef = firebase.storage()
-    //                             .refFromURL(this.props.eventItem.URL);
-    //                         deletePhotoRef.delete().then(() => {
-    //                             Actions.gifts({ eventId, type: 'back' });
-    //                         });
-    //                     });
-    //             });
-    //     } else {
-    //         console.log('same URL');
-    //         firebase.database().ref(path)
-    //             .set({ name: isFromText, URL: this.props.eventItem.URL, sent: hasBeenSent })
-    //             .then(() => {
-    //                 this.setState({
-    //                     isFromText: '',
-    //                     description: '',
-    //                     responsePath: '',
-    //                     avatarSource: null,
-    //                     dbData: ''
-    //                 });
-    //                 Actions.gifts({ eventId, type: 'back' });
-    //             });
-    //     }
-    // }
+
     handleSendItemForm() {
         const { responsePath, isFromText, hasBeenSent } = this.state;
         const { eventId, editKeyId } = this.props;
@@ -146,9 +88,6 @@ class EditItemForm extends Component {
         const { currentUser } = firebase.auth();
         const path = `users/${currentUser.uid}/events/${eventId}/items/${editKeyId}`;
         const storagePath = `users/${currentUser.uid}/events/${eventId}/items/`;
-
-        //console.log(responsePath);
-
         const Blob = RNFetchBlob.polyfill.Blob;
 
         window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
@@ -205,7 +144,7 @@ class EditItemForm extends Component {
     }
 
     render() {
-        const { container, imageItem, imageItemContainer, paragraph } = styles;
+        const { container, imageItem, imageItemContainer, paragraph, spinnerStyle } = styles;
 
         return (
             <View style={{ flex: 1, paddingTop: 75, }}>
@@ -243,11 +182,20 @@ class EditItemForm extends Component {
                         />
                     </SquareCardSection>
                   </View>
-                  <SquareCardSection>
-                      <Button onPress={this.handleSendItemForm.bind(this)}>
-                          Update Item
-                      </Button>
-                  </SquareCardSection>
+                  {this.state.sendPhoto
+                      ?
+                          <SquareCardSection>
+                            <View style={spinnerStyle} >
+                              <Spinner size="large" />
+                            </View>
+                          </SquareCardSection>
+                      :
+                      <SquareCardSection>
+                          <Button onPress={this.handleSendItemForm.bind(this)}>
+                              Update Item
+                          </Button>
+                      </SquareCardSection>
+                  }
                 </View>
             </View>
         );
@@ -266,9 +214,14 @@ const styles = {
     alignItems: 'center'
   },
   imageItem: {
-    // borderRadius: 5,
     width: 300,
     height: 300
+  },
+  spinnerStyle: {
+    flex: 1,
+    marginVertical: 25,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   paragraph: {
     paddingTop: 130,

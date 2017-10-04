@@ -5,7 +5,8 @@ import {
     ScrollView,
     View,
     Platform,
-    Image
+    Image,
+    FlatList
 } from 'react-native';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
@@ -199,6 +200,18 @@ class EventsMain extends Component {
                     />
                 );
             });
+            // return (
+            //         <ItemDetail
+            //             key={index}
+            //             type='events'
+            //             title={event.name}/*item.state we are sending to itemDetail*/
+            //             _id={index}
+            //             onEditPress={() => this.handleEditPress(index, event.name)}
+            //             onDeletePress={() => this.handleDeletePress(index)}
+            //             onItemPress={() => this.handleItemPress(index, event.name)}
+            //         />
+            //     );
+            console.log(event);
         }
     }
 
@@ -223,12 +236,18 @@ class EventsMain extends Component {
             style={styles.imageContainer}
           >
             <View style={styles.screenStyle}>
-
                 <ScrollView>
                     <View style={{ marginBottom: 65 }} >
                         {this.renderItems()}
                     </View>
                 </ScrollView>
+                {/*<View style={{ marginBottom: 65 }} >
+                  <FlatList
+                    key={'eventsflatlist'}
+                    data={this.state.dbData}
+                    renderItem={({ item }) => this.renderItems(item)}
+                  />
+                </View>*/}
                 <Confirm
                     visible={this.state.showDeleteModal}
                     onAccept={this.onDeleteAccept.bind(this)}
