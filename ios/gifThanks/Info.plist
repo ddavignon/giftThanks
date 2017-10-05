@@ -81,6 +81,8 @@
 	<string>To use camera microphone</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To select image from camera roll</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>To add image to camera roll</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Andale Mono.ttf</string>
