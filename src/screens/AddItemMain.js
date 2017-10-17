@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { ScrollView, Image } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import AddItemForm from '../components/AddItemForm';
 
 class AddItemMain extends Component {
     render() {
         return (
+          <KeyboardAwareScrollView
+            resetScrollToCoords={{ x: 0, y: 0 }}
+          >
           <Image
             source={require('../../assets/images/plain.png')}
             style={styles.imageContainer}
@@ -13,6 +17,7 @@ class AddItemMain extends Component {
                 <AddItemForm eventId={this.props.eventId} />
             </ScrollView>
           </Image>
+          </KeyboardAwareScrollView>
         );
     }
 }
