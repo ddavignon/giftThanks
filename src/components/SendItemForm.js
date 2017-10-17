@@ -4,7 +4,8 @@ import {
     View,
     Text,
     TextInput,
-    Switch
+    Switch,
+    Dimensions
 } from 'react-native';
 import ContactsWrapper from 'react-native-contacts-wrapper';
 import Mailer from 'react-native-mail';
@@ -27,14 +28,15 @@ class SendItemForm extends Component {
         emailFooterBase64: '',
         eventId: '',
         addPhotoSwitch: false,
-        emailImagePath: ''
+        emailImagePath: '',
+        smallScreen: false
     }
 
 
     componentDidMount() {
         console.log('sendItemForm event name: ', this.props.eventName);
         console.log('sendItemForm event item: ', this.props.eventItem);
-        console.log('sendItemForm eventItem URL: ', this.props.eventItem.URL);
+        // console.log('sendItemForm eventItem URL: ', this.props.eventItem.URL);
         const { URL, name } = this.props.eventItem;
         this.setState({
             avatarSource: { uri: URL },
@@ -43,6 +45,10 @@ class SendItemForm extends Component {
         });
         this.handleGetImage();
         this.convertImageBase64();
+        const { height, width } = Dimensions.get('window');
+        if (width < 350) {
+          this.setState({ smallScreen: true });
+        }
     }
 
     onGetEmailButtonPressed() {
@@ -150,6 +156,10 @@ class SendItemForm extends Component {
       return emailRe.test(email);
     }
 
+    handleSmallScreen() {
+      return this.state.smallScreen ? styles.smallTextArea : styles.textArea;
+    }
+
     render() {
         const { imageItem, imageContainer, textArea, textStyle } = styles;
 
@@ -188,12 +198,12 @@ class SendItemForm extends Component {
                 </SquareCardSection>
                   <View style={{ backgroundColor: '#fff' }}>
                       <TextInput
-                          style={textArea}
+                          style={this.handleSmallScreen()}
                           multiline={true}
                           placeholder={'Mom@mail.com'}
                           editable={true}
                           maxLength={200}
-                          numberOfLines={10}
+                          numberOfLines={6}
                           onChangeText={(emailBodyText) => this.setState({ emailBodyText })}
                           value={this.state.emailBodyText}
                       />
@@ -233,6 +243,11 @@ const styles = {
     textArea: {
         marginLeft: 10,
         height: 140,
+        fontSize: 18
+    },
+    smallTextArea: {
+        marginLeft: 10,
+        height: 100,
         fontSize: 18
     }
 };
