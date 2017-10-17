@@ -7,7 +7,8 @@ import {
   Picker,
   Alert,
   Image,
-  AsyncStorage
+  AsyncStorage,
+  Dimensions
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import FBSDK, { LoginManager, AccessToken } from 'react-native-fbsdk';
@@ -15,7 +16,6 @@ import { SocialIcon } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
-// import firebase from 'react-native-firebase';
 import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
 import { Card, SquareCardSection, Input, Button, Spinner } from './common';
 
@@ -25,13 +25,19 @@ class LoginForm extends Component {
     email: '',
     password: '',
     googleUser: {},
-    showLogin: true
+    showLogin: true,
+    smallScreen: false
   }
 
   componentDidMount() {
     GoogleSignin.configure({
       iosClientId: '1097148081266-ls3e9l7eqtf10456as58l4gid60pl8cs.apps.googleusercontent.com',
     });
+    const { height, width } = Dimensions.get('window');
+    console.log('screenHeight:', height, 'screenWidth: ', width);
+    if (width < 350) {
+      this.setState({ smallScreen: true });
+    }
   }
 
   onSignInPress() {
@@ -51,8 +57,8 @@ class LoginForm extends Component {
 
   async saveToken(token) {
     try {
-      console.log('saveToken data: ', token);
-      console.log('AsyncStorage: ', AsyncStorage);
+      // console.log('saveToken data: ', token);
+      // console.log('AsyncStorage: ', AsyncStorage);
       await AsyncStorage.setItem('token', token);
     } catch (error) {
       console.log('Error saving firebasetoken to storage.', error);
@@ -109,6 +115,13 @@ class LoginForm extends Component {
       });
   }
 
+  sizeLoginImage() {
+    if (this.state.smallScreen) {
+      return styles.smallImageContainer;
+    }
+    return styles.imageContainer;
+  }
+
   renderScreen() {
     if (this.state.showLogin) {
       return (
@@ -119,7 +132,7 @@ class LoginForm extends Component {
         <View style={{ paddingTop: 45, backgroundColor: 'rgb(245,245,245)' }}>
             <Image
               source={require('../../assets/images/gifThanks_login.png')}
-              style={styles.imageContainer}
+              style={this.sizeLoginImage()}
             />
           <View style={{ marginRight: 20, marginLeft: 20 }}>
             <View style={styles.inputMargin}>
@@ -218,6 +231,15 @@ const styles = {
     width: 250,
     height: 255,
     marginVertical: 35,
+    backgroundColor: 'transparent'
+  },
+  smallImageContainer: {
+    alignSelf: 'center',
+    justifyContent: 'center',
+    width: 110,
+    height: 125,
+    marginTop: 35,
+    marginBottom: 15,
     backgroundColor: 'transparent'
   },
   socialLoginContainerStyle: {
