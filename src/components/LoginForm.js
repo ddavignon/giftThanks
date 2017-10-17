@@ -9,6 +9,7 @@ import {
   Image,
   AsyncStorage
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import FBSDK, { LoginManager, AccessToken } from 'react-native-fbsdk';
 import { SocialIcon } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
@@ -111,7 +112,10 @@ class LoginForm extends Component {
   renderScreen() {
     if (this.state.showLogin) {
       return (
-        <ScrollView style={styles.mainScrollView} >
+        // <ScrollView style={styles.mainScrollView} >
+        <KeyboardAwareScrollView
+          resetScrollToCoords={{ x: 0, y: 0 }}
+        >
         <View style={{ paddingTop: 45, backgroundColor: 'rgb(245,245,245)' }}>
             <Image
               source={require('../../assets/images/gifThanks_login.png')}
@@ -162,7 +166,8 @@ class LoginForm extends Component {
             </View>
 
         </View>
-      </ScrollView>
+        </KeyboardAwareScrollView>
+      // </ScrollView>
       );
     }
 

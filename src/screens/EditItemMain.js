@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { ScrollView, Image } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import EditItemForm from '../components/EditItemForm';
 
 class EditItemMain extends Component {
     render() {
         return (
+          <KeyboardAwareScrollView
+            resetScrollToCoords={{ x: 0, y: 0 }}
+          >
           <Image
             source={require('../../assets/images/plain.png')}
             style={styles.imageContainer}
@@ -17,6 +21,7 @@ class EditItemMain extends Component {
                 />
             </ScrollView>
           </Image>
+          </KeyboardAwareScrollView>
         );
     }
 }
