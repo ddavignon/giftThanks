@@ -131,13 +131,33 @@ class EventsMain extends Component {
         return this.state !== nextState;
     }
 
+    deleteImagesHelper(id) {
+
+        const { currentUser } = firebase.auth();
+        firebase.database().ref(`users/${currentUser.uid}/events/${this.state.deleteKeyId}`)
+            .once('value').then(data => {
+                if (data.val().items) {
+                    _.each(data.val().items, item => {
+                        const deletePhotoRef = firebase.storage().refFromURL(item.URL);
+                        deletePhotoRef.delete().then(() => {
+                            console.log('deleted item', item);
+                        });
+                    });
+                }
+            })
+            .catch((err) => console.log('error on delete image', err));
+    }
+
     onDeleteAccept() {
         console.log('delete data');
         const { currentUser } = firebase.auth();
-
+    
+        this.deleteImagesHelper(this.state.deleteKeyId);
         firebase.database().ref(`users/${currentUser.uid}/events/${this.state.deleteKeyId}`)
             .remove()
-            .then(() => this.setState({ showDeleteModal: false, deleteKeyId: '' }));
+            .then(() => {
+                this.setState({ showDeleteModal: false, deleteKeyId: '' });
+            });
     }
 
     onCreateDecline() {
